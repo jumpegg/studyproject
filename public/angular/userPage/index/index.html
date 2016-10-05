@@ -1,0 +1,51 @@
+<div class="container">
+		<div class="admin_wrapper">
+			<div class="tabletitle">
+				<button ng-click="beforeAdminCurrent()"><</button>
+				<span>관리중인 페이지 목록</span>
+				<button ng-click="nextAdminCurrent()">></button>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>study</th>
+						<th>생성일</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat = 'board in testpaging'>
+					<tr>
+						<td><a href="/boardIndex/{{board.id}}">{{board.title}}</a></td>
+						<td>{{board.create_date}}</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>	
+		<div class="guest_wrapper">
+			<div class="tabletitle">
+				<button><</button>
+				<span>가입한 페이지 목록</span>
+				<button>></button>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>study</th>
+						<th>가입일</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat = 'joiner in joinboards'>
+					<tr>
+						<td>{{joiner.title}}</td>
+						<td>{{joiner.create_date}}</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>
+
+	<div class="notification_wrapper">
+		<h1>
+			Notification section
+		</h1>
+	</div>
+	
+</div>

@@ -1,0 +1,17 @@
+"html":{
+			"snippets":{
+				"test" : "success",
+				"sqls" : "select ${column} from ${table}",
+				"sqlsw" : "select ${column} from ${table} where ${where}",
+				"sqli" : "insert into ${table} values(${values})",
+				"sqliv" : "insert into ${table}(${col}) values(${values})",
+				"sqlu" : "update ${table} set ${values} where ${where}",
+				"sqld" : "delete from ${table} where ${values}",
+				"node-get" : "app.get('${url}', function(req, res){\n\t${something}\n});",
+				"node-post" : "app.post('${url}', function(req, res){\n\t${something}\n});",
+				"ang-get" : "\\$http({\n\tmethod: 'get',\n\turl:'${url}'\n}).success(function(data, status, headers, config){\n\t${success_do}\n}).error(function(data, status, headers, config){\n\t${error_do}\n});",
+				"ang-post" : "\\$http({\n\tmethod: 'post',\n\turl:'${url}',\n\tdata: ${data}\n}).success(function(data, status, headers, config){\n\t${success_do}\n}).error(function(data, status, headers, config){\n\t${error_do}\n});",
+				"success_do" : "if(data.result == 'success'){\n\talert('등록되었습니다.');\n}else{\n\talert('서버에러');\n};",
+				"error_do" : "alert(status);"
+			}
+		}

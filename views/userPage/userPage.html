@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="userPage">
+<head>
+	<% include ./header.html %>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body ng-controller='userCtrl'>
+
+<div class="side-bar">
+	<div class="user-title">
+		<a href="/userPage#!/">
+			<%=session.userID%>
+		</a>
+	</div>
+	<div class="list-wrapper">
+		<ul class="menu-list">
+			<a href="userPage#!/myprofile"><li>My profile</li></a>
+			<li ng-click="toggleMenu()">Study</li>
+			<ul ng-hide="menuStatus">
+				<a href="userPage#!/owner"><li>Owner</li></a>
+			</ul>
+		</ul>
+	</div>
+
+</div>
+
+	<div class="main-panel" ng-view>
+		
+	</div>
+</body>
+</html>

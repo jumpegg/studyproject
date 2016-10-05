@@ -1,0 +1,19 @@
+<table border='1px solid black'>
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>제목</th>
+			<th>작성자</th>
+		</tr>
+	</thead>
+	<tbody ng-repeat = 'freetalk in freetalkList'>
+		<tr>
+			<td>{{$index+1}}</td>
+			<td><a href="">{{freetalk.title}}</a></td>
+			<td>{{freetalk.nickname}}</td>
+		</tr>
+	</tbody>
+</table>
+	<a href="{{boardinfo[0].id}}#!/newfreetalk" class="btn btn-default">새글 작성</a>
+	<link href="../css/board/freetalk.less" rel="stylesheet/less" type="text/css" />
+	<script type="text/javascript" src="../js/less.min.js"></script>

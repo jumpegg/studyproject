@@ -1,0 +1,168 @@
+.mainbanner{
+	width:1000px;
+	height: 500px;
+	border: 1px solid black;
+	position: relative;
+	left: 50%;
+	margin-top: 50px;
+	margin-left: -500px;
+	overflow: hidden;
+}
+	.mainbanner img{
+		position: relative;
+		width: 1000px;
+		height: 500px;
+	}
+
+
+.login{
+	width: 400px;
+	height: 200px;
+	top: 40px;
+	border: 1px solid black;
+	position: relative;
+	left: 50%;
+	margin-left: -200px;
+	padding: 20px;
+}
+
+	.login_wrapper input{
+		width: 100%;
+		height: 40px;
+		margin-bottom: 20px;
+		border-radius: 5px;
+		border: 1px solid gray;
+		padding: 3px;
+	}
+
+.button_wrapper{
+	text-align: center;
+}
+	.login_btn{
+		width: 40%;
+		height: 30px;
+		background-color: white;
+		border-radius: 10px;
+		border: 1px solid gray;
+	}
+
+.modal-dialog{
+	width:380px;
+}
+	.modal-body{
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+		.modal-body input{
+			width: 300px;
+			height: 40px;
+			border: 1px solid gray;
+			border-radius: 5px;
+			margin-bottom: 10px;
+			padding: 3px;
+			padding-left: 10px;
+		}
+	.modal-footer{
+		text-align: center;
+	}
+		.modal-footer button{
+			width:150px;
+			height: 40px;
+		}
+
+.arrow {
+    position: absolute;
+    z-index: 1002;
+    display: block;
+    top: 50%;
+    margin-top: -35px;
+    width: 36px;
+    height: 71px;
+    outline: none;
+    cursor: pointer;
+    background: url(../../img/login/arrow/blank.gif) no-repeat;
+    border-style: none;
+}
+
+.arrow.prev {
+    opacity: 0.2;
+    left: 20px;
+    background-image: url(../../img/login/arrow/paddle_prev_999.png);
+    transition: 0.2s linear all;
+}
+
+.arrow.next {
+    opacity: 0.2;
+    right: 20px;
+    background-image: url(../../img/login/arrow/paddle_next_999.png);
+    transition: 0.2s linear all;
+}
+
+.arrow.prev:hover {
+    opacity: 1;
+    background-image: url(../../img/login/arrow/paddle_prev_fff.png);
+}
+
+.arrow.next:hover {
+    opacity: 1;
+    background-image: url(../../img/login/arrow/paddle_next_fff.png);
+}
+.nav {
+    text-align: center;
+    display: block;
+    position: absolute;
+    z-index: 1002;
+    left: 0;
+    bottom: -4px;
+    right: 0;
+    height: 48px;
+}
+.nav .wrapper {
+    margin: 0 auto;
+    width: 100%;
+    padding: 1em 0 .8em;
+}
+
+.nav ul {
+    margin: 0;
+    width: 100%;
+}
+
+.nav .dot, .nav .dot button {
+    display: inline-block;
+    zoom: 1;
+}
+
+.dots .dot {
+    position: relative;
+    margin: 0 8px;
+    width: 12px;
+    height: 12px;
+}
+.dots .dot button {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 6px;
+    height: 6px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid transparent;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: background-color 0.25s, border-color 0.25s;
+    -moz-transition: background-color 0.25s, border-color 0.25s;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.dots .dot button.active {
+    border-color: #FFF;
+    background-color: transparent;
+}

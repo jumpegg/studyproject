@@ -1,0 +1,7 @@
+<input type="hidden" value="{{userinfo.nickname}}" ng-model="newfreetalk.nickname">
+<h4>제목</h4>
+<input type="text" ng-model="newfreetalk.title">
+<h4>내용</h4>
+<input type="textarea" ng-model="newfreetalk.content">
+<button type="button" class="btn btn-default">취소</button>
+<button type="button" class="btn btn-primary" ng-click="CreateFreetalk(newfreetalk)">글작성</button>

@@ -1,0 +1,101 @@
+ <div class="owner-topmenu">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createStudy">스터디 생성</button>
+ </div>
+<div class="owner-tablewrapper">
+  <table>
+    <thead>  
+      <tr>
+        <th>study name</th>
+        <th>회원수</th>
+        <th>생성일</th>
+        <th style="width: 100px;">상세보기</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat = 'board in filteredAdmins'>
+        <tr>
+          <td>{{board.title}}</td>
+          <td>200</td>
+          <td>{{board.create_date}}</td>
+          <td>
+            <a href="" ng-click="show=!show">open</a>
+          </td>
+        </tr>
+        <tr ng-show=show>
+          <td class="board-des" colspan="3">{{board.description}}</td>
+          <td>
+            <button type="button" data-toggle="modal" data-target="#updateStudy" class="btn btn-default" ng-click="beforeUpdate(board.id)">수정</button><br>
+            <button type="button" class="btn btn-default">제거</button>
+          </td>
+        </tr>
+
+    </tbody>
+  </table>  
+</div>
+<div class="owner-paging">
+  <ul class="pagination">
+    <li><a ng-click="firstCurrentPage()" href=""><<</a></li>
+    <li><a ng-click="beforeCurrentPage()" href=""><</a></li>
+   <li ng-repeat = 'index in pageIndex'>
+     <a ng-click="setCurrentPage(index)" href="">{{index}}</a>
+   </li>
+   <li><a ng-click="nextCurrentPage()" href="">></a></li>
+   <li><a ng-click="lastCurrentPage()" href="">>></a></li>
+  </ul>
+  
+</div>
+     <!-- Edit Modal -->
+       <div class="modal fade" id="updateStudy" tabindex="-1" role="dialog" aria-labelledby="createStudyLabel" area-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+              <h4 class="modal-title" id="createStudyLabel">edit study</h4>
+              </div>
+               <div class="modal-body">
+                 <div>
+                   <h4>study name</h4>
+                   <input type="text" placeholder="title" ng-model="updateStudy.title">
+                 </div>
+                 <div>
+                   <h4>description</h4>
+                   <textarea cols="30" rows="10" ng-model="updateStudy.description"></textarea>
+                 </div>
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-primary" ng-click="upStudy(updateStudy)" data-dismiss="modal">Edit</button>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+      <!-- Edit Modal end -->
+  <!-- Modal -->
+<div class="modal fade" id="createStudy" tabindex="-1" role="dialog" aria-labelledby="createStudyLabel" area-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="createStudyLabel">new study</h4>
+      </div>
+      
+        <div class="modal-body">
+          
+          <div>
+            <h4>study name</h4>
+            <input type="text" placeholder="title" ng-model="newStudy.title">
+            <input type="hidden" value="<%= session.index %>" ng-model="newStudy.admin_id">
+          </div>
+          <div>
+            <h4>description</h4>
+            <textarea cols="30" rows="10" ng-model="newStudy.description"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="CreateStudy(newStudy)" data-dismiss="modal">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

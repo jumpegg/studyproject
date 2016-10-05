@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="board">
+<head>
+	<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/TweenMax.min.js"></script>
+	<script type="text/javascript" src="../js/angular-1.5.8/angular.js"></script>
+	<script type="text/javascript" src="../js/angular-1.5.8/angular-route.js"></script>
+	<script type="text/javascript" src="../js/angular-1.5.8/angular-animate.js"></script>
+	<script type="text/javascript" src="../angular/board/index/boardIndex.js"></script>
+	<script type="text/javascript" src="../angular/board/board.js"></script>
+	<script type="text/javascript" src="../angular/board/account/account.js"></script>
+	<script type="text/javascript" src="../angular/board/freetalk/freetalk.js"></script>
+	<script type="text/javascript" src="../angular/board/joinuser/joinuser.js"></script>
+	<script type="text/javascript" src="../angular/board/notice/notice.js"></script>
+	<script type="text/javascript" src="../angular/board/schedule/schedule.js"></script>
+	<script type="text/javascript" src="../angular/board/studydata/studydata.js"></script>
+	<script type="text/javascript" src="../angular/board/userauth/userauth.js"></script>
+	
+	
+
+	
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-controller='boardCtrl'>
+<div class="container">
+		<nav class="navbar navbar-inverse">
+		  <div class="navbar-header">
+		  		<a href="<%= session.board_id %>#!/" class="navbar-brand">{{boardinfo.title}}</a>
+		  </div>
+		  <ul class="nav navbar-nav">
+		  		<li class="dropdown">
+		  			<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expended="false">게시판</a>
+		  			<ul class="dropdown-menu" role="menu">
+		  				<li><a href="<%= session.board_id %>#!/freetalk">자유게시판</a></li>
+		  				<li><a href="<%= session.board_id %>#!/notice">공지사항</a></li>
+		  			</ul>
+		  		</li>
+		  		<li class="dropdown">
+		  			<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expended="false">운영</a>
+		  			<ul class="dropdown-menu" role="menu">
+		  				<li><a href="<%= session.board_id %>#!/schedule">스케쥴</a></li>
+		  				<li><a href="<%= session.board_id %>#!/account">회계</a></li>
+		  				<li><a href="<%= session.board_id %>#!/userauth">회원관리</a></li>
+		  			</ul>
+		  		</li>
+		  		<li class="dropdown">
+		  			<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expended="false">자료실</a>
+		  			<ul class="dropdown-menu" role="menu">
+		  				<li><a href="<%= session.board_id %>#!/studydata">스터디 자료</a></li>
+		  			</ul>
+		  		</li>
+		  		<li class="dropdown">
+		  			<a href="<%= session.board_id %>#!/joinuser" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expended="false">회원가입</a>
+		  		</li>
+		  </ul>
+		</nav>
+	</div>
+	<div class="container" ng-view>
+		
+	</div>
+
+</body>
+</html>

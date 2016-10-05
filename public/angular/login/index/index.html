@@ -1,0 +1,79 @@
+<link href="css/login/login.css" rel="stylesheet" type="text/css" />
+
+<div class="container" ng-controller="indexCtrl">
+	<div class="row">
+		<div class="mainbanner">
+			<img ng-repeat="slide in slides" class="slide slide-animation" 
+			ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
+			<button class="arrow prev" ng-click="nextSlide()"></button>
+			<button class="arrow next" ng-click="prevSlide()"></button>
+
+			<nav class="nav">
+				<div class="wrapper">
+					<ul class="dots">
+						<li class="dot" ng-repeat="slide in slides">
+							<button ng-class="{'active':isCurrentSlideIndex($index)}" ng-click="setCurrentSlideIndex($index);">{{slide.description}}</button>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="login">
+			<div class="login_wrapper">
+				<form action="/login" method="POST">
+					<div>
+						<input name="userID" type="text" placeholder="ID">
+					</div>
+					<div>
+						<input name="password" type="password" placeholder="PASSWORD">
+					</div>
+					<div class="button_wrapper">
+						<button class="login_btn" type="submit">Login</button>
+						<button class="login_btn" type="button" data-toggle="modal" data-target="#myModal">Sign-up</button>
+					</div>	
+				</form>
+			</div>
+		</div>	
+	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">회원 가입</h4>
+      </div>
+
+      <form name="signUpForm" action="/sign-up" method="post">
+	      <div class="modal-body">
+	        	
+	        	<div>
+	        		<h4>ID <button type="button" class="btn btn-default">중복확인</button>	</h4>
+	        		<input type="text" name="userID" placeholder="ID">
+	        	</div>
+	        	
+	        	<div>
+	        		<h4>Password</h4>
+	        		<input type="text" name="password" placeholder="PASSWORD">
+	        	</div>
+	        	<div>
+	        		<h4>Email</h4>
+	        		<input type="text" name="email" placeholder="Email">
+	        	</div>
+	      </div>
+
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary">Sign-up</button>
+	      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>

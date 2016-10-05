@@ -1,0 +1,71 @@
+<div class="myprofile-full">
+	
+<div class="myprofile-title">
+	My Profile Infomation
+</div>
+<div class="myprofile-infowrapper">
+	<div class="myprofile-simpleInfo">
+		<div class="myprofile-pic">
+			
+		</div>
+		<div class="myprofile-userinfo">
+			<div class="myprofile-name">
+				ID  
+			</div>
+			<div class="myprofile-content">
+				: {{loginUser.userID}}
+			</div>
+		</div>
+		<div class="myprofile-userinfo">
+			<div class="myprofile-name">
+				Email 
+			</div>
+			<div class="myprofile-content">
+				: {{loginUser.email}}
+			</div>
+		</div>
+		<div class="myprofile-userinfo">
+			<div class="myprofile-name">
+				가입일 
+			</div>
+			<div class="myprofile-content">
+				: {{loginUser.create_date}}
+			</div>
+		</div>
+	</div>
+	<div class="myprofile-detailInfo">
+		<div class="myprofile-detailInfo-wrapper">
+			<div class="myprofile-detailUserInfo">
+				<div class="myprofile-detailname">
+					Phone
+				</div>
+				<div class="myprofile-detailcontent">
+					{{loginUser.phone}}
+				</div>
+			</div>
+			<div class="myprofile-detailUserInfo">
+				<div class="myprofile-detailname">
+					Address
+				</div>
+				<div class="myprofile-detailcontent">
+					{{loginUser.address}}
+				</div>
+			</div>
+			<div class="myprofile-detailUserInfo">
+				<div class="myprofile-detailname">
+					Introduce
+				</div>
+				<div class="myprofile-detailcontent">
+					{{loginUser.introduce}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="myprofile-footer">
+		<div class="myprofile-btnwrapper">
+			<button type="button" class="btn btn-default" onclick="location.href='/userPage#!/myprofile/edit' ">정보 수정</button>
+			<button type="button" class="btn btn-danger">탈퇴</button>
+		</div>
+	</div>
+</div>
