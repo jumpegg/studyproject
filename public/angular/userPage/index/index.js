@@ -8,8 +8,6 @@ angular.module('userPage.index', ['ngRoute'])
 	});
 }])
 .controller('indexCtrl', function($scope, user, paging){
-	$scope.adminCurrent = 1;
-	$scope.joinCurrent = 1;
 
 	$scope.setAdminPages = function(){
 		$scope.testpaging = paging.makePage($scope.adminBoards, $scope.adminCurrent, 10).list;

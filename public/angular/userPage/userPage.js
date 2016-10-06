@@ -15,7 +15,10 @@ angular.module('userPage',[
 }])
 .controller('userCtrl', function($scope, user, paging){
 	$scope.menuStatus = true;
-	
+	$scope.adminCurrent = 1;
+	$scope.joinCurrent = 1;
+
+
 	$scope.toggleMenu = function(){
 		$scope.menuStatus = $scope.menuStatus === false ? true: false;
 	};

@@ -10,8 +10,8 @@ var fs = require('fs');
 var mysql = require('mysql');
 // mysql config
 var mysqlClient = mysql.createConnection({
-	user:'root',
-	password: '870915',
+	user:'wonny',
+	password: 'wonny',
 	database : 'nodetest'
 });
 var passport = require('passport');
