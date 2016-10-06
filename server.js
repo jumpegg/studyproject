@@ -46,7 +46,13 @@ passport.use('local-login',
 	function(req, userID, password, done){
 		mysqlClient.query('select * from user where userID = ?', [userID], 
 			function(error, result){
-				var comp = bcrypt.compareSync(password, result[0].password);
+				console.log(result.length);
+				var checkpass = '';
+
+				checkpass = result.length == 0 ? bcrypt.hashSync(0, salt) : result[0].password;
+				
+				var comp = bcrypt.compareSync(password, checkpass);
+
 				if(error){
 					return done(error);
 				}else if(result.length == 0){

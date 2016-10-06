@@ -7,7 +7,6 @@ module.exports = function(app, mysqlClient, passport, bcrypt, salt)
 		res.render('login/login.html');
 	});
 	app.post('/login', function(req, res, next){
-		req.flash("userID");
 		if(req.body.userID.length === 0 || req.body.password.length === 0){
 			res.redirect('/login');
 		}else{
@@ -16,7 +15,7 @@ module.exports = function(app, mysqlClient, passport, bcrypt, salt)
 	}, passport.authenticate('local-login', {
 		successRedirect : '/userPage',
 		failureRedirect : '/login',
-		failureFlash : true
+		failureFlash : false
 	}));
 	app.get('/logout', function(req, res){
 		req.logout();
