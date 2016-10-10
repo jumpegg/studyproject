@@ -1,4 +1,4 @@
-module.exports = function(app, mysqlClient, passport, session)
+module.exports = function(app, mysqlClient, passport, session, fs, formidable, util)
 {
 	app.get('/userPage', function(req, res){
 		res.render('userPage/userPage.html', {
@@ -77,5 +77,36 @@ module.exports = function(app, mysqlClient, passport, session)
 					res.json({result: 'success'});
 				}
 			});
+	});
+	app.post('/profilepicUpload', function(req, res){
+		var form = new formidable.IncomingForm();
+		var files = [],
+		fields = [];
+
+		form.keepExtensions = true;
+
+		var dir = './userPic/profilePic/'+req.session.userID;
+		if(!fs.existsSync(dir)){
+			fs.mkdirSync(dir);
+		}
+		form.uploadDir = dir;
+
+		form.on('field', function(field, value){
+			console.log('[field]'+field, value);
+			fields.push([field, value]);
+		})
+		.on('file', function(field, file){
+			console.log('file' + field, file);
+			fs.rename(file.path, form.uploadDir + '/' + file.name);
+
+			files.push([field, file]);
+		})
+		.on('end', function(){
+			res.end('success');
+		})
+		.on('error', function(error){
+			console.log('[error] error : '+ error);
+		});
+		form.parse(req);
 	});
 }

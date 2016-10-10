@@ -18,7 +18,6 @@ angular.module('userPage',[
 	$scope.adminCurrent = 1;
 	$scope.joinCurrent = 1;
 
-
 	$scope.toggleMenu = function(){
 		$scope.menuStatus = $scope.menuStatus === false ? true: false;
 	};
@@ -128,6 +127,9 @@ angular.module('userPage',[
 			}).error(function(data, status, headers, config){
 				console(status);
 			});
+		},
+		setuserPic: function(input){
+
 		}
 	}
 })
@@ -161,4 +163,22 @@ angular.module('userPage',[
 			return pageComponent;
 		};
 		return paging;
-});
+})
+.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);

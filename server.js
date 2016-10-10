@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 // fs 파일 입출력
 var fs = require('fs');
+// util : nodejs 보조 모듈
+var util = require('util');
 // mysql
 var mysql = require('mysql');
 // mysql config
@@ -17,7 +19,10 @@ var mysqlClient = mysql.createConnection({
 var passport = require('passport');
 var flash = require('connect-flash');
 var async = require('async');
-
+//fs : 파일 입출력
+var fs = require('fs');
+//formidable : 파일 업로드
+var formidable = require('formidable');
 // encrypt 
 var bcrypt = require('bcrypt-nodejs');
 var salt = bcrypt.genSaltSync(33);
@@ -91,7 +96,7 @@ app.use(session({
 // route 파일 설정
 var main = require('./router/main')(app, mysqlClient);
 var login = require('./router/login')(app, mysqlClient, passport, bcrypt, salt);
-var userPage = require('./router/userPage')(app, mysqlClient, passport, session);
+var userPage = require('./router/userPage')(app, mysqlClient, passport, session, fs, formidable, util);
 var board = require('./router/board_router')(app, mysqlClient, passport, session);
 
 app.listen(3000, function(){

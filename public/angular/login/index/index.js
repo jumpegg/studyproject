@@ -20,6 +20,10 @@ angular.module('login.index', ['ngRoute', 'ngAnimate'])
 
 	$scope.setCurrentSlideIndex = function (index){
 		$scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
+	/*	
+		var cal  = $scope.direction? $scope.direction : "n"
+		var cal = $scope.direction || "n" 
+	*/
 		$scope.currentIndex = index;
 	};
 	$scope.isCurrentSlideIndex = function(index){
