@@ -81,6 +81,8 @@ app.engine('html', require('ejs').renderFile);
 
 // js, css, img 파일 경로 설정
 app.use(express.static('public'));
+app.use("/bower_components", express.static(__dirname + "/bower_components"));
+app.use("/userPic", express.static(__dirname + "/userPic"));
 
 //bodyParser config
 app.use(bodyParser.json());

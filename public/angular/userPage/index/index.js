@@ -22,7 +22,9 @@ angular.module('userPage.index', ['ngRoute'])
 		$scope.setAdminPages();
 		$scope.adminCurrent = paging.makePage($scope.adminBoards, $scope.adminCurrent, 10).currentPage;
 	};
-
+	user.getboards(function(data){
+		$scope.adminBoards = data;
+	});
 	$scope.setAdminPages();
 
 });

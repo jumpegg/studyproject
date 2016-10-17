@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('userPage.myprofile', ['ngRoute'])
+angular.module('userPage.myprofile', ['ngRoute','file-model'])
 .config(['$routeProvider', function($routeProvider, $scope){
 	$routeProvider.when('/myprofile',{
 		templateUrl: 'angular/userPage/myprofile/myprofile.html',
@@ -28,7 +28,13 @@ angular.module('userPage.myprofile', ['ngRoute'])
 	$scope.updateUser = function(input){
 		var jinput = JSON.stringify(input);
 		user.setuserinfo(jinput);
+		if($scope.mypicture){
+			console.log("pic upload");
+			console.log($scope.mypicture);
+			user.setuserPic($scope.mypicture, '/profilepicUpload');
+		};
 		$location.path("/myprofile");
+		
 	};
 
 });

@@ -97,8 +97,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 		})
 		.on('file', function(field, file){
 			console.log('file' + field, file);
-			fs.rename(file.path, form.uploadDir + '/' + file.name);
-
+			fs.rename(file.path, form.uploadDir + '/' + req.session.userID+'.jpg');
 			files.push([field, file]);
 		})
 		.on('end', function(){
@@ -108,5 +107,25 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 			console.log('[error] error : '+ error);
 		});
 		form.parse(req);
+	});
+	app.get('/profilePicList', function(req, res){
+		fs.realpath("./", function(err, path){
+			if(err){
+				console.log(err);
+				return;
+			}
+			console.log('Path is : ' +path);
+		});
+		fs.readdir("./userPic/profilePic/"+req.session.userID,function(err, files){
+			if(err){
+				console.log(err);
+				return;
+			}
+			files.forEach(function(f){
+				console.log('Files: ' + f);
+			});
+			res.end(files);
+
+		});
 	});
 }

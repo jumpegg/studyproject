@@ -47,7 +47,6 @@ angular.module('userPage',[
 				method: 'get',
 				url:'/getuser'
 			}).success(function(data, status, headers, config){
-				console.log("success");
 				callback(data);
 			}).error(function(data, status, headers, config){
 				console.log("error");
@@ -128,11 +127,40 @@ angular.module('userPage',[
 				console(status);
 			});
 		},
-		setuserPic: function(input){
-
+		setuserPic: function(file, uploadUrl){
+			var fd = new FormData();
+			fd.append('file', file);
+			/*$http.post(uploadUrl, fd, {
+				transformRequest: angular.identity,
+				headers: {'Content-Type' : undefined}
+			})*/
+			$http({
+				method: 'post',
+				url:uploadUrl,
+				headers: {
+                'Content-Type': undefined
+            },
+				data: fd
+			})
+			.success(function(){
+				console.log("file upload success");
+			})
+			.error(function(){
+				console.log("file upload fail");
+			});
+		},
+		getUserPicList: function(callback){
+			$http({
+				method: 'get',
+				url:'/profilePicList'
+			}).success(function(data, status, headers, config){
+				console.log("get user profile list success");
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
 		}
-	}
-})
+	}})
 .factory('paging', function(){
 		var paging = {};
 
