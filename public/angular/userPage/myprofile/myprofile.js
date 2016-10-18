@@ -16,7 +16,7 @@ angular.module('userPage.myprofile', ['ngRoute','file-model'])
 		$scope.loginUser = data[0];
 	});
 })
-.controller('myprofileCtrl2', function($scope, user, $location){
+.controller('myprofileCtrl2', function($scope, user, $location, $route, $window){
 	$scope.beforeUserUpdate = function(){
 		user.getuser(function(data){
 			$scope.upUserinfo = data[0];
@@ -29,12 +29,11 @@ angular.module('userPage.myprofile', ['ngRoute','file-model'])
 		var jinput = JSON.stringify(input);
 		user.setuserinfo(jinput);
 		if($scope.mypicture){
-			console.log("pic upload");
-			console.log($scope.mypicture);
 			user.setuserPic($scope.mypicture, '/profilepicUpload');
 		};
-		$location.path("/myprofile");
-		
+		$location.path("/userPage#!/myprofile");
+		$window.location.reload();
+		/*$route.reload();*/
 	};
 
 });

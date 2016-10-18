@@ -92,11 +92,9 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 		form.uploadDir = dir;
 
 		form.on('field', function(field, value){
-			console.log('[field]'+field, value);
 			fields.push([field, value]);
 		})
 		.on('file', function(field, file){
-			console.log('file' + field, file);
 			fs.rename(file.path, form.uploadDir + '/' + req.session.userID+'.jpg');
 			files.push([field, file]);
 		})
