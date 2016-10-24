@@ -33,6 +33,9 @@ angular.module('board.freetalk', ['ngRoute'])
 	freetalkService.getfreetalkone($routeParams.index, function(data){
 		$scope.freetalkone = data[0];
 	});
+	$scope.DelFreetalk = function(input){
+		freetalkService.hidefreetalk(input);
+	};
 })
 .controller('freetalkCtrl', function($scope, freetalkService){
 	$scope.CreateFreetalk = function(input){
@@ -42,15 +45,11 @@ angular.module('board.freetalk', ['ngRoute'])
 	$scope.UpdateFreetalk = function(input){
 		freetalkService.upfreetalk(input);
 	};
-	$scope.DelFreetalk = function(input){
-		freetalkService.hidefreetalk(input);
-	};
 	$scope.FreetalkList = function(){
 		freetalkService.getfreetalk(function(data){
 			$scope.freetalkList = data;
 		});
 	};
-
 	$scope.FreetalkList();
 	console.log($scope.freetalkList);
 });

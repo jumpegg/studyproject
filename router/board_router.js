@@ -3,11 +3,8 @@ module.exports = function(app, mysqlClient, passport, session)
 	app.get('/boardIndex/:id', function(req, res){
 		console.log("req.params.id is : " + req.params.id);
 		req.session.board_id = req.params.id;
-		console.log("req.session.board_id is : "+ req.session.board_id);
-
 		mysqlClient.query('select * from board where id = ?',[req.session.board_id], function(error, result){
 			req.session.board_name = result[0].title;
-			console.log("board name is : " + req.session.board_name);
 			if(error){
 				console.log("server board info error");
 			}else{
@@ -29,7 +26,6 @@ module.exports = function(app, mysqlClient, passport, session)
 		mysqlClient.query('select * from guest where board_id = ? and user_id = ?', [req.session.board_id, req.session.index], function(error, result){
 			if(error){
 				console.log('server getboardguest error');
-				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -54,7 +50,7 @@ module.exports = function(app, mysqlClient, passport, session)
 		});
 	});
 	app.get('/board/getfreetalk', function(req, res){
-		mysqlClient.query('select * from freetalk where board_id = ?',[req.session.board_id], function(error, result){
+		mysqlClient.query('select * from freetalk where board_id = ? and available = true',[req.session.board_id], function(error, result){
 			if(error){
 				console.log('server getfreetalk error');
 			}else{
@@ -66,6 +62,15 @@ module.exports = function(app, mysqlClient, passport, session)
 		mysqlClient.query('select * from notice where board_id = ?',[req.session.board_id], function(error, result){
 			if(error){
 				console.log('server getnotice error');
+			}else{
+				res.json(result);
+			}
+		});
+	});
+	app.get('/board/getnotice/:index', function(req, res){
+		mysqlClient.query('select * from notice where board_id = ? and id = ?',[req.session.board_id, req.params.index],function(error, result){
+			if(error){
+				console.log('server get notice one error');
 			}else{
 				res.json(result);
 			}

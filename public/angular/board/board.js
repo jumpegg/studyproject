@@ -115,7 +115,7 @@ angular.module('board',[
 		}
 	}
 })
-.factory('freetalkService', function($http){
+.factory('freetalkService', function($http, $location){
 	return{
 		getfreetalk: function(callback){
 			$http.get('/board/getfreetalk')
@@ -143,6 +143,7 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				if(data.message == "success"){
 					alert('등록되었습니다.');
+					$location.path("/freetalk");
 				}else{
 					alert('서버에러');
 				}
@@ -158,6 +159,7 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				if(data.message == 'success'){
 					alert('등록되었습니다.');
+					$location.path("/freetalk");
 				}else{
 					alert('서버에러');
 				};
@@ -165,12 +167,12 @@ angular.module('board',[
 				alert(status);
 			});
 		},
-		hidefreetalk: function(index, callback){
+		hidefreetalk: function(index){
 			$http({
 				method: 'get',
 				url: '/board/hidefreetalk/:'+index
 			}).success(function(data, status, headers, config){
-				callback(data);
+				$location.path("/freetalk");
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
@@ -181,6 +183,14 @@ angular.module('board',[
 	return{
 		getnotice: function(callback){
 			$http.get('/board/getnotice')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		getnoticeone: function(callback){
+			$http.get('/board/getnotice/:index')
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
