@@ -44,6 +44,15 @@ module.exports = function(app, mysqlClient, passport, session)
 			}
 		});
 	});
+	app.get('/board/getfreetalk/:index', function(req, res){
+		mysqlClient.query('select * from freetalk where board_id = ? and id = ?',[req.session.board_id, req.params.index], function(error,result){
+			if(error){
+				console.log('server getfreetalk one error');
+			}else{
+				res.json(result);
+			}
+		});
+	});
 	app.get('/board/getfreetalk', function(req, res){
 		mysqlClient.query('select * from freetalk where board_id = ?',[req.session.board_id], function(error, result){
 			if(error){
@@ -83,9 +92,10 @@ module.exports = function(app, mysqlClient, passport, session)
 
 	app.post('/board/newfreetalk', function(req, res){
 		mysqlClient.query('insert into freetalk(board_id, user_id, nickname, title, content, cnt, create_date, available) values(?,?,?,?,?,0,now(), true)', 
-			[req.session.board_id, req.session.index, req.body.nickname, req.body.title, req.body.content], 
+			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.content], 
 			function(error, result){
 				if(error){
+					console.log(req.session.userID);
 					console.log('server error');
 				}else{
 					res.json({message : 'success'});
@@ -138,7 +148,7 @@ module.exports = function(app, mysqlClient, passport, session)
 	});
 	app.post('/board/upfreetalk', function(req, res){
 		mysqlClient.query('update freetalk set title = ?, content = ?, update_date = now() where id = ?',
-			[req.body.title, req.body.content, req.body.index],
+			[req.body.title, req.body.content, req.body.id],
 			function(error, result){
 				if(error){
 					console.log('server error');

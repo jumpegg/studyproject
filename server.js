@@ -96,9 +96,9 @@ app.use(session({
 }));
 
 // route 파일 설정
-var main = require('./router/main')(app, mysqlClient);
-var login = require('./router/login')(app, mysqlClient, passport, bcrypt, salt);
-var userPage = require('./router/userPage')(app, mysqlClient, passport, session, fs, formidable, util);
+var main = require('./router/main_router')(app, mysqlClient);
+var login = require('./router/login_router')(app, mysqlClient, passport, bcrypt, salt);
+var userPage = require('./router/userPage_router')(app, mysqlClient, passport, session, fs, formidable, util);
 var board = require('./router/board_router')(app, mysqlClient, passport, session);
 
 app.listen(3000, function(){

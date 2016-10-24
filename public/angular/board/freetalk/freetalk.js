@@ -10,9 +10,47 @@ angular.module('board.freetalk', ['ngRoute'])
 	.when('/newfreetalk',{
 		templateUrl: '../angular/board/freetalk/newfreetalk.html',
 		controller: 'freetalkCtrl'
+	})
+	.when('/freetalk/:index',{
+		templateUrl: '../angular/board/freetalk/readfreetalk.html',
+		controller: 'readfreetalkCtrl'
+	})
+	.when('/newfreetalk/:index',{
+		templateUrl: '../angular/board/freetalk/newfreetalk.html',
+		controller: 'updatefreetalkCtrl'
 	});
-
 }])
-.controller('freetalkCtrl', function($scope){
+.controller('updatefreetalkCtrl', function($scope, $routeParams, freetalkService){
+	console.log("this is update controller");
+	freetalkService.getfreetalkone($routeParams.index, function(data){
+		$scope.newfreetalk = data[0];
+	});
+	$scope.CreateFreetalk = function(input){
+		freetalkService.upfreetalk(input);
+	};
+})
+.controller('readfreetalkCtrl', function($scope, $routeParams, freetalkService){
+	freetalkService.getfreetalkone($routeParams.index, function(data){
+		$scope.freetalkone = data[0];
+	});
+})
+.controller('freetalkCtrl', function($scope, freetalkService){
+	$scope.CreateFreetalk = function(input){
+		freetalkService.setfreetalk(input);
+		$scope.FreetalkList();
+	};
+	$scope.UpdateFreetalk = function(input){
+		freetalkService.upfreetalk(input);
+	};
+	$scope.DelFreetalk = function(input){
+		freetalkService.hidefreetalk(input);
+	};
+	$scope.FreetalkList = function(){
+		freetalkService.getfreetalk(function(data){
+			$scope.freetalkList = data;
+		});
+	};
 
+	$scope.FreetalkList();
+	console.log($scope.freetalkList);
 });

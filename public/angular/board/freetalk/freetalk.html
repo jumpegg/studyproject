@@ -9,7 +9,7 @@
 	<tbody ng-repeat = 'freetalk in freetalkList'>
 		<tr>
 			<td>{{$index+1}}</td>
-			<td><a href="">{{freetalk.title}}</a></td>
+			<td><a href="{{boardinfo[0].id}}#!/freetalk/{{freetalk.id}}">{{freetalk.title}}</a></td>
 			<td>{{freetalk.nickname}}</td>
 		</tr>
 	</tbody>

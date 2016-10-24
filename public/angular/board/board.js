@@ -79,7 +79,7 @@ angular.module('board',[
 				url:'/board/newguest',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == "success"){
+				if(data.message == "success"){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
@@ -94,7 +94,7 @@ angular.module('board',[
 				url:'/board/upguest',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == 'success'){
+				if(data.message == 'success'){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
@@ -117,12 +117,21 @@ angular.module('board',[
 })
 .factory('freetalkService', function($http){
 	return{
-
 		getfreetalk: function(callback){
 			$http.get('/board/getfreetalk')
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
+				console.log(status);
+			});
+		},
+		getfreetalkone: function(index, callback){
+			$http({
+				method: 'get',
+				url:'/board/getfreetalk/'+index
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
 		},
@@ -132,7 +141,7 @@ angular.module('board',[
 				url:'/board/newfreetalk',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == "success"){
+				if(data.message == "success"){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
@@ -147,7 +156,7 @@ angular.module('board',[
 				url:'/board/upfreetalk',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == 'success'){
+				if(data.message == 'success'){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
@@ -156,10 +165,10 @@ angular.module('board',[
 				alert(status);
 			});
 		},
-		hidefreetalk: function(callback){
+		hidefreetalk: function(index, callback){
 			$http({
 				method: 'get',
-				url:'/board/hidefreetalk/:index'
+				url: '/board/hidefreetalk/:'+index
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
@@ -184,7 +193,7 @@ angular.module('board',[
 				url:'/board/newnotice',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == 'success'){
+				if(data.message == 'success'){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
@@ -199,7 +208,7 @@ angular.module('board',[
 				url:'/board/upnotice',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == 'success'){
+				if(data.message == 'success'){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
@@ -246,7 +255,7 @@ angular.module('board',[
 				url:'/board/newschedule',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == 'success'){
+				if(data.message == 'success'){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
@@ -261,7 +270,7 @@ angular.module('board',[
 				url:'/board/upschedule',
 				data: input
 			}).success(function(data, status, headers, config){
-				if(data.result == 'success'){
+				if(data.message == 'success'){
 					alert('등록되었습니다.');
 				}else{
 					alert('서버에러');
