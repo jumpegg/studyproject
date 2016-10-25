@@ -1,0 +1,12 @@
+<input type="hidden" value="{{userinfo.nickname}}" ng-model="scheduleVO.nickname">
+<h4>제목</h4>
+<input type="text" class='form-control' ng-model="scheduleVO.title">
+<h4>장소</h4>
+<input type="text" class="form-control" ng-model="scheduleVO.place">
+<h4>시간</h4>
+<input type="datetime-local" class="form-control" ng-model="scheduleVO.gathering_time">
+<h4>비용</h4>
+<input type="number" class="form-control" ng-model="scheduleVO.t_cost">
+
+<a href="{{boardinfo[0].id}}#!/schedule" class="btn btn-default">취소</a>
+<button type="button" class="btn btn-primary" ng-click="newschedule(scheduleVO)">글작성</button>

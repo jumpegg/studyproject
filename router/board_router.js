@@ -59,7 +59,7 @@ module.exports = function(app, mysqlClient, passport, session)
 		});
 	});
 	app.get('/board/getnotice', function(req, res){
-		mysqlClient.query('select * from notice where board_id = ?',[req.session.board_id], function(error, result){
+		mysqlClient.query('select * from notice where board_id = ? and available = true',[req.session.board_id], function(error, result){
 			if(error){
 				console.log('server getnotice error');
 			}else{
@@ -85,6 +85,15 @@ module.exports = function(app, mysqlClient, passport, session)
 			}
 		});
 	});
+	app.get('/board/getschedule/:index', function(req, res){
+		mysqlClient.query('select * from schedule where board_id = ? and id = ?',[req.session.board_id, req.params.index], function(error, result){
+			if(error){
+				console.log('server getschedule error');
+			}else{
+				res.json(result);
+			}
+		});
+	});
 	app.get('/board/getattendUser/:id', function(req, res){
 		mysqlClient.query('select * from attendUser where schedule_id = ?',[req.params.id], function(error, result){
 			if(error){
@@ -100,7 +109,6 @@ module.exports = function(app, mysqlClient, passport, session)
 			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.content], 
 			function(error, result){
 				if(error){
-					console.log(req.session.userID);
 					console.log('server error');
 				}else{
 					res.json({message : 'success'});
@@ -119,11 +127,12 @@ module.exports = function(app, mysqlClient, passport, session)
 			});
 	});
 	app.post('/board/newschedule', function(req, res){
-		mysqlClient.query('insert into schedule(board_id, user_id, title, place, gathering_time, t_cost, e_cost, cnt, create_date) values(?,?,?,?,?,?,?,0,now())',
-			[req.session.board_id, req.session.index, req.body.title, req.body.place, req.body.gathering_time, req.body.t_cost, req.body.e_cost],
+		mysqlClient.query('insert into schedule(board_id, user_id, nickname, title, place, gathering_time, t_cost, cnt, create_date, available) values(?,?,?,?,?,?,?,0,now(), true)',
+			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.place, req.body.gathering_time, req.body.t_cost],
 			function(error, result){
 				if(error){
 					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -164,7 +173,7 @@ module.exports = function(app, mysqlClient, passport, session)
 	});
 	app.post('/board/upnotice', function(req, res){
 		mysqlClient.query('update notice set title = ?, content = ?, update_date = now() where id = ?',
-			[req.body.title, req.body.content, req.body.index],
+			[req.body.title, req.body.content, req.body.id],
 			function(error, result){
 				if(error){
 					console.log('server error');
@@ -174,11 +183,11 @@ module.exports = function(app, mysqlClient, passport, session)
 			});
 	});
 	app.post('/board/upschedule', function(req, res){
-		mysqlClient.query('update schedule set title=?, place=?, gathering_time=?, t_cost=?, e_cost, update_date=now()',
-			[req.body.title, req.body.place, req.body.gathering_time, req.body.t_coast, req.body.e_cost],
+		mysqlClient.query('update schedule set title=?, place=?, gathering_time=?, t_cost=?, update_date=now() where id = ?',
+			[req.body.title, req.body.place, req.body.gathering_time, req.body.t_cost, req.body.id],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}

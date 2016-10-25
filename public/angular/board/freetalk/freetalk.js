@@ -23,7 +23,7 @@ angular.module('board.freetalk', ['ngRoute'])
 .controller('updatefreetalkCtrl', function($scope, $routeParams, freetalkService){
 	console.log("this is update controller");
 	freetalkService.getfreetalkone($routeParams.index, function(data){
-		$scope.newfreetalk = data[0];
+		$scope.freetalkVO = data[0];
 	});
 	$scope.CreateFreetalk = function(input){
 		freetalkService.upfreetalk(input);

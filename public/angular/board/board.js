@@ -63,7 +63,7 @@ angular.module('board',[
 		}
 	}
 })
-.factory('guestService', function($http){
+.factory('guestService', function($http, $location){
 	return{
 		getguest: function(callback){
 			$http.get('/board/getguest')
@@ -170,7 +170,7 @@ angular.module('board',[
 		hidefreetalk: function(index){
 			$http({
 				method: 'get',
-				url: '/board/hidefreetalk/:'+index
+				url: '/board/hidefreetalk/'+index
 			}).success(function(data, status, headers, config){
 				$location.path("/freetalk");
 			}).error(function(data, status, headers, config){
@@ -179,7 +179,7 @@ angular.module('board',[
 		},
 	}
 })
-.factory('noticeService', function($http){
+.factory('noticeService', function($http, $location){
 	return{
 		getnotice: function(callback){
 			$http.get('/board/getnotice')
@@ -189,8 +189,8 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		getnoticeone: function(callback){
-			$http.get('/board/getnotice/:index')
+		getnoticeone: function(index, callback){
+			$http.get('/board/getnotice/'+index)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -205,6 +205,7 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				if(data.message == 'success'){
 					alert('등록되었습니다.');
+					$location.path("/notice");
 				}else{
 					alert('서버에러');
 				}
@@ -220,6 +221,7 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				if(data.message == 'success'){
 					alert('등록되었습니다.');
+					$location.path("/notice");
 				}else{
 					alert('서버에러');
 				};
@@ -227,12 +229,12 @@ angular.module('board',[
 				alert(status);
 			});
 		},
-		hidenotice: function(callback){
+		hidenotice: function(index){
 			$http({
 				method: 'get',
-				url:'/board/hidenotice/:index'
+				url:'/board/hidenotice/'+index
 			}).success(function(data, status, headers, config){
-				callback(data);
+				$location.path("/notice");
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
@@ -249,13 +251,47 @@ angular.module('board',[
 		}
 	}
 })
-.factory('scheduleService', function($http){
+.factory('studydataService', function($http, $location){
+	return{
+		getstudydata: function(callback){
+			$http({
+				method: 'get',
+				url:'/board/getstudydata'
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		getstudydataone: function(index, callback){
+			$http({
+				method: 'get',
+				url:'/board/getstudydata/'+index
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		}
+	}
+})
+.factory('scheduleService', function($http, $location){
 	return{
 		getschedule: function(callback){
 			$http.get('/board/getschedule')
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
+				console.log(status);
+			});
+		},
+		getscheduleone: function(index, callback){
+			$http({
+				method: 'get',
+				url:'/board/getschedule/'+index
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
 		},
@@ -267,6 +303,7 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				if(data.message == 'success'){
 					alert('등록되었습니다.');
+					$location.path("/schedule");
 				}else{
 					alert('서버에러');
 				};
@@ -282,6 +319,7 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				if(data.message == 'success'){
 					alert('등록되었습니다.');
+					$location.path("/schedule");
 				}else{
 					alert('서버에러');
 				};
@@ -289,19 +327,19 @@ angular.module('board',[
 				alert(status);
 			});
 		},
-		delschedule: function(callback){
+		delschedule: function(input){
 			$http({
 				method: 'get',
-				url:'/board/delschedule/:index'
+				url:'/board/delschedule/'+input
 			}).success(function(data, status, headers, config){
-				callback(data);
+				$location.path("/schedule");
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
 		}
 	}
 })
-.factory('attendUserService', function($http){
+.factory('attendUserService', function($http, $location){
 	return{
 		getattendUser: function(callback){
 			$http.get('/board/getattendUser')

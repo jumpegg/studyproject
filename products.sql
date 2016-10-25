@@ -80,10 +80,24 @@ create table schedule(
 	nickname varchar(200) not null,
 	title varchar(1000),
 	place varchar(1000),
-	gathering_time varchar(500),
+	gathering_time DATE,
 	t_cost int,
 	e_cost int,
 	cnt int,
+	create_date DATE,
+	update_date DATE,
+	delete_date DATE,
+	available boolean not null
+);
+
+create table studydata(
+	id int not null auto_increment primary key,
+	board_id int not null,
+	user_id int not null,
+	nickname varchar(200) not null,
+	title varchar(1000),
+	description TEXT,
+	url TEXT,
 	create_date DATE,
 	update_date DATE,
 	delete_date DATE,

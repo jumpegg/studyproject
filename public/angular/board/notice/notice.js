@@ -26,15 +26,23 @@ angular.module('board.notice', ['ngRoute'])
 	});
 })
 .controller('newnoticeCtrl',function($scope, noticeService){
-	
+	$scope.newnotice = function(input){
+		noticeService.setnotice(input);
+	};
 })
 .controller('readnoticeCtrl',function($scope, $routeParams, noticeService){
-	noticeService.getnoticeone(function(data){
-		$scope.noticeOne = data[0];
+	noticeService.getnoticeone($routeParams.index, function(data){
+		$scope.noticeVO = data[0];
 	});
+	$scope.Delnotice = function(input){
+		noticeService.hidenotice(input);
+	};
 })
 .controller('updatenoticeCtrl',function($scope, $routeParams, noticeService){
-	noticeService.getnoticeone(function(data){
-		$scope.newnotice = data[0];
+	noticeService.getnoticeone($routeParams.index, function(data){
+		$scope.noticeVO = data[0];
 	});
+	$scope.newnotice = function(input){
+		noticeService.upnotice(input);
+	};
 });
