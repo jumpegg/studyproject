@@ -2,19 +2,33 @@
 
 angular.module('board.studydata', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider, $scope){
-	$routeProvider.when('/studydata',{
+	$routeProvider
+	.when('/studydata',{
 		templateUrl: '../angular/board/studydata/studydata.html',
 		controller: 'studydataCtrl'
-	});
+	})
+	.when('/newstudydata',{
+		templateUrl: '../angular/board/studydata/newstudydata.html',
+		controller: 'newstudydataCtrl'
+	})
+	.when('/studydata/:index',{
+		templateUrl: '../angular/board/studydata/readstudydata.html',
+		controller: 'readstudydataCtrl'
+	})
+	.when('/newstudydata/:index',{
+		templateUrl: '../angular/board/studydata/newstudydata.html',
+		controller: 'updatestudydataCtrl'
+	})
 }])
-.directive("myDirective", function(){
-	return{
-		restrict : "E",
-		scope : {name:"@pName"},
-		template: "<div>Name is : {{name}}</div>"
-		+ "Change name : <input ng-model='name' type='text' />"
-	};
-})
 .controller('studydataCtrl', function($scope){
-	$scope.name = "John";
+	
+})
+.controller('newstudydataCtrl', function($scope){
+	
+})
+.controller('readstudydataCtrl', function($scope){
+	
+})
+.controller('updatestudydataCtrl', function($scope){
+	
 });

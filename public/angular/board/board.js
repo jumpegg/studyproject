@@ -272,6 +272,66 @@ angular.module('board',[
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
+		},
+		setstudydata: function(input){
+			$http({
+				method: 'post',
+				url:'/board/newstudydata',
+				data: input
+			}).success(function(data, status, headers, config){
+				$location.path("/studydata");
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		upstudydata: function(input){
+			$http({
+				method: 'post',
+				url:'/board/upstudydata',
+				data: input
+			}).success(function(data, status, headers, config){
+				$location.path("/studydata");
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		hidenotice: function(index){
+			$http({
+				method: 'get',
+				url:'/board/hidestudydata/'+index
+			}).success(function(data, status, headers, config){
+				$location.path("/studydata");
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		delnotice: function(index){
+			$http({
+				method: 'get',
+				url:'/board/delstudydata/'+index
+			}).success(function(data, status, headers, config){
+				$location.path("/studydata");
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		setstudydatafile: function(file){
+			var fd = new FormData();
+			fd.append('file', file);
+			$http({
+				method: 'post',
+				url:'/board/setstudydatafile',
+				headers: {
+                'Content-Type': undefined
+             },
+				data: fd
+			})
+			.success(function(){
+				console.log("file upload success");
+			})
+			.error(function(){
+				console.log("file upload fail");
+			});
 		}
 	}
 })
