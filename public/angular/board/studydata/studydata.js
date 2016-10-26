@@ -20,15 +20,29 @@ angular.module('board.studydata', ['ngRoute'])
 		controller: 'updatestudydataCtrl'
 	})
 }])
-.controller('studydataCtrl', function($scope){
-	
+.controller('studydataCtrl', function($scope, studydataService){
+	studydataService.getstudydata(function(data){
+		$scope.dataList = data;
+	});
 })
-.controller('newstudydataCtrl', function($scope){
-	
+.controller('newstudydataCtrl', function($scope, studydataService){
+	$scope.newstudydata = function(input){
+		studydataService.setstudydata(input);
+	};
 })
-.controller('readstudydataCtrl', function($scope){
-	
+.controller('readstudydataCtrl', function($scope, studydataService, $routeParams){
+	studydataService.getstudydataone($routeParams.index, function(data){
+		$scope.dataVO = data[0];
+	});
+	$scope.Delstudydata = function(input){
+		studydataService.hidestudydata(input);
+	};
 })
-.controller('updatestudydataCtrl', function($scope){
-	
+.controller('updatestudydataCtrl', function($scope, studydataService, $routeParams){
+	studydataService.getstudydataone($routeParams.index, function(data){
+		$scope.dataVO = data[0];
+	});
+	$scope.newstudydata = function(input){
+		studydataService.upstudydata(input);
+	};
 });

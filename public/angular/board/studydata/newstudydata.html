@@ -1,0 +1,8 @@
+<input type="hidden" value="{{userinfo.nickname}}" ng-model="dataVO.nickname">
+<h4>제목</h4>
+<input type="text" class='form-control' ng-model="dataVO.title">
+<h4>설명</h4>
+<input type="text" class="form-control" ng-model="dataVO.description">
+
+<a href="{{boardinfo[0].id}}#!/studydata" class="btn btn-default">취소</a>
+<button type="button" class="btn btn-primary" ng-click="newstudydata(dataVO)">글작성</button>

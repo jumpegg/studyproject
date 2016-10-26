@@ -295,7 +295,7 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		hidenotice: function(index){
+		hidestudydata: function(index){
 			$http({
 				method: 'get',
 				url:'/board/hidestudydata/'+index
@@ -305,7 +305,7 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		delnotice: function(index){
+		delstudydata: function(index){
 			$http({
 				method: 'get',
 				url:'/board/delstudydata/'+index

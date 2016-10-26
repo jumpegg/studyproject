@@ -321,11 +321,11 @@ module.exports = function(app, mysqlClient, passport, session)
 		});
 	});
 	app.post('/board/newstudydata', function(req, res){
-		mysqlClient.query('insert into studydata(board_id, user_id, title, description, url, create_date, available) values(?,?,?,?,?,now(),true)',
-			[req.session.board_id, req.session.index, req.body.title, req.body.description, req.body.url],
+		mysqlClient.query('insert into studydata(board_id, user_id, title, description, create_date, available) values(?,?,?,?,now(),true)',
+			[req.session.board_id, req.session.index, req.body.title, req.body.description],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -336,7 +336,7 @@ module.exports = function(app, mysqlClient, passport, session)
 			[req.body.title, req.body.description, req.body.id],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -346,7 +346,7 @@ module.exports = function(app, mysqlClient, passport, session)
 		mysqlClient.query('update studydata set available = false where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
