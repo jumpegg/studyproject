@@ -98,6 +98,7 @@ create table studydata(
 	title varchar(1000),
 	description TEXT,
 	url TEXT,
+	filename TEXT,
 	create_date DATE,
 	update_date DATE,
 	delete_date DATE,

@@ -1,10 +1,6 @@
 module.exports = function(app, mysqlClient, passport, session, fs, formidable, util)
 {
-	app.get('/userPage', function(req, res){
-		res.render('userPage/userPage.html', {
-			session: req.session
-		});
-	});
+
 	app.post('/userPage/edit', function(req,res){
 		mysqlClient.query('update user set email = ?, phone = ?, address = ?, introduce = ? where id = ?',
 			[req.body.email, req.body.phone, req.body.address, req.body.introduce, req.session.index],

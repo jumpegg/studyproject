@@ -8,7 +8,7 @@ angular.module('login.index', ['ngRoute', 'ngAnimate'])
 	});
 	
 }])
-.controller('indexCtrl', function($scope){
+.controller('indexCtrl', function($scope, loginService){
 	$scope.slides = [
 		{image: 'img/login/da1.jpg', description: 'Image 00'},
 		{image: 'img/login/da2.jpg', description: 'Image 01'},
@@ -36,6 +36,9 @@ angular.module('login.index', ['ngRoute', 'ngAnimate'])
 	$scope.nextSlide = function(){
 		$scope.direction = 'right';
 		$scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
+	};
+	$scope.loginFn = function(input){
+		loginService.loginPost(input);
 	};
 })
 .animation('.slide-animation', function(){

@@ -9,4 +9,20 @@ angular.module('login',[
   $locationProvider.hashPrefix('!');
 
   $routeProvider.otherwise({redirectTo: '/'});
-}]);
+}])
+.factory('loginService', function($http, $location){
+	return{
+		loginPost: function(input){
+			$http({
+				method: 'post',
+				url:'/login',
+				data: input,
+				withCredentials: true
+			}).success(function(data, status, headers, config){
+				console.log('login success');
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		}
+	}
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('board.studydata', ['ngRoute'])
+angular.module('board.studydata', ['ngRoute','file-model'])
 .config(['$routeProvider', function($routeProvider, $scope){
 	$routeProvider
 	.when('/studydata',{
@@ -28,6 +28,9 @@ angular.module('board.studydata', ['ngRoute'])
 .controller('newstudydataCtrl', function($scope, studydataService){
 	$scope.newstudydata = function(input){
 		studydataService.setstudydata(input);
+		if($scope.datafile){
+			studydataService.setstudydatafile($scope.datafile);
+		};
 	};
 })
 .controller('readstudydataCtrl', function($scope, studydataService, $routeParams){

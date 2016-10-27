@@ -42,7 +42,7 @@ passport.deserializeUser(function(user, done){
 });
 
 var LocalStrategy = require('passport-local').Strategy;
-passport.use('local-login',
+passport.use('local',
 	new LocalStrategy({
 		usernameField : 'userID',
 		passwordField : 'password',
@@ -83,6 +83,7 @@ app.engine('html', require('ejs').renderFile);
 app.use(express.static('public'));
 app.use("/bower_components", express.static(__dirname + "/bower_components"));
 app.use("/userPic", express.static(__dirname + "/userPic"));
+app.use("/studydata", express.static(__dirname + "/studydata"));
 
 //bodyParser config
 app.use(bodyParser.json());
@@ -91,16 +92,49 @@ app.use(bodyParser.urlencoded({extended: true}));
 //session config
 app.use(session({
 	secret: '@#@#MYSIGN#@#@#',
-	resave: false,
+	resave: true,
 	saveUninitialized: true
 }));
+
 
 // route 파일 설정
 var main = require('./router/main_router')(app, mysqlClient);
 var login = require('./router/login_router')(app, mysqlClient, passport, bcrypt, salt);
 var userPage = require('./router/userPage_router')(app, mysqlClient, passport, session, fs, formidable, util);
-var board = require('./router/board_router')(app, mysqlClient, passport, session);
+var board = require('./router/board_router')(app, mysqlClient, passport, session, fs, formidable);
+
+var isAuthenticated = function(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/');
+};
 
 app.listen(3000, function(){
 	console.log('listening on port 3000!');
 });
+
+app.get('/userPage', function(req, res){
+	res.render('userPage/userPage.html', {
+		session: req.session
+	});
+});
+
+app.get('/boardIndex/:id', function(req, res){
+	console.log("req.params.id is : " + req.params.id);
+	req.session.board_id = req.params.id;
+	mysqlClient.query('select * from board where id = ? and available = true',[req.session.board_id], function(error, result){
+		req.session.board_name = result[0].title;
+		if(error){
+			console.log("server board info error");
+		}else{
+			res.render('board.html',{session: req.session});
+		}
+	});
+});
+
+app.post('/login', passport.authenticate('local', {
+	successRedirect : '/userPage',
+	failureRedirect : '/login',
+	failureFlash : false
+}));

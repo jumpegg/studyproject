@@ -7,5 +7,8 @@
 <p>
 	{{dataVO.description}}
 </p>
+<p>
+	<a href="/studydata/{{boardinfo.id}}/{{dataVO.url}}/{{dataVO.filename}}">file download</a>
+</p>
 <a href="{{boardinfo[0].id}}#!/newstudydata/{{dataVO.id}}" class="btn btn-default">수정</a>
 <button class="btn btn-default" ng-click="Delstudydata(dataVO.id)">삭제</button>

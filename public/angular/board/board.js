@@ -32,6 +32,7 @@ angular.module('board',[
 	});
 	boardService.getboard(function(data){
 		$scope.boardinfo = data[0];
+		console.log($scope.boardinfo.id);
 	});
 	boardService.getboardguest(function(data){
 		$scope.userinfo = data[0];

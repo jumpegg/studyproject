@@ -1,18 +1,6 @@
-module.exports = function(app, mysqlClient, passport, session)
+module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 {
-	app.get('/boardIndex/:id', function(req, res){
-		console.log("req.params.id is : " + req.params.id);
-		req.session.board_id = req.params.id;
-		mysqlClient.query('select * from board where id = ? and available = true',[req.session.board_id], function(error, result){
-			req.session.board_name = result[0].title;
-			if(error){
-				console.log("server board info error");
-			}else{
-				res.render('board.html',{session: req.session});
-			}
-		});
-		
-	});
+
 	app.get('/board/getboardinfo', function(req, res){
 		mysqlClient.query('select * from board where id = ?',[req.session.board_id], function(error, result){
 			if(error){
@@ -321,8 +309,11 @@ module.exports = function(app, mysqlClient, passport, session)
 		});
 	});
 	app.post('/board/newstudydata', function(req, res){
-		mysqlClient.query('insert into studydata(board_id, user_id, title, description, create_date, available) values(?,?,?,?,now(),true)',
-			[req.session.board_id, req.session.index, req.body.title, req.body.description],
+		var d = new Date();
+		var t = d.getTime();
+		var y = Math.round(t/10);
+		mysqlClient.query('insert into studydata(board_id, user_id, title, description, url, create_date, available) values(?,?,?,?,?,now(),true)',
+			[req.session.board_id, req.session.index, req.body.title, req.body.description, y],
 			function(error, result){
 				if(error){
 					console.log(error);
@@ -330,6 +321,48 @@ module.exports = function(app, mysqlClient, passport, session)
 					res.json({message : 'success'});
 				}
 			});
+	});
+	app.post('/board/setstudydatafile', function(req, res){
+		var form = new formidable.IncomingForm();
+		var files = [],
+		fields = [];
+		var d = new Date();
+		var t = d.getTime();
+		var y = Math.round(t/10);
+
+
+		form.keepExtensions = true;
+
+		var dir = './studydata/'+req.session.board_id;
+		var subdir = './studydata/'+req.session.board_id+'/'+y;
+		if(!fs.existsSync(dir)){
+			fs.mkdirSync(dir);
+		};
+		if(!fs.existsSync(subdir)){
+			fs.mkdirSync(subdir);
+		};
+
+		form.uploadDir = subdir;
+
+		form.on('field', function(field, value){
+			fields.push([field, value]);
+		})
+		.on('file', function(field, file){
+			fs.rename(file.path, form.uploadDir + '/' + file.name);
+			mysqlClient.query('update studydata set filename = ? where url = ?',[file.name, y],function(error, result){
+				if(error){
+					console.log(error);
+				}
+			});
+			files.push([field, file]);
+		})
+		.on('end', function(){
+			res.end('success');
+		})
+		.on('error', function(error){
+			console.log('[error] error : '+ error);
+		});
+		form.parse(req);
 	});
 	app.post('/board/upstudydata', function(req, res){
 		mysqlClient.query('update studydata set title = ?, description = ?, update_date = now() where id = ?',
@@ -365,32 +398,4 @@ module.exports = function(app, mysqlClient, passport, session)
 
 
 
-	app.post('/board/setstudydatafile', function(req, res){
-		var form = new formidable.IncomingForm();
-		var files = [],
-		fields = [];
-
-		form.keepExtensions = true;
-
-		var dir = './studydata/'+req.session.board_id;
-		if(!fs.existsSync(dir)){
-			fs.mkdirSync(dir);
-		}
-		form.uploadDir = dir;
-
-		form.on('field', function(field, value){
-			fields.push([field, value]);
-		})
-		.on('file', function(field, file){
-			fs.rename(file.path, form.uploadDir + '/' + file.name);
-			files.push([field, file]);
-		})
-		.on('end', function(){
-			res.end('success');
-		})
-		.on('error', function(error){
-			console.log('[error] error : '+ error);
-		});
-		form.parse(req);
-	});
 }
