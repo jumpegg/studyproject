@@ -441,4 +441,78 @@ angular.module('board',[
 			});
 		}
 	}
+})
+.factory('accountService', function($http, $location){
+	return{
+		getaccount: function(callback){
+			$http.get('/board/getaccount')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		getaccountone: function(index, callback){
+			$http({
+				method: 'get',
+				url:'/board/getaccount/'+index
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		setaccount: function(input){
+			$http({
+				method: 'post',
+				url:'/board/newaccount',
+				data: input
+			}).success(function(data, status, headers, config){
+				if(data.message == 'success'){
+					alert('등록되었습니다.');
+					$location.path("/account");
+				}else{
+					alert('서버에러');
+				};
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		upaccount: function(input){
+			$http({
+				method: 'post',
+				url:'/board/upaccount',
+				data: input
+			}).success(function(data, status, headers, config){
+				if(data.message == 'success'){
+					alert('등록되었습니다.');
+					$location.path("/account");
+				}else{
+					alert('서버에러');
+				};
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		hideaccount: function(callback){
+			$http({
+				method: 'get',
+				url:'/board/hideaccount/:index'
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		delaccount: function(input){
+			$http({
+				method: 'get',
+				url:'/board/delaccount/'+input
+			}).success(function(data, status, headers, config){
+				$location.path("/account");
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		}
+	}
 });

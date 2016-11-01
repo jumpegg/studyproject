@@ -143,11 +143,11 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 	app.post('/board/newnotice', function(req, res){
-		mysqlClient.query('insert into notice(board_id, user_id, title, content, cnt, create_date, available) values(?,?,?,?,0,now(),true)',
-			[req.session.board_id, req.session.index, req.body.title, req.body.content],
+		mysqlClient.query('insert into notice(board_id, user_id, nickname, title, content, cnt, create_date, available) values(?,?,?,?,?,0,now(),true)',
+			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.content],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -312,8 +312,8 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		var d = new Date();
 		var t = d.getTime();
 		var y = Math.round(t/10);
-		mysqlClient.query('insert into studydata(board_id, user_id, title, description, url, create_date, available) values(?,?,?,?,?,now(),true)',
-			[req.session.board_id, req.session.index, req.body.title, req.body.description, y],
+		mysqlClient.query('insert into studydata(board_id, user_id, nickname ,title, description, url, create_date, available) values(?,?,?,?,?,?,now(),true)',
+			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.description, y],
 			function(error, result){
 				if(error){
 					console.log(error);
@@ -395,7 +395,76 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 				}
 			});
 	});
+	////////////////////////////
+	// account
+	////////////////////////////
 
+	app.get('/board/getaccount', function(req, res){
+		mysqlClient.query('select * from account where board_id = ?', [req.session.board_id],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json(result);
+				}
+			});
+	});
+	app.get('/board/getaccount/:index', function(req, res){
+		mysqlClient.query('select * from account where board_id = ? and id = ?', [req.session.board_id, req.params.index],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json(result);
+				}
+			});
+	});
+	app.post('/board/newaccount', function(req, res){
+		mysqlClient.query('insert into account(board_id, user_id, nickname, title, description, cost, create_date, available) values(?,?,?,?,?,?,now(),true)',
+			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.description, req.body.cost],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.post('/board/upaccount', function(req, res){
+		mysqlClient.query('update account set title = ?, description = ?, cost = ?, update_date = now() where id = ?',
+			[req.body.title, req.body.description, req.body.cost, req.body.id],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.get('/board/hideaccount/:index', function(req, res){
+		mysqlClient.query('update account set available = false where id = ?', [req.params.index],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.get('/board/delaccount/:index', function(req, res){
+		mysqlClient.query('delete from account where id = ?', [req.params.index],
+			function(error, result){
+				if(error){
+					console.log('server error');
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+
+	/////////////////////////////
+	// attendee
+	/////////////////////////////
 
 
 }

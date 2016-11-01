@@ -1,0 +1,10 @@
+<input type="hidden" value="{{userinfo.nickname}}" ng-model="accountVO.nickname">
+<h4>제목</h4>
+<input type="text" class='form-control' ng-model="accountVO.title">
+<h4>설명</h4>
+<textarea class='form-control' cols='40' rows='10' ng-model='accountVO.description'></textarea>
+<h4>가격</h4>
+<input type="text" class='form-control' ng-model="accountVO.cost">
+
+<a href="{{boardinfo[0].id}}#!/account" class="btn btn-default">취소</a>
+<button type="button" class="btn btn-primary" ng-click="newaccount(accountVO)">글작성</button>

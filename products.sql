@@ -112,6 +112,28 @@ create table attendUser(
 	nickname varchar(200) not null
 );
 
+create table account(
+	id int not null auto_increment primary key,
+	board_id int not null,
+	user_id int not null,
+	nickname varchar(200) not null,
+	title varchar(200) not null,
+	description text,
+	cost int,
+	create_date DATE,
+	update_date DATE,
+	delete_date DATE,
+	available boolean not null
+);
+
+create table attendee(
+	id int not null auto_increment primary key,
+	account_id int not null,
+	user_id int not null,
+	member_paycheck boolean not null,
+	admin_paycheck boolean not null
+);
+
 
 select * from board where id = (select board_id from guest where user_id = ?)
 
@@ -120,3 +142,7 @@ insert into user(userID, password, email) values('wonny', 'wonny', 'wonny@naver.
 
 /*테이블 구조 보기*/
 desc board;
+
+/*날짜 비교*/
+select * from notice
+where date(create_date) < '2016-10-20';
