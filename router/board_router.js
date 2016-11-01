@@ -4,7 +4,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getboardinfo', function(req, res){
 		mysqlClient.query('select * from board where id = ?',[req.session.board_id], function(error, result){
 			if(error){
-				console.log('server getboardinfo error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -18,7 +18,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getboardguest', function(req, res){
 		mysqlClient.query('select * from guest where board_id = ? and user_id = ?', [req.session.board_id, req.session.index], function(error, result){
 			if(error){
-				console.log('server getboardguest error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -27,7 +27,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getguest', function(req, res){
 		mysqlClient.query('select * from guest where board_id = ?',[req.session.board_id], function(error, result){
 			if(error){
-				console.log('server getguest error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -38,7 +38,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			[req.body.nickname, req.body.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -48,7 +48,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('delete from guest where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -62,7 +62,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getfreetalk/:index', function(req, res){
 		mysqlClient.query('select * from freetalk where board_id = ? and id = ?',[req.session.board_id, req.params.index], function(error,result){
 			if(error){
-				console.log('server getfreetalk one error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -71,7 +71,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getfreetalk', function(req, res){
 		mysqlClient.query('select * from freetalk where board_id = ? and available = true',[req.session.board_id], function(error, result){
 			if(error){
-				console.log('server getfreetalk error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -82,7 +82,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.content], 
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -93,7 +93,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			[req.body.title, req.body.content, req.body.id],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -103,7 +103,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('update freetalk set available = false where id=?',[req.params.index], 
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -113,7 +113,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('delete from freetalk where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -127,7 +127,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getnotice', function(req, res){
 		mysqlClient.query('select * from notice where board_id = ? and available = true',[req.session.board_id], function(error, result){
 			if(error){
-				console.log('server getnotice error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -136,7 +136,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getnotice/:index', function(req, res){
 		mysqlClient.query('select * from notice where board_id = ? and id = ?',[req.session.board_id, req.params.index],function(error, result){
 			if(error){
-				console.log('server get notice one error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -158,7 +158,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			[req.body.title, req.body.content, req.body.id],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -168,7 +168,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('update notice set available = false where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -178,7 +178,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('delete from notice where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -192,7 +192,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getschedule', function(req, res){
 		mysqlClient.query('select * from schedule where board_id = ? and available = true',[req.session.board_id], function(error, result){
 			if(error){
-				console.log('server getschedule error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -201,7 +201,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getschedule/:index', function(req, res){
 		mysqlClient.query('select * from schedule where board_id = ? and id = ?',[req.session.board_id, req.params.index], function(error, result){
 			if(error){
-				console.log('server getschedule error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -212,7 +212,6 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.place, req.body.gathering_time, req.body.t_cost],
 			function(error, result){
 				if(error){
-					console.log('server error');
 					console.log(error);
 				}else{
 					res.json({message : 'success'});
@@ -234,7 +233,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('update schedule set available = false where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -244,7 +243,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('delete from schedule where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -258,7 +257,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getattendUser/:id', function(req, res){
 		mysqlClient.query('select * from attendUser where schedule_id = ?',[req.params.id], function(error, result){
 			if(error){
-				console.log('server getattendUser error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -269,7 +268,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			[req.params.s_id, req.params.u_id],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -279,7 +278,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('delete from attendUser where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -293,7 +292,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getstudydata', function(req, res){
 		mysqlClient.query('select * from studydata where board_id = ? and available = true',[req.session.board_id], function(error, result){
 			if(error){
-				console.log('server getnotice error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -302,7 +301,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	app.get('/board/getstudydata/:index', function(req, res){
 		mysqlClient.query('select * from studydata where board_id = ? and id = ?',[req.session.board_id, req.params.index],function(error, result){
 			if(error){
-				console.log('server get notice one error');
+				console.log(error);
 			}else{
 				res.json(result);
 			}
@@ -389,7 +388,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('delete from studydata where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}
@@ -455,7 +454,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		mysqlClient.query('delete from account where id = ?', [req.params.index],
 			function(error, result){
 				if(error){
-					console.log('server error');
+					console.log(error);
 				}else{
 					res.json({message : 'success'});
 				}

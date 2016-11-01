@@ -45,6 +45,11 @@ create table guest(
 	FOREIGN KEY (board_id) REFERENCES board(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+insert into guest(board_id, user_id, admin_auth, nickname, join_date) values(1, 1, true, 'wonnynickname', now());
+insert into guest(board_id, user_id, admin_auth, nickname, join_date) values(2, 2, true, 'wonnynickname', now());
+
+
+
 create table freetalk(
 	id int not null auto_increment primary key,
 	board_id int not null,
@@ -146,3 +151,49 @@ desc board;
 /*날짜 비교*/
 select * from notice
 where date(create_date) < '2016-10-20';
+
+/*user outer join user, board test*/
+select user.id, user.email, user.userID, count(board.id) AS cnt
+from user left outer join board 
+on user.id = board.admin_id;
+
+
+/*outer join board, guest test*/
+select board.id, board.admin_id, board.title, board.description, board.create_date,
+	board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt
+	from board left outer join guest
+	on board.id = guest.board_id
+	where board.admin_id = 1;
+
+select board.id, board.admin_id, board.title, board.description, board.create_date, board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt from board left outer join guest on board.id = guest.board_id where board.admin_id = 1;
+
+/*inner join*/
+select board.id, board.admin_id, board.title, board.description, board.create_date,
+	board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt
+	from board inner join guest
+	on board.id = guest.board_id
+	where board.admin_id = 1;
+
+/*left join*/
+select board.id, board.admin_id, board.title, board.description, board.create_date,
+	board.update_date, board.delete_date, board.available
+	from board left join guest
+	on board.id = guest.board_id
+	where board.admin_id = 1;
+
+/*left join group by */
+select board.id, board.admin_id, board.title, board.description, board.create_date,
+	board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt
+	from board left join guest
+	on board.id = guest.board_id
+	where board.admin_id = 1
+	group by board.id;
+
+/*sub query*/
+select id, admin_id, title, description, create_date, update_date, delete_date, available, 
+(select count(*) from guest where board_id = 1) AS guestcnt
+from board
+where admin_id = 1;
+
+
+select board.id, board.admin_id, board.title, board.description, board.create_date, board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = 1 group by board.id;

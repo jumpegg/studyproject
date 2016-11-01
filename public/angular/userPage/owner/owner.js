@@ -14,6 +14,12 @@ angular.module('userPage.owner', ['ngRoute'])
 			$scope.updateStudy = data[0];
 		});
 	};
+/*	$scope.guestcnt = function(input){
+		user.getguestcnt(input, function(data){
+			$scope.guestcnt = data[0];
+		});
+		return $scope.guestcnt;
+	};*/
 
 	$scope.upStudy = function(input){
 		var jinput = JSON.stringify(input);

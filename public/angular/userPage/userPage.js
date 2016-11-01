@@ -29,7 +29,6 @@ angular.module('userPage',[
 			$scope.adminBoards = data;
 		});
 	};
-
 	user.getuser(function(data){
 		$scope.loginUser = data[0];
 	});
@@ -66,6 +65,16 @@ angular.module('userPage',[
 			$http({
 				method: 'get',
 				url:'/getboard/'+input
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		getguestcnt: function(input, callback){
+			$http({
+				method: 'get',
+				url:'/getguest/'+input
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
