@@ -3,12 +3,13 @@
     <div class="ListLabel">
       공지사항
     </div>
-    <table border='1px solid black'>
+    <table>
       <tbody ng-repeat = 'notice in noticeList'>
         <tr>
           <td>{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
           <td>{{notice.nickname}}</td>
+          <td>{{notice.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>
@@ -18,12 +19,13 @@
     <div class="ListLabel">
       자유게시판
     </div>
-    <table border='1px solid black'>
+    <table>
       <tbody ng-repeat = 'freetalk in freetalkList'>
         <tr>
           <td>{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/freetalk/{{freetalk.id}}">{{freetalk.title}}</a></td>
           <td>{{freetalk.nickname}}</td>
+          <td>{{freetalk.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>
@@ -36,12 +38,13 @@
     <div class="ListLabel">
       스터디 계획
     </div>
-    <table border='1px solid black'>
+    <table>
       <tbody ng-repeat = 'schedule in scheduleList'>
         <tr>
           <td>{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/schedule/{{schedule.id}}">{{schedule.title}}</a></td>
           <td>{{schedule.nickname}}</td>
+          <td>{{schedule.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>
@@ -51,12 +54,13 @@
     <div class="ListLabel">
       자료실
     </div>
-    <table border='1px solid black'>
+    <table>
       <tbody ng-repeat = 'studydata in studydataList'>
         <tr>
           <td>{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/studydata/{{studydata.id}}">{{studydata.title}}</a></td>
           <td>{{studydata.nickname}}</td>
+          <td>{{studydata.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>

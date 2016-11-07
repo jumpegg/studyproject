@@ -4,6 +4,7 @@
 			<th>No</th>
 			<th>제목</th>
 			<th>작성자</th>
+			<th>작성일</th>
 		</tr>
 	</thead>
 	<tbody ng-repeat = 'notice in noticeList'>
@@ -11,6 +12,7 @@
 			<td>{{$index+1}}</td>
 			<td><a href="{{boardinfo[0].id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
 			<td>{{notice.nickname}}</td>
+			<td>{{notice.create_date|date:"MM.dd"</td>
 		</tr>
 	</tbody>
 </table>

@@ -4,6 +4,7 @@
 			<th>No</th>
 			<th>제목</th>
 			<th>작성자</th>
+			<th>작성일</th>
 		</tr>
 	</thead>
 	<tbody ng-repeat = 'schedule in scheduleList'>
@@ -11,6 +12,7 @@
 			<td>{{$index+1}}</td>
 			<td><a href="{{boardinfo[0].id}}#!/schedule/{{schedule.id}}">{{schedule.title}}</a></td>
 			<td>{{schedule.nickname}}</td>
+			<td>{{schedule.create_date|date:"MM.dd"}}</td>
 		</tr>
 	</tbody>
 </table>
