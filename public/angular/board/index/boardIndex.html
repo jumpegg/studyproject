@@ -1,18 +1,8 @@
-<div class="rowWrapper">
 
-  <div class="freetalkListWrapper ListBox">
-    <table border='1px solid black'>
-      <tbody ng-repeat = 'freetalk in freetalkList'>
-        <tr>
-          <td>{{$index+1}}</td>
-          <td><a href="{{boardinfo[0].id}}#!/freetalk/{{freetalk.id}}">{{freetalk.title}}</a></td>
-          <td>{{freetalk.nickname}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="noticeListWrapper ListBox">
+  <div class="noticeListWrapper">
+    <div class="ListLabel">
+      공지사항
+    </div>
     <table border='1px solid black'>
       <tbody ng-repeat = 'notice in noticeList'>
         <tr>
@@ -24,11 +14,28 @@
     </table>
   </div>
 
-</div>
+  <div class="freetalkListWrapper">
+    <div class="ListLabel">
+      자유게시판
+    </div>
+    <table border='1px solid black'>
+      <tbody ng-repeat = 'freetalk in freetalkList'>
+        <tr>
+          <td>{{$index+1}}</td>
+          <td><a href="{{boardinfo[0].id}}#!/freetalk/{{freetalk.id}}">{{freetalk.title}}</a></td>
+          <td>{{freetalk.nickname}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 
 <div class="rowWrapper">
 
   <div class="scheduleListWrapper ListBox">
+    <div class="ListLabel">
+      스터디 계획
+    </div>
     <table border='1px solid black'>
       <tbody ng-repeat = 'schedule in scheduleList'>
         <tr>
@@ -41,6 +48,9 @@
   </div>
 
   <div class="studyListWrapper ListBox">
+    <div class="ListLabel">
+      자료실
+    </div>
     <table border='1px solid black'>
       <tbody ng-repeat = 'studydata in studydataList'>
         <tr>

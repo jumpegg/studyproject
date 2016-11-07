@@ -69,7 +69,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 	app.get('/board/getfreetalk/list/:index', function(req, res){
-		mysqlClient.query('select * from freetalk where board_id = ? and available = true order by id limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
+		mysqlClient.query('select * from freetalk where board_id = ? and available = true order by id desc limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -125,7 +125,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	////////////////////////
 
 	app.get('/board/getnotice/list/:index', function(req, res){
-		mysqlClient.query('select * from notice where board_id = ? and available = true order by id limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
+		mysqlClient.query('select * from notice where board_id = ? and available = true order by id desc limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -190,7 +190,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	////////////////////////
 
 	app.get('/board/getschedule/list/:index', function(req, res){
-		mysqlClient.query('select * from schedule where board_id = ? and available = true order by id limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
+		mysqlClient.query('select * from schedule where board_id = ? and available = true order by id desc limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -399,7 +399,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	////////////////////////////
 
 	app.get('/board/getaccount/list/:index', function(req, res){
-		mysqlClient.query('select * from account where board_id = ? order by id limit ?,?', [req.session.board_id, (req.params.index-1)*10, 10],
+		mysqlClient.query('select * from account where board_id = ? order by id desc limit ?,?', [req.session.board_id, (req.params.index-1)*10, 10],
 			function(error, result){
 				if(error){
 					console.log(error);
