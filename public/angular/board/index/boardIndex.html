@@ -6,10 +6,10 @@
     <table>
       <tbody ng-repeat = 'notice in noticeList'>
         <tr>
-          <td>{{$index+1}}</td>
+          <td class="table_index">{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
-          <td>{{notice.nickname}}</td>
-          <td>{{notice.create_date|date:"MM.dd"}}</td>
+          <td class="table_narrow">{{notice.nickname}}</td>
+          <td class="table_narrow">{{notice.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>
@@ -22,10 +22,10 @@
     <table>
       <tbody ng-repeat = 'freetalk in freetalkList'>
         <tr>
-          <td>{{$index+1}}</td>
+          <td class="table_index">{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/freetalk/{{freetalk.id}}">{{freetalk.title}}</a></td>
-          <td>{{freetalk.nickname}}</td>
-          <td>{{freetalk.create_date|date:"MM.dd"}}</td>
+          <td class="table_narrow">{{freetalk.nickname}}</td>
+          <td class="table_narrow">{{freetalk.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>
@@ -41,10 +41,10 @@
     <table>
       <tbody ng-repeat = 'schedule in scheduleList'>
         <tr>
-          <td>{{$index+1}}</td>
+          <td class="table_index">{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/schedule/{{schedule.id}}">{{schedule.title}}</a></td>
-          <td>{{schedule.nickname}}</td>
-          <td>{{schedule.create_date|date:"MM.dd"}}</td>
+          <td class="table_narrow">{{schedule.nickname}}</td>
+          <td class="table_narrow">{{schedule.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>
@@ -57,10 +57,10 @@
     <table>
       <tbody ng-repeat = 'studydata in studydataList'>
         <tr>
-          <td>{{$index+1}}</td>
+          <td class="table_index">{{$index+1}}</td>
           <td><a href="{{boardinfo[0].id}}#!/studydata/{{studydata.id}}">{{studydata.title}}</a></td>
-          <td>{{studydata.nickname}}</td>
-          <td>{{studydata.create_date|date:"MM.dd"}}</td>
+          <td class="table_narrow">{{studydata.nickname}}</td>
+          <td class="table_narrow">{{studydata.create_date|date:"MM.dd"}}</td>
         </tr>
       </tbody>
     </table>
