@@ -17,19 +17,7 @@ angular.module('board',[
 
   $routeProvider.otherwise({redirectTo: '/'});
 }])
-.controller('boardCtrl', function($scope, guestService, freetalkService, noticeService, scheduleService, attendUserService, boardService){
-	guestService.getguest(function(data){
-		$scope.guestList = data;
-	});
-	freetalkService.getfreetalk(function(data){
-		$scope.freetalkList = data;
-	});
-	noticeService.getnotice(function(data){
-		$scope.noticeList = data;
-	});
-	scheduleService.getschedule(function(data){
-		$scope.scheduleList = data;
-	});
+.controller('boardCtrl', function($scope, boardService){
 	boardService.getboard(function(data){
 		$scope.boardinfo = data[0];
 		console.log($scope.boardinfo.id);
@@ -37,11 +25,6 @@ angular.module('board',[
 	boardService.getboardguest(function(data){
 		$scope.userinfo = data[0];
 	});
-
-	$scope.CreateFreetalk = function(input){
-		var jinput = JSON.stringify(input);
-		freetalkService.setfreetalk(jinput);
-	}
 
 })
 .factory('boardService', function($http){
@@ -118,8 +101,8 @@ angular.module('board',[
 })
 .factory('freetalkService', function($http, $location){
 	return{
-		getfreetalk: function(callback){
-			$http.get('/board/getfreetalk')
+		getfreetalk: function(index, callback){
+			$http.get('/board/getfreetalk/list/'+index)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -182,8 +165,8 @@ angular.module('board',[
 })
 .factory('noticeService', function($http, $location){
 	return{
-		getnotice: function(callback){
-			$http.get('/board/getnotice')
+		getnotice: function(index, callback){
+			$http.get('/board/getnotice/list/'+index)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -254,10 +237,10 @@ angular.module('board',[
 })
 .factory('studydataService', function($http, $location){
 	return{
-		getstudydata: function(callback){
+		getstudydata: function(index, callback){
 			$http({
 				method: 'get',
-				url:'/board/getstudydata'
+				url:'/board/getstudydata/list/'+index
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
@@ -338,8 +321,8 @@ angular.module('board',[
 })
 .factory('scheduleService', function($http, $location){
 	return{
-		getschedule: function(callback){
-			$http.get('/board/getschedule')
+		getschedule: function(index, callback){
+			$http.get('/board/getschedule/list/'+index)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -444,8 +427,8 @@ angular.module('board',[
 })
 .factory('accountService', function($http, $location){
 	return{
-		getaccount: function(callback){
-			$http.get('/board/getaccount')
+		getaccount: function(index, callback){
+			$http.get('/board/getaccount/list/'+index)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){

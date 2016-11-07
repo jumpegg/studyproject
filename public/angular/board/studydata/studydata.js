@@ -21,7 +21,7 @@ angular.module('board.studydata', ['ngRoute','file-model'])
 	})
 }])
 .controller('studydataCtrl', function($scope, studydataService){
-	studydataService.getstudydata(function(data){
+	studydataService.getstudydata(1,function(data){
 		$scope.dataList = data;
 	});
 })

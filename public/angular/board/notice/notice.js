@@ -21,7 +21,7 @@ angular.module('board.notice', ['ngRoute'])
 	});
 }])
 .controller('noticeCtrl', function($scope, noticeService){
-	noticeService.getnotice(function(data){
+	noticeService.getnotice(1,function(data){
 		$scope.noticeList = data;
 	});
 })

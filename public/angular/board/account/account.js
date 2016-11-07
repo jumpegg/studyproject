@@ -21,7 +21,7 @@ angular.module('board.account', ['ngRoute'])
 	});
 }])
 .controller('accountCtrl', function($scope, accountService){
-	accountService.getaccount(function(data){
+	accountService.getaccount(1,function(data){
 		$scope.accountList = data;
 		console.log($scope.accountList);
 	});

@@ -68,8 +68,8 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			}
 		});
 	});
-	app.get('/board/getfreetalk', function(req, res){
-		mysqlClient.query('select * from freetalk where board_id = ? and available = true',[req.session.board_id], function(error, result){
+	app.get('/board/getfreetalk/list/:index', function(req, res){
+		mysqlClient.query('select * from freetalk where board_id = ? and available = true order by id limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -124,8 +124,8 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	//notice
 	////////////////////////
 
-	app.get('/board/getnotice', function(req, res){
-		mysqlClient.query('select * from notice where board_id = ? and available = true',[req.session.board_id], function(error, result){
+	app.get('/board/getnotice/list/:index', function(req, res){
+		mysqlClient.query('select * from notice where board_id = ? and available = true order by id limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -189,8 +189,8 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	//schedule
 	////////////////////////
 
-	app.get('/board/getschedule', function(req, res){
-		mysqlClient.query('select * from schedule where board_id = ? and available = true',[req.session.board_id], function(error, result){
+	app.get('/board/getschedule/list/:index', function(req, res){
+		mysqlClient.query('select * from schedule where board_id = ? and available = true order by id limit ?,?',[req.session.board_id, (req.params.index-1)*10, 10], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -289,8 +289,8 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	//studydata
 	////////////////////////
 
-	app.get('/board/getstudydata', function(req, res){
-		mysqlClient.query('select * from studydata where board_id = ? and available = true',[req.session.board_id], function(error, result){
+	app.get('/board/getstudydata/list/:index', function(req, res){
+		mysqlClient.query('select * from studydata where board_id = ? and available = true order by id limit ?,?',[req.session.board_id,(req.params.index-1)*10, 10], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -398,8 +398,8 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	// account
 	////////////////////////////
 
-	app.get('/board/getaccount', function(req, res){
-		mysqlClient.query('select * from account where board_id = ?', [req.session.board_id],
+	app.get('/board/getaccount/list/:index', function(req, res){
+		mysqlClient.query('select * from account where board_id = ? order by id limit ?,?', [req.session.board_id, (req.params.index-1)*10, 10],
 			function(error, result){
 				if(error){
 					console.log(error);

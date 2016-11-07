@@ -46,7 +46,7 @@ angular.module('board.freetalk', ['ngRoute'])
 		freetalkService.upfreetalk(input);
 	};
 	$scope.FreetalkList = function(){
-		freetalkService.getfreetalk(function(data){
+		freetalkService.getfreetalk(1,function(data){
 			$scope.freetalkList = data;
 		});
 	};

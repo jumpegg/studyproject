@@ -21,7 +21,7 @@ angular.module('board.schedule', ['ngRoute'])
 	});
 }])
 .controller('scheduleCtrl', function($scope, scheduleService){
-	scheduleService.getschedule(function(data){
+	scheduleService.getschedule(1,function(data){
 		$scope.scheduleList = data;
 	});
 })
