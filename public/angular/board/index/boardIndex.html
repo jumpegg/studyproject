@@ -1,1 +1,58 @@
-<h1>Board Index Page</h1>
+<div class="rowWrapper">
+
+  <div class="freetalkListWrapper ListBox">
+    <table border='1px solid black'>
+      <tbody ng-repeat = 'freetalk in freetalkList'>
+        <tr>
+          <td>{{$index+1}}</td>
+          <td><a href="{{boardinfo[0].id}}#!/freetalk/{{freetalk.id}}">{{freetalk.title}}</a></td>
+          <td>{{freetalk.nickname}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="noticeListWrapper ListBox">
+    <table border='1px solid black'>
+      <tbody ng-repeat = 'notice in noticeList'>
+        <tr>
+          <td>{{$index+1}}</td>
+          <td><a href="{{boardinfo[0].id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
+          <td>{{notice.nickname}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="rowWrapper">
+
+  <div class="scheduleListWrapper ListBox">
+    <table border='1px solid black'>
+      <tbody ng-repeat = 'schedule in scheduleList'>
+        <tr>
+          <td>{{$index+1}}</td>
+          <td><a href="{{boardinfo[0].id}}#!/schedule/{{schedule.id}}">{{schedule.title}}</a></td>
+          <td>{{schedule.nickname}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="studyListWrapper ListBox">
+    <table border='1px solid black'>
+      <tbody ng-repeat = 'studydata in studydataList'>
+        <tr>
+          <td>{{$index+1}}</td>
+          <td><a href="{{boardinfo[0].id}}#!/studydata/{{studydata.id}}">{{studydata.title}}</a></td>
+          <td>{{studydata.nickname}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<link href="../css/board/boardIndex.less" rel="stylesheet/less" type="text/css" />
+<script type="text/javascript" src="../js/less.min.js"></script>
