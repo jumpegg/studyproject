@@ -15,7 +15,9 @@
     </table>
   </div>
 
-  <div class="freetalkListWrapper">
+<div class="rowWrapper">
+
+  <div class="freetalkListWrapper ListBox">
     <div class="ListLabel">
       자유게시판
     </div>
@@ -31,6 +33,23 @@
     </table>
   </div>
 
+  <div class="accountListWrapper ListBox">
+    <div class="ListLabel">
+      회계상황
+    </div>
+    <table>
+      <tbody ng-repeat = 'account in accountList'>
+        <tr>
+          <td class="table_index">{{$index+1}}</td>
+          <td><a href="{{boardinfo[0].id}}#!/account/{{account.id}}">{{account.title}}</a></td>
+          <td class="table_narrow">{{account.nickname}}</td>
+          <td class="table_narrow">{{account.create_date|date:"MM.dd"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
 
 <div class="rowWrapper">
 

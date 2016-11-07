@@ -7,7 +7,7 @@ angular.module('board.index', ['ngRoute'])
 		controller: 'boardIndexCtrl'
 	});
 }])
-.controller('boardIndexCtrl', function($scope, guestService, freetalkService, noticeService, scheduleService, attendUserService, boardService, studydataService){
+.controller('boardIndexCtrl', function($scope, guestService, freetalkService, noticeService, scheduleService, attendUserService, boardService, studydataService, accountService){
 	guestService.getguest(function(data){
 		$scope.guestList = data;
 	});
@@ -20,6 +20,9 @@ angular.module('board.index', ['ngRoute'])
 	scheduleService.getschedule(1,function(data){
 		$scope.scheduleList = data;
 	});
+	accountService.getaccount(1,function(data){
+		$scope.accountList = data;
+	})
 	studydataService.getstudydata(1,function(data){
 		$scope.studydataList = data;
 	});
