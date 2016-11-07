@@ -515,4 +515,72 @@ angular.module('board',[
 			});
 		}
 	}
+})
+.factory('attendeeService', function($http, $location){
+	return{
+		getattendee: function(callback){
+			$http.get('/board/getattendee')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		setattendee: function(input){
+			$http({
+				method: 'post',
+				url:'/board/newattendee',
+				data: input
+			}).success(function(data, status, headers, config){
+				if(data.message == 'success'){
+					alert('등록되었습니다.');
+					$location.path("/attendee");
+				}else{
+					alert('서버에러');
+				};
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		upattendeemember: function(input){
+			$http({
+				method: 'get',
+				url:'/board/upattendeemember'+input
+			}).success(function(data, status, headers, config){
+				if(data.message == 'success'){
+					alert('등록되었습니다.');
+					$location.path("/attendee");
+				}else{
+					alert('서버에러');
+				};
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		upattendeeadmin: function(input){
+			$http({
+				method: 'get',
+				url:'/board/upattendeeadmin'+input
+			}).success(function(data, status, headers, config){
+				if(data.message == 'success'){
+					alert('등록되었습니다.');
+					$location.path("/attendee");
+				}else{
+					alert('서버에러');
+				};
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		delattendee: function(input){
+			$http({
+				method: 'get',
+				url:'/board/delattendee/'+input
+			}).success(function(data, status, headers, config){
+				$location.path("/attendee");
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		}
+	}
 });

@@ -181,6 +181,12 @@ select board.id, board.admin_id, board.title, board.description, board.create_da
 	on board.id = guest.board_id
 	where board.admin_id = 1;
 
+/*sub query*/
+select id, admin_id, title, description, create_date, update_date, delete_date, available, 
+(select count(*) from guest where board_id = 1) AS guestcnt
+from board
+where admin_id = 1;
+
 /*left join group by */
 select board.id, board.admin_id, board.title, board.description, board.create_date,
 	board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt
@@ -189,11 +195,12 @@ select board.id, board.admin_id, board.title, board.description, board.create_da
 	where board.admin_id = 1
 	group by board.id;
 
-/*sub query*/
-select id, admin_id, title, description, create_date, update_date, delete_date, available, 
-(select count(*) from guest where board_id = 1) AS guestcnt
-from board
-where admin_id = 1;
-
+select board.*, count(guest.id) AS guestcnt
+	from board left join guest
+	on board.id = guest.board_id
+	where board.admin_id = 1
+	group by board.id;
 
 select board.id, board.admin_id, board.title, board.description, board.create_date, board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = 1 group by board.id;
+
+select board.*, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = 1 group by board.id;

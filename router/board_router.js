@@ -465,5 +465,57 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	// attendee
 	/////////////////////////////
 
-
+	app.get('/board/getattendee', function(req, res){
+		mysqlClient.query('select * from attendee where account_id = ?', [req.session.board_id],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json(result);
+				}
+			});
+	});
+	app.post('/board/newattendee', function(req, res){
+		mysqlClient.query('insert into attendee(account_id, user_id, member_paycheck, admin_paycheck) values(?,?,false, false)',
+			[req.body.account_id, req.session.index],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.get('/board/upattendeemember/:index', function(req, res){
+		mysqlClient.query('update attendee set member_paycheck = true where id = ?',
+			[req.params.index],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.get('/board/upattendeeadmin/:index', function(req, res){
+		mysqlClient.query('update attendee set admin_paycheck = true where id = ?',
+			[req.params.index],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.get('/board/delattendee/:index', function(req, res){
+		mysqlClient.query('delete from account where id = ?', [req.params.index],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
 }

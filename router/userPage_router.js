@@ -15,7 +15,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 		});
 	});
 	app.get('/getboards', function(req, res){
-		mysqlClient.query('select board.id, board.admin_id, board.title, board.description, board.create_date, board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = ? group by board.id', [req.session.index], function(error, result){
+		mysqlClient.query('select board.*, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = ? group by board.id;', [req.session.index], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
