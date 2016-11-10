@@ -141,6 +141,8 @@ create table attendee(
 
 
 select * from board where id = (select board_id from guest where user_id = ?)
+insert into user(userID, password, email) values('tester', 'tester', 'tester@tester.com');
+
 
 insert into user(userID, password, email, available, create_date) values('jumpegg', '870915', 'jumpegg@naver.com',true, now());
 insert into user(userID, password, email) values('wonny', 'wonny', 'wonny@naver.com');

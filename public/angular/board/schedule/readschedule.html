@@ -1,17 +1,62 @@
-<h3>
-	{{scheduleVO.nickname}}
-</h3>
-<h1>
+<div class="boardinfo">
+	<div class="boardtitle">
+		스케쥴
+	</div>
+	<div class="boardnav">
+		홈>스케쥴
+	</div>
+</div>
+<div class="readtitle">
 	{{scheduleVO.title}}
-</h1>
-<p>
-	{{scheduleVO.place}}
-</p>
-<p>
-	{{scheduleVO.gathering_time}}
-</p>
-<p>
-	{{scheduleVO.t_cost}}
-</p>
-<a href="{{boardinfo[0].id}}#!/newschedule/{{scheduleVO.id}}" class="btn btn-default">수정</a>
-<button class="btn btn-default" ng-click="Delschedule(scheduleVO.id)">삭제</button>
+</div>
+<div class="readinfo">
+	<div class="readnickname">
+	작성자 :	{{scheduleVO.nickname}}
+	</div>
+	<div class="readdate">
+		{{scheduleVO.create_date|date:"yy.MM.dd hh:mm"}}
+	</div>
+</div>
+<div class="readcontent">
+	<div class="infoLabel">
+		스터디 장소
+	</div>
+	<div class="place infodata">
+		{{scheduleVO.place}}	
+	</div>
+	<div class="infoLabel">
+		모임 시간
+	</div>
+	<div class="gathering_time infodata">
+		{{scheduleVO.gathering_time|date:"yy.MM.dd hh:mm" }}
+	</div>
+	<div class="infoLabel">
+		총 비용
+	</div>
+	<div class="t_cost infodata">
+	  {{scheduleVO.t_cost}}
+	</div>
+	<div class="infoLabel">
+		개인 지불 비용
+	</div>
+	<div class="e_cost infodata">
+	  {{scheduleVO.t_cost}}
+	</div>
+</div>
+<div class="btnboxwrapper">
+	<div class="backbtnbox">
+		<a href="{{boardinfo[0].id}}#!/schedule" class="btn btn-default">뒤로가기</a>
+	</div>
+	<div class="btnbox">
+		<a href="{{boardinfo[0].id}}#!/newschedule/{{scheduleVO.id}}" class="btn btn-default">수정</a>
+		<button class="btn btn-default" ng-click="DelSchedule(scheduleVO.id)">삭제</button>
+	</div>
+</div>
+	<link href="../css/board/schedule/scheduleread.less" rel="stylesheet/less" type="text/css" />
+	<script type="text/javascript" src="../js/less.min.js"></script>
+
+
+
+
+	<link href="../css/board/customread.less" rel="stylesheet/less" type="text/css" />
+	<script type="text/javascript" src="../js/less.min.js"></script>

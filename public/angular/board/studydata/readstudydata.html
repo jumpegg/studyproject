@@ -1,14 +1,40 @@
-<h3>
-	{{dataVO.nickname}}
-</h3>
-<h1>
+<div class="boardinfo">
+	<div class="boardtitle">
+		자료실
+	</div>
+	<div class="boardnav">
+		홈>자료실
+	</div>
+</div>
+<div class="readtitle">
 	{{dataVO.title}}
-</h1>
-<p>
+</div>
+<div class="readinfo">
+	<div class="readnickname">
+	작성자 :	{{dataVO.nickname}}
+	</div>
+	<div class="readdate">
+		{{dataVO.create_date|date:"yy.MM.dd hh:mm"}}
+	</div>
+</div>
+<div class="fileinfo">
+	자료 : <a href="/studydata/{{boardinfo.id}}/{{dataVO.url}}/{{dataVO.filename}}">{{dataVO.filename}}</a>
+
+</div>
+<div class="readcontent">
 	{{dataVO.description}}
-</p>
-<p>
-	<a href="/studydata/{{boardinfo.id}}/{{dataVO.url}}/{{dataVO.filename}}">file download</a>
-</p>
-<a href="{{boardinfo[0].id}}#!/newstudydata/{{dataVO.id}}" class="btn btn-default">수정</a>
-<button class="btn btn-default" ng-click="Delstudydata(dataVO.id)">삭제</button>
+</div>
+<div class="btnboxwrapper">
+	<div class="backbtnbox">
+		<a href="{{boardinfo[0].id}}#!/studydata" class="btn btn-default">뒤로가기</a>
+	</div>
+	<div class="btnbox">
+		<a href="{{boardinfo[0].id}}#!/newstudydata/{{dataVO.id}}" class="btn btn-default">수정</a>
+		<button class="btn btn-default" ng-click="Delstudydata(dataVO.id)">삭제</button>
+	</div>
+</div>
+
+
+
+	<link href="../css/board/studydata/studydataread.less" rel="stylesheet/less" type="text/css" />
+	<script type="text/javascript" src="../js/less.min.js"></script>
