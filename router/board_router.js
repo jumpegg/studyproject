@@ -518,4 +518,61 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 				}
 			});
 	});
+
+	
+	////////////////////////
+	// comment
+	////////////////////////
+
+	app.get('/board/getcomment/:index', function(req, res){
+		mysqlClient.query('select * from comment where board_id = ? and id = ?',[req.session.board_id, req.params.index], function(error,result){
+			if(error){
+				console.log(error);
+			}else{
+				res.json(result);
+			}
+		});
+	});
+	app.get('/board/getcomment/list/:type/:index', function(req, res){
+		mysqlClient.query('select * from comment where board_type = ? and parents_id = ?',[req.params.type ,req.params.index], function(error, result){
+			if(error){
+				console.log(error);
+			}else{
+				res.json(result);
+			}
+		});
+	});
+	app.post('/board/newcomment', function(req, res){
+		mysqlClient.query('insert into comment(board_type, parents_id, user_id, nickname, comment, create_date) values(?,?,?,?,?,now())', 
+			[req.body.board_type, req.body.parents_id, req.session.index, req.session.userID, req.body.comment], 
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.post('/board/upcomment', function(req, res){
+		mysqlClient.query('update comment set content = ?, update_date = now() where id = ?',
+			[req.body.conmment, req.body.id],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
+	app.get('/board/delcomment/:index', function(req, res){
+		mysqlClient.query('delete from comment where id = ?', [req.params.index],
+			function(error, result){
+				if(error){
+					console.log(error);
+				}else{
+					res.json({message : 'success'});
+				}
+			});
+	});
 }
+

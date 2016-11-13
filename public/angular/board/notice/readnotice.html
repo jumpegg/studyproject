@@ -21,15 +21,31 @@
 	{{noticeVO.content}}
 </div>
 <div class="btnboxwrapper">
-	<div class="backbtnbox">
-		<a href="{{boardinfo[0].id}}#!/notice" class="btn btn-default">뒤로가기</a>
-	</div>
 	<div class="btnbox">
 		<a href="{{boardinfo[0].id}}#!/newnotice/{{noticeVO.id}}" class="btn btn-default">수정</a>
 		<button class="btn btn-default" ng-click="Delnotice(noticeVO.id)">삭제</button>
 	</div>
 </div>
 
+<div class="commentwrapper">
+	<div class="commentlabel">
+		Comments
+	</div>
+	<div class="commentbox">
+		<div class="comment">
+			<input type="hidden" name="board_type" value="noticeVO" ng-model="commentVO.board_type">
+			<input type="hidden" name="parents_id" value="{{noticeVO.id}}" ng-model="commentVO.parents_id">
+			<textarea name="comment" class="comment_textarea" ng-model="commentVO.comment"></textarea>
+		</div>
+		<div class="commentbtn">
+			<button type="button" class="btn btn-default" ng-click="CreateCommit(commitVO)">댓글등록</button>
+		</div>
+	</div>
+</div>
 
-	<link href="../css/board/customread.less" rel="stylesheet/less" type="text/css" />
-	<script type="text/javascript" src="../js/less.min.js"></script>
+<div class="backbtnbox">
+	<a href="{{boardinfo[0].id}}#!/notice" class="btn btn-default">뒤로가기</a>
+</div>
+
+<link href="../css/board/customread.less" rel="stylesheet/less" type="text/css" />
+<script type="text/javascript" src="../js/less.min.js"></script>

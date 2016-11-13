@@ -29,12 +29,15 @@ angular.module('board.freetalk', ['ngRoute'])
 		freetalkService.upfreetalk(input);
 	};
 })
-.controller('readfreetalkCtrl', function($scope, $routeParams, freetalkService){
+.controller('readfreetalkCtrl', function($scope, $routeParams, freetalkService, commentService){
 	freetalkService.getfreetalkone($routeParams.index, function(data){
 		$scope.freetalkone = data[0];
 	});
 	$scope.DelFreetalk = function(input){
 		freetalkService.hidefreetalk(input);
+	};
+	$scope.CreateComment = function(input){
+		commentService.setcomment(input);
 	};
 })
 .controller('freetalkCtrl', function($scope, freetalkService){

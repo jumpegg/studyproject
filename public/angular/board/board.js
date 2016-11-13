@@ -566,4 +566,66 @@ angular.module('board',[
 			});
 		}
 	}
+})
+.factory('commentService', function($http, $location){
+	return{
+		getcomment: function(index, callback){
+			$http.get('/board/getcomment/list/'+index)
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		getcommentone: function(index, callback){
+			$http.get('/board/getcomment/'+index)
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		setcomment: function(input){
+			$http({
+				method: 'post',
+				url:'/board/newcomment',
+				data: input
+			}).success(function(data, status, headers, config){
+				if(data.message == 'success'){
+					alert('등록되었습니다.');
+					$location.path("/comment");
+				}else{
+					alert('서버에러');
+				}
+			}).error(function(data, status, headers, config){
+				alert(status);
+			});
+		},
+		upcomment: function(input){
+			$http({
+				method: 'post',
+				url:'/board/upcomment',
+				data: input
+			}).success(function(data, status, headers, config){
+				if(data.message == 'success'){
+					alert('등록되었습니다.');
+					$location.path("/comment");
+				}else{
+					alert('서버에러');
+				};
+			}).error(function(data, status, headers, config){
+				alert(status);
+			});
+		},
+		delcomment: function(callback){
+			$http({
+				method: 'get',
+				url:'/board/delcomment/:index'
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		}
+	}
 });

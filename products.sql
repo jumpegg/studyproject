@@ -139,6 +139,21 @@ create table attendee(
 	admin_paycheck boolean not null
 );
 
+create table comment(
+	id int not null auto_increment primary key,
+	board_type int not null,
+	parents_id int not null,
+	user_id int not null,
+	nickname varchar(200) not null,
+	comment text,
+	create_date DATE,
+	update_date DATE
+);
+
+create table board_type(
+	id int not null auto_increment primary key,
+	type_name varchar(100) not null
+);
 
 select * from board where id = (select board_id from guest where user_id = ?)
 insert into user(userID, password, email) values('tester', 'tester', 'tester@tester.com');

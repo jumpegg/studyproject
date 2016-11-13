@@ -1,21 +1,35 @@
-<table border='1px solid black'>
-	<thead>
-		<tr>
-			<th>No</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-		</tr>
-	</thead>
-	<tbody ng-repeat = 'data in dataList'>
-		<tr>
-			<td>{{$index+1}}</td>
-			<td><a href="{{boardinfo[0].id}}#!/studydata/{{data.id}}">{{data.title}}</a></td>
-			<td>{{data.nickname}}</td>
-			<td>{{data.create_date|date:"MM.dd"}}</td>
-		</tr>
-	</tbody>
-</table>
-	<a href="{{boardinfo[0].id}}#!/newstudydata" class="btn btn-default">새글 작성</a>
+<div class="boardinfo">
+	<div class="boardtitle">
+		자료실
+	</div>
+	<div class="boardnav">
+		홈 > 자료실
+	</div>
+</div>
+<div class="listWrapper">
+
+	<table>
+		<thead>
+			<tr>
+				<th class="tblno">No</th>
+				<th>제목</th>
+				<th class="tblinfo">작성자</th>
+				<th class="tblinfo">작성일</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat = 'data in dataList'>
+			<tr>
+				<td>{{$index+1}}</td>
+				<td><a href="{{boardinfo[0].id}}#!/studydata/{{data.id}}">{{data.title}}</a></td>
+				<td class="tblinfo">{{data.nickname}}</td>
+				<td class="tblinfo">{{data.create_date|date:"MM.dd"}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="listfooter">
+	<a href="{{boardinfo[0].id}}#!/newdata" class="btn btn-default">새글 작성</a>
+</div>
+
 	<link href="../css/board/customlist.less" rel="stylesheet/less" type="text/css" />
 	<script type="text/javascript" src="../js/less.min.js"></script>

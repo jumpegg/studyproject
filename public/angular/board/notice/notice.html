@@ -1,21 +1,34 @@
-<table border='1px solid black'>
-	<thead>
-		<tr>
-			<th>No</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-		</tr>
-	</thead>
-	<tbody ng-repeat = 'notice in noticeList'>
-		<tr>
-			<td>{{$index+1}}</td>
-			<td><a href="{{boardinfo[0].id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
-			<td>{{notice.nickname}}</td>
-			<td>{{notice.create_date|date:"MM.dd"}}</td>
-		</tr>
-	</tbody>
-</table>
+<div class="boardinfo">
+	<div class="boardtitle">
+		공지사항
+	</div>
+	<div class="boardnav">
+		홈 > 공지사항
+	</div>
+</div>
+<div class="listWrapper">
+
+	<table>
+		<thead>
+			<tr>
+				<th class="tblno">No</th>
+				<th>제목</th>
+				<th class="tblinfo">작성자</th>
+				<th class="tblinfo">작성일</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat = 'notice in noticeList'>
+			<tr>
+				<td>{{$index+1}}</td>
+				<td><a href="{{boardinfo[0].id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
+				<td class="tblinfo">{{notice.nickname}}</td>
+				<td class="tblinfo">{{notice.create_date|date:"MM.dd"}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="listfooter">
 	<a href="{{boardinfo[0].id}}#!/newnotice" class="btn btn-default">새글 작성</a>
+</div>
 	<link href="../css/board/customlist.less" rel="stylesheet/less" type="text/css" />
 	<script type="text/javascript" src="../js/less.min.js"></script>
