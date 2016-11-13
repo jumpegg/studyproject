@@ -77,6 +77,15 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			}
 		});
 	});
+	app.get('/board/getfreetalkcnt', function(req, res){
+		mysqlClient.query('select count(*) from freetalk', function(error, result){
+			if(error){
+				console.log(error);
+			}else{
+				res.json(result);
+			}
+		});
+	});
 	app.post('/board/newfreetalk', function(req, res){
 		mysqlClient.query('insert into freetalk(board_id, user_id, nickname, title, content, cnt, create_date, available) values(?,?,?,?,?,0,now(), true)', 
 			[req.session.board_id, req.session.index, req.session.userID, req.body.title, req.body.content], 

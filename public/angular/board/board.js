@@ -109,6 +109,14 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
+		getfreetalkcnt: function(callback){
+			$http.get('/board/getfreetalkcnt')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
 		getfreetalkone: function(index, callback){
 			$http({
 				method: 'get',

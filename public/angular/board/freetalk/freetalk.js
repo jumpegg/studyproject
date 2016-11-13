@@ -41,6 +41,8 @@ angular.module('board.freetalk', ['ngRoute'])
 	};
 })
 .controller('freetalkCtrl', function($scope, freetalkService){
+
+	$scope.pageIndex = [];
 	$scope.CreateFreetalk = function(input){
 		freetalkService.setfreetalk(input);
 		$scope.FreetalkList();
@@ -51,6 +53,12 @@ angular.module('board.freetalk', ['ngRoute'])
 	$scope.FreetalkList = function(){
 		freetalkService.getfreetalk(1,function(data){
 			$scope.freetalkList = data;
+		});
+		freetalkService.getfreetalkcnt(function(data){
+			$scope.lastPage = Math.ceil(data/10);
+			for(var i=0; i<Math.ceil(data/10); i++){
+				$scope.pageIndex.push(i+1);
+			};
 		});
 	};
 	$scope.FreetalkList();
