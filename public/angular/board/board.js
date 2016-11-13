@@ -569,8 +569,8 @@ angular.module('board',[
 })
 .factory('commentService', function($http, $location){
 	return{
-		getcomment: function(index, callback){
-			$http.get('/board/getcomment/list/'+index)
+		getcomment: function(type, index, callback){
+			$http.get('/board/getcomment/list/'+type+'/'+index)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){

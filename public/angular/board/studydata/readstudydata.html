@@ -26,6 +26,7 @@
 </div>
 <div class="btnboxwrapper">
 	<div class="btnbox">
+		<a href="{{boardinfo[0].id}}#!/studydata" class="btn btn-default">목록</a>
 		<a href="{{boardinfo[0].id}}#!/newstudydata/{{dataVO.id}}" class="btn btn-default">수정</a>
 		<button class="btn btn-default" ng-click="Delstudydata(dataVO.id)">삭제</button>
 	</div>
@@ -45,10 +46,6 @@
 			<button type="button" class="btn btn-default" ng-click="CreateCommit(commitVO)">댓글등록</button>
 		</div>
 	</div>
-</div>
-
-<div class="backbtnbox">
-	<a href="{{boardinfo[0].id}}#!/studydata" class="btn btn-default">뒤로가기</a>
 </div>
 	
 <link href="../css/board/studydata/studydataread.less" rel="stylesheet/less" type="text/css" />

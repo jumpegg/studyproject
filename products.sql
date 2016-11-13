@@ -155,6 +155,11 @@ create table board_type(
 	type_name varchar(100) not null
 );
 
+insert into board_type(type_name) values('freetalk');
+insert into board_type(type_name) values('notice');
+insert into board_type(type_name) values('schedule');
+insert into board_type(type_name) values('studydata');
+
 select * from board where id = (select board_id from guest where user_id = ?)
 insert into user(userID, password, email) values('tester', 'tester', 'tester@tester.com');
 
