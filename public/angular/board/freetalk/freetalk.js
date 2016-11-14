@@ -36,8 +36,16 @@ angular.module('board.freetalk', ['ngRoute'])
 	$scope.DelFreetalk = function(input){
 		freetalkService.hidefreetalk(input);
 	};
+	commentService.getcomment('freetalk', $routeParams.index, function(data){
+		$scope.commentList = data;
+	});
 	$scope.CreateComment = function(input){
+		input.board_type = "freetalk";
+		input.parents_id = $scope.freetalkone.id;
 		commentService.setcomment(input);
+		commentService.getcomment('freetalk', $routeParams.index, function(data){
+			$scope.commentList = data;
+		});
 	};
 })
 .controller('freetalkCtrl', function($scope, freetalkService){

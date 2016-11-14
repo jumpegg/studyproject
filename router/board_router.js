@@ -543,7 +543,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 	app.post('/board/newcomment', function(req, res){
-		mysqlClient.query('insert into comment(board_type, parents_id, user_id, nickname, comment, create_date) values(?,?,?,?,?,now())', 
+		mysqlClient.query('insert into comment(board_type, parents_id, user_id, nickname, comment, create_date) values((select id from board_type where type_name = ?),?,?,?,?,now())', 
 			[req.body.board_type, req.body.parents_id, req.session.index, req.session.userID, req.body.comment], 
 			function(error, result){
 				if(error){

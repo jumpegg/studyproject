@@ -33,12 +33,23 @@ angular.module('board.studydata', ['ngRoute','file-model'])
 		};
 	};
 })
-.controller('readstudydataCtrl', function($scope, studydataService, $routeParams){
+.controller('readstudydataCtrl', function($scope, studydataService, $routeParams, commentService){
 	studydataService.getstudydataone($routeParams.index, function(data){
 		$scope.dataVO = data[0];
 	});
 	$scope.Delstudydata = function(input){
 		studydataService.hidestudydata(input);
+	};
+	commentService.getcomment('studydata', $routeParams.index, function(data){
+		$scope.commentList = data;
+	});
+	$scope.CreateComment = function(input){
+		input.board_type = "studydata";
+		input.parents_id = $scope.dataVO.id;
+		commentService.setcomment(input);
+		commentService.getcomment('studydata', $routeParams.index, function(data){
+			$scope.commentList = data;
+		});
 	};
 })
 .controller('updatestudydataCtrl', function($scope, studydataService, $routeParams){

@@ -30,13 +30,25 @@ angular.module('board.schedule', ['ngRoute'])
 		scheduleService.setschedule(input);
 	};
 })
-.controller('readscheduleCtrl', function($scope, scheduleService, $routeParams){
+.controller('readscheduleCtrl', function($scope, scheduleService, $routeParams, commentService){
 	scheduleService.getscheduleone($routeParams.index, function(data){
 		$scope.scheduleVO = data[0];
 	});
 	$scope.Delschedule = function(input){
 		scheduleService.delschedule(input);
 	};
+	commentService.getcomment('schedule', $routeParams.index, function(data){
+		$scope.commentList = data;
+	});
+	$scope.CreateComment = function(input){
+		input.board_type = "schedule";
+		input.parents_id = $scope.scheduleVO.id;
+		commentService.setcomment(input);
+		commentService.getcomment('schedule', $routeParams.index, function(data){
+			$scope.commentList = data;
+		});
+	};
+
 })
 .controller('updatescheduleCtrl', function($scope, scheduleService, $routeParams){
 	scheduleService.getscheduleone($routeParams.index, function(data){

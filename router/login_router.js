@@ -22,4 +22,17 @@ module.exports = function(app, mysqlClient, passport, bcrypt, salt)
 				}
 			});
 	});
+	app.get('/usercheck/:userID', function(req, res){
+		mysqlClient.query('select count(*) AS cnt from user where userID = ?',
+		[req.params.userID],
+		function(error, result){
+			if(error){
+				console.log(error);
+			}else if(result[0].cnt != 0){
+				res.json({message : true});
+			}else{
+				res.json({message : false});
+			}
+		});
+	});
 }

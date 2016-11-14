@@ -49,29 +49,28 @@
         <h4 class="modal-title" id="myModalLabel">회원 가입</h4>
       </div>
 
-      <form name="signUpForm" action="/sign-up" method="post">
+			<div class="signup">
 	      <div class="modal-body">
-	        	
 	        	<div>
-	        		<h4>ID <button type="button" class="btn btn-default">중복확인</button>	</h4>
-	        		<input type="text" name="userID" placeholder="ID">
+	        		<h4>ID <button type="button" class="btn btn-default" ng-click="checkID(signupVO.userID)">중복확인</button>	</h4>
+	        		<input type="text" name="userID" placeholder="ID" ng-model="signupVO.userID">
 	        	</div>
 	        	
 	        	<div>
 	        		<h4>Password</h4>
-	        		<input type="text" name="password" placeholder="PASSWORD">
+	        		<input type="text" name="password" placeholder="PASSWORD" ng-model="signupVO.password">
 	        	</div>
 	        	<div>
 	        		<h4>Email</h4>
-	        		<input type="text" name="email" placeholder="Email">
+	        		<input type="text" name="email" placeholder="Email" ng-model="signupVO.email">
 	        	</div>
 	      </div>
 
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="submit" class="btn btn-primary">Sign-up</button>
+	        <button type="button" class="btn btn-primary" ng-click="signUp(signupVO)">Sign-up</button>
 	      </div>
-      </form>
+			</div>
 
     </div>
   </div>

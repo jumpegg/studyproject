@@ -601,7 +601,6 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				if(data.message == 'success'){
 					alert('등록되었습니다.');
-					$location.path("/comment");
 				}else{
 					alert('서버에러');
 				}

@@ -23,6 +23,27 @@ angular.module('login',[
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
+		},
+		usercheck: function(input, callback){
+			$http({
+				method: 'get',
+				url:'/usercheck/'+input
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		signup: function(input){
+			$http({
+				method: 'post',
+				url:'/sign-up',
+				data: input
+			}).success(function(data, status, headers, config){
+				console.log('signup success');
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
 		}
 	}
 });

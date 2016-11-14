@@ -36,14 +36,25 @@
 	<div class="commentlabel">
 		Comments
 	</div>
+	<div class="commentList" ng-repeat="comment in commentList">
+		<div class="commentOne_info">
+			<span class="comment_name">
+			{{comment.nickname}} 
+			</span>
+			<span class="comment_date">
+				{{comment.create_date|date:"yy.MM.dd"}}
+			</span>
+		</div>
+		<div class="commentOne_comment">
+			{{comment.comment}}
+		</div>
+	</div>
 	<div class="commentbox">
 		<div class="comment">
-			<input type="hidden" name="board_type" value="schedule" ng-model="commentVO.board_type">
-			<input type="hidden" name="parents_id" value="{{scheduleVO.id}}" ng-model="commentVO.parents_id">
-			<textarea name="comment" class="comment_textarea" ng-model="commentVO.comment"></textarea>
+			<textarea class="comment_textarea" ng-model="commentVO.comment"></textarea>
 		</div>
 		<div class="commentbtn">
-			<button type="button" class="btn btn-default" ng-click="CreateCommit(commitVO)">댓글등록</button>
+			<button type="button" class="btn btn-default" ng-click="CreateComment(commentVO)">댓글등록</button>
 		</div>
 	</div>
 </div>
