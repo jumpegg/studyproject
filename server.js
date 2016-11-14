@@ -29,6 +29,13 @@ var salt = bcrypt.genSaltSync(33);
 
 app.use(flash());
 
+//session config
+app.use(session({
+	secret: '@#@#MYSIGN#@#@#',
+	resave: true,
+	saveUninitialized: true
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -74,6 +81,12 @@ passport.use('local',
 	})
 );
 
+var isAuthenticated = function(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/');
+};
 //view 파일 경로 설정
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -89,38 +102,21 @@ app.use("/studydata", express.static(__dirname + "/studydata"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-//session config
-app.use(session({
-	secret: '@#@#MYSIGN#@#@#',
-	resave: true,
-	saveUninitialized: true
-}));
 
 
-// route 파일 설정
-var main = require('./router/main_router')(app, mysqlClient);
-var login = require('./router/login_router')(app, mysqlClient, passport, bcrypt, salt);
-var userPage = require('./router/userPage_router')(app, mysqlClient, passport, session, fs, formidable, util);
-var board = require('./router/board_router')(app, mysqlClient, passport, session, fs, formidable);
 
-var isAuthenticated = function(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect('/');
-};
 
 app.listen(3000, function(){
 	console.log('listening on port 3000!');
 });
 
-app.get('/userPage', function(req, res){
+app.get('/userPage',isAuthenticated ,function(req, res, next){
 	res.render('userPage/userPage.html', {
 		session: req.session
 	});
 });
 
-app.get('/boardIndex/:id', function(req, res){
+app.get('/boardIndex/:id',isAuthenticated ,function(req, res, next){
 	console.log("req.params.id is : " + req.params.id);
 	req.session.board_id = req.params.id;
 	mysqlClient.query('select * from board where id = ? and available = true',[req.session.board_id], function(error, result){
@@ -138,3 +134,9 @@ app.post('/login', passport.authenticate('local', {
 	failureRedirect : '/login',
 	failureFlash : false
 }));
+
+// route 파일 설정
+var main = require('./router/main_router')(app, mysqlClient);
+var login = require('./router/login_router')(app, mysqlClient, passport, bcrypt, salt);
+var userPage = require('./router/userPage_router')(app, mysqlClient, passport, session, fs, formidable, util);
+var board = require('./router/board_router')(app, mysqlClient, passport, session, fs, formidable);
