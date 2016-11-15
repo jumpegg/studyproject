@@ -27,6 +27,15 @@
 		</tbody>
 	</table>
 </div>
+<div class="pager">
+	<ul class="idxWrapper">
+		<li ng-repeat="idx in pageIndex">
+			<a href="" ng-click="listMaker(idx)">
+				{{idx}}
+			</a>
+		</li>
+	</ul>
+</div>
 <div class="listfooter">
 	<a href="{{boardinfo[0].id}}#!/newfreetalk" class="btn btn-default">새글 작성</a>
 </div>

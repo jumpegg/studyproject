@@ -21,10 +21,23 @@ angular.module('board.account', ['ngRoute'])
 	});
 }])
 .controller('accountCtrl', function($scope, accountService){
-	accountService.getaccount(1,function(data){
-		$scope.accountList = data;
-		console.log($scope.accountList);
-	});
+	$scope.AccountList = function(input){
+		accountService.getaccount(input,function(data){
+			$scope.accountList = data;
+		});
+		accountService.getaccountcnt(function(data){
+			$scope.pageIndex=[];
+			$scope.lastPage = Math.ceil(data.cnt/10);
+			for(var i=1; i<=$scope.lastPage; i++){
+				$scope.pageIndex.push(i);
+			};
+		});
+	}
+
+	$scope.AccountList(1);
+	$scope.listMaker = function(input){
+		$scope.AccountList(input);
+	};
 })
 .controller('newaccountCtrl', function($scope, accountService){
 	$scope.newaccount = function(input){

@@ -21,9 +21,24 @@ angular.module('board.notice', ['ngRoute'])
 	});
 }])
 .controller('noticeCtrl', function($scope, noticeService){
-	noticeService.getnotice(1,function(data){
-		$scope.noticeList = data;
-	});
+	$scope.NoticeList = function(input){
+		noticeService.getnotice(input,function(data){
+			$scope.noticeList = data;
+		});
+		noticeService.getnoticecnt(function(data){
+			$scope.pageIndex=[];
+			$scope.lastPage = Math.ceil(data.cnt/10);
+			for(var i=1; i<=$scope.lastPage; i++){
+				$scope.pageIndex.push(i);
+			};
+		});
+	};
+
+	$scope.NoticeList(1);
+	$scope.listMaker = function(input){
+		$scope.NoticeList(input);
+	}
+
 })
 .controller('newnoticeCtrl',function($scope, noticeService){
 	$scope.newnotice = function(input){

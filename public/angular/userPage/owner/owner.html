@@ -24,7 +24,7 @@
           <td class="board-des" colspan="3">{{board.description}}</td>
           <td>
             <button type="button" data-toggle="modal" data-target="#updateStudy" class="btn btn-default" ng-click="beforeUpdate(board.id)">수정</button><br>
-            <button type="button" class="btn btn-default">제거</button>
+            <button type="button" ng-click="delstudy(board.id)" class="btn btn-default">제거</button>
           </td>
         </tr>
 

@@ -21,16 +21,22 @@ angular.module('board.studydata', ['ngRoute','file-model'])
 	})
 }])
 .controller('studydataCtrl', function($scope, studydataService){
-	studydataService.getstudydata(1,function(data){
-		$scope.dataList = data;
-	});
-})
-.controller('newstudydataCtrl', function($scope, studydataService){
-	$scope.newstudydata = function(input){
-		studydataService.setstudydata(input);
-		if($scope.datafile){
-			studydataService.setstudydatafile($scope.datafile);
-		};
+	$scope.StudydataList = function(input){
+		studydataService.getstudydata(input,function(data){
+			$scope.studydataList = data;
+		});
+		studydataService.getstudydatacnt(function(data){
+			$scope.pageIndex=[];
+			$scope.lastPage = Math.ceil(data.cnt/10);
+			for(var i=1; i<=$scope.lastPage; i++){
+				$scope.pageIndex.push(i);
+			};
+		});
+	}
+
+	$scope.StudydataList(1);
+	$scope.listMaker = function(input){
+		$scope.StudydataList(input);
 	};
 })
 .controller('readstudydataCtrl', function($scope, studydataService, $routeParams, commentService){

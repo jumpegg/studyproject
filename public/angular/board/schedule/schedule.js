@@ -21,9 +21,24 @@ angular.module('board.schedule', ['ngRoute'])
 	});
 }])
 .controller('scheduleCtrl', function($scope, scheduleService){
-	scheduleService.getschedule(1,function(data){
-		$scope.scheduleList = data;
-	});
+	$scope.ScheduleList = function(input){
+		scheduleService.getschedule(input,function(data){
+			$scope.scheduleList = data;
+		});
+		scheduleService.getschedulecnt(function(data){
+			$scope.pageIndex=[];
+			$scope.lastPage = Math.ceil(data.cnt/10);
+			for(var i=1; i<=$scope.lastPage; i++){
+				$scope.pageIndex.push(i);
+			};
+		});
+	}
+
+	$scope.ScheduleList(1);
+	$scope.listMaker = function(input){
+		$scope.ScheduleList(input);
+	};
+
 })
 .controller('newscheduleCtrl', function($scope, scheduleService){
 	$scope.newschedule = function(input){

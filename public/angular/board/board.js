@@ -20,7 +20,6 @@ angular.module('board',[
 .controller('boardCtrl', function($scope, boardService){
 	boardService.getboard(function(data){
 		$scope.boardinfo = data[0];
-		console.log($scope.boardinfo.id);
 	});
 	boardService.getboardguest(function(data){
 		$scope.userinfo = data[0];
@@ -189,6 +188,14 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
+		getnoticecnt: function(callback){
+			$http.get('/board/getnoticecnt')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
 		setnotice: function(input){
 			$http({
 				method: 'post',
@@ -262,6 +269,14 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		getstudydatacnt: function(callback){
+			$http.get('/board/getstudydatacnt')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
 				console.log(status);
 			});
 		},
@@ -344,6 +359,14 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		getschedulecnt: function(callback){
+			$http.get('/board/getschedulecnt')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
 				console.log(status);
 			});
 		},
@@ -450,6 +473,14 @@ angular.module('board',[
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		getaccountcnt: function(callback){
+			$http.get('/board/getaccountcnt')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
 				console.log(status);
 			});
 		},

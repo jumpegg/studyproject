@@ -17,7 +17,7 @@
 				<th class="tblinfo">작성일</th>
 			</tr>
 		</thead>
-		<tbody ng-repeat = 'data in dataList'>
+		<tbody ng-repeat = 'data in studydataList'>
 			<tr>
 				<td>{{$index+1}}</td>
 				<td><a href="{{boardinfo[0].id}}#!/studydata/{{data.id}}">{{data.title}}</a></td>
@@ -26,6 +26,15 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+<div class="pager">
+	<ul class="idxWrapper">
+		<li ng-repeat="idx in pageIndex">
+			<a href="" ng-click="listMaker(idx)">
+				{{idx}}
+			</a>
+		</li>
+	</ul>
 </div>
 <div class="listfooter">
 	<a href="{{boardinfo[0].id}}#!/newstudydata" class="btn btn-default">새글 작성</a>

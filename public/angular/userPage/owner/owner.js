@@ -11,19 +11,20 @@ angular.module('userPage.owner', ['ngRoute'])
 
 	$scope.beforeUpdate = function(input){
 		user.getboard(input, function(data){
-			$scope.updateStudy = data[0];
+			$scope.updateStudy = data;
 		});
 	};
-/*	$scope.guestcnt = function(input){
-		user.getguestcnt(input, function(data){
-			$scope.guestcnt = data[0];
-		});
-		return $scope.guestcnt;
-	};*/
 
 	$scope.upStudy = function(input){
-		var jinput = JSON.stringify(input);
-		user.updateboard(jinput);
+		user.updateboard(input);
+
+		user.getboards(function(data){
+			$scope.adminBoards = data;
+		});
+	};
+
+	$scope.delstudy = function(input){
+		user.delboard(input);
 
 		user.getboards(function(data){
 			$scope.adminBoards = data;

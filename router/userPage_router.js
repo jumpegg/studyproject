@@ -10,7 +10,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 			if(error){
 				console.log(error);
 			}else{
-				res.json(result);
+				res.json(result[0]);
 			}
 		});
 	});
@@ -30,6 +30,16 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 			}else{
 				console.log('session id = '+req.session.index);
 				res.json(result);
+			}
+		});
+	});
+	app.get('/delboard/:index', function(req, res){
+		mysqlClient.query('delete from board where id = ?',[req.params.index],
+		function(error, result){
+			if(error){
+				console.log(error);
+			}else{
+				console.log('board deleted!');
 			}
 		});
 	});

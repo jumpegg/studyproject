@@ -22,8 +22,7 @@ angular.module('userPage',[
 		$scope.menuStatus = $scope.menuStatus === false ? true: false;
 	};
 	$scope.CreateStudy = function(input){
-		var jinput = JSON.stringify(input);
-		user.setboard(jinput);
+		user.setboard(input);
 		
 		user.getboards(function(data){
 			$scope.adminBoards = data;
@@ -109,6 +108,16 @@ angular.module('userPage',[
 				}
 			}).error(function(data, status, headers, config){
 				alert(status);
+			});
+		},
+		delboard: function(input){
+			$http({
+				method: 'get',
+				url:'/delboard/'+input
+			}).success(function(data, status, headers, config){
+				alert('삭제되었습니다.');
+			}).error(function(data, status, headers, config){
+				console.log(status);
 			});
 		},
 		getjoinboards: function(callback){
