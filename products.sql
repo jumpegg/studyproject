@@ -130,6 +130,13 @@ create table account(
 	delete_date DATE,
 	available boolean not null
 );
+insert into freetalk(board_id, user_id, nickname, title, content, create_date, available, cnt) select board_id, user_id, nickname, title, content, create_date, available, cnt from freetalk;
+
+insert into notice(board_id, user_id, nickname, title, content, create_date, available, cnt) select board_id, user_id, nickname, title, content, create_date, available, cnt from notice;
+
+insert into schedule(board_id, user_id, nickname, title, place, gathering_time, t_cost, e_cost, create_date, available, cnt) select board_id, user_id, nickname, title, place, gathering_time, t_cost, e_cost, create_date, available, cnt from schedule;
+
+insert into account(board_id, user_id, nickname, title, description, create_date, available, cost) select board_id, user_id, nickname, title, description, create_date, available, cost from account;
 
 create table attendee(
 	id int not null auto_increment primary key,
@@ -154,6 +161,8 @@ create table board_type(
 	id int not null auto_increment primary key,
 	type_name varchar(100) not null
 );
+
+
 
 insert into board_type(type_name) values('freetalk');
 insert into board_type(type_name) values('notice');
