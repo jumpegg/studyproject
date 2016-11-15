@@ -22,15 +22,26 @@ angular.module('board.notice', ['ngRoute'])
 }])
 .controller('noticeCtrl', function($scope, noticeService){
 	$scope.NoticeList = function(input){
-		noticeService.getnotice(input,function(data){
-			$scope.noticeList = data;
-		});
 		noticeService.getnoticecnt(function(data){
 			$scope.pageIndex=[];
 			$scope.lastPage = Math.ceil(data.cnt/10);
-			for(var i=1; i<=$scope.lastPage; i++){
+			if(input <= 0){
+				input = 1;
+			}else if(input > $scope.lastPage){
+				input = $scope.lastPage;
+			}
+			var low = Math.floor(input/10) * 10 + 1;
+			var height = Math.ceil(input/10) * 10;
+			if(height > $scope.lastPage){
+				height = $scope.lastPage;
+			};
+			console.log(low+" - "+height); 
+			for(var i=low; i<=height; i++){
 				$scope.pageIndex.push(i);
 			};
+		});
+		noticeService.getnotice(input,function(data){
+			$scope.noticeList = data;
 		});
 	};
 

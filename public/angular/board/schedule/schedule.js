@@ -22,15 +22,26 @@ angular.module('board.schedule', ['ngRoute'])
 }])
 .controller('scheduleCtrl', function($scope, scheduleService){
 	$scope.ScheduleList = function(input){
-		scheduleService.getschedule(input,function(data){
-			$scope.scheduleList = data;
-		});
 		scheduleService.getschedulecnt(function(data){
 			$scope.pageIndex=[];
 			$scope.lastPage = Math.ceil(data.cnt/10);
-			for(var i=1; i<=$scope.lastPage; i++){
+			if(input <= 0){
+				input = 1;
+			}else if(input > $scope.lastPage){
+				input = $scope.lastPage;
+			}
+			var low = Math.floor(input/10) * 10 + 1;
+			var height = low + 9;
+			if(height > $scope.lastPage){
+				height = $scope.lastPage;
+			};
+			console.log(low+" - "+height); 
+			for(var i=low; i<=height; i++){
 				$scope.pageIndex.push(i);
 			};
+		});
+		scheduleService.getschedule(input,function(data){
+			$scope.scheduleList = data;
 		});
 	}
 
