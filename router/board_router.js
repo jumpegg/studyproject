@@ -12,7 +12,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	////////////////////////
-	//guest
+	//?guest
 	////////////////////////
 
 	app.get('/board/getboardguest', function(req, res){
@@ -56,7 +56,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	////////////////////////
-	//freetalk
+	//?freetalk
 	////////////////////////
 
 	app.get('/board/getfreetalk/:index', function(req, res){
@@ -69,7 +69,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 	app.get('/board/getfreetalk/list/:index', function(req, res){
-		mysqlClient.query('select * from freetalk where board_id = ? and available = true order by id desc limit ?,?',[req.session.board_id, (req.params.index-1)*pageSize, pageSize], function(error, result){
+		mysqlClient.query('select * from freetalk where board_id = ? and available = true and ? like ? order by id desc limit ?,?',[req.session.board_id, req.query.type, req.query.search, (req.params.index-1)*pageSize, pageSize], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -78,10 +78,12 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 	app.get('/board/getfreetalkcnt', function(req, res){
-		mysqlClient.query('select count(*) as cnt from freetalk where available = true', function(error, result){
+		mysqlClient.query('select count(*) as cnt from freetalk where available = true and ? like ?',[req.query.type, req.query.search], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
+				console.log(req.query.type);
+				console.log(req.query.search);
 				res.json(result[0]);
 			}
 		});
@@ -130,11 +132,11 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	////////////////////////
-	//notice
+	//?notice
 	////////////////////////
 
 	app.get('/board/getnotice/list/:index', function(req, res){
-		mysqlClient.query('select * from notice where board_id = ? and available = true order by id desc limit ?,?',[req.session.board_id, (req.params.index-1)*pageSize, pageSize], function(error, result){
+		mysqlClient.query('select * from notice where board_id = ? and available = true and ? like ? order by id desc limit ?,?',[req.session.board_id, req.query.type, req.query.search,  (req.params.index-1)*pageSize, pageSize], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -152,7 +154,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 		app.get('/board/getnoticecnt', function(req, res){
-		mysqlClient.query('select count(*) as cnt from notice where available = true', function(error, result){
+		mysqlClient.query('select count(*) as cnt from notice where available = true and ? like ?',[req.query.type, req.query.search], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -204,11 +206,11 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	////////////////////////
-	//schedule
+	//?schedule
 	////////////////////////
 
 	app.get('/board/getschedule/list/:index', function(req, res){
-		mysqlClient.query('select * from schedule where board_id = ? and available = true order by id desc limit ?,?',[req.session.board_id, (req.params.index-1)*pageSize, pageSize], function(error, result){
+		mysqlClient.query('select * from schedule where board_id = ? and available = true and ? like ? order by id desc limit ?,?',[req.session.board_id, req.query.type, req.query.search,  (req.params.index-1)*pageSize, pageSize], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -226,7 +228,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 		app.get('/board/getschedulecnt', function(req, res){
-		mysqlClient.query('select count(*) as cnt from schedule where available = true', function(error, result){
+		mysqlClient.query('select count(*) as cnt from schedule where available = true and ? like ?',[req.query.type, req.query.search], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -278,7 +280,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	////////////////////////
-	//attendUser
+	//?attendUser
 	////////////////////////
 
 	app.get('/board/getattendUser/:id', function(req, res){
@@ -313,11 +315,11 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	////////////////////////
-	//studydata
+	//?studydata
 	////////////////////////
 
 	app.get('/board/getstudydata/list/:index', function(req, res){
-		mysqlClient.query('select * from studydata where board_id = ? and available = true order by id limit ?,?',[req.session.board_id,(req.params.index-1)*pageSize, pageSize], function(error, result){
+		mysqlClient.query('select * from studydata where board_id = ? and available = true and ? like ? order by id limit ?,?',[req.session.board_id, req.query.type, req.query.search, (req.params.index-1)*pageSize, pageSize], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -335,7 +337,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 		app.get('/board/getstudydatacnt', function(req, res){
-		mysqlClient.query('select count(*) as cnt from studydata where available = true', function(error, result){
+		mysqlClient.query('select count(*) as cnt from studydata where available = true and ? like ?',[req.query.type, req.query.search], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -431,11 +433,11 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			});
 	});
 	////////////////////////////
-	// account
+	//?account
 	////////////////////////////
 
 	app.get('/board/getaccount/list/:index', function(req, res){
-		mysqlClient.query('select * from account where board_id = ? order by id desc limit ?,?', [req.session.board_id, (req.params.index-1)*pageSize, pageSize],
+		mysqlClient.query('select * from account where board_id = ? and available = true and ? like ? order by id desc limit ?,?', [req.session.board_id, req.query.type, req.query.search,  (req.params.index-1)*pageSize, pageSize],
 			function(error, result){
 				if(error){
 					console.log(error);
@@ -455,7 +457,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			});
 	});
 		app.get('/board/getaccountcnt', function(req, res){
-		mysqlClient.query('select count(*) as cnt from account where available = true', function(error, result){
+		mysqlClient.query('select count(*) as cnt from account where available = true and ? like ?',[req.query.type, req.query.search], function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -507,7 +509,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	/////////////////////////////
-	// attendee
+	//?attendee
 	/////////////////////////////
 
 	app.get('/board/getattendee', function(req, res){
@@ -566,7 +568,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 
 	
 	////////////////////////
-	// comment
+	//?comment
 	////////////////////////
 
 	app.get('/board/getcomment/list/:type/:index', function(req, res){

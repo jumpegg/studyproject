@@ -29,10 +29,16 @@
 </div>
 <div class="pager">
 	<ul class="idxWrapper">
+		<li>
+			<a href="" ng-click="NoticeList(1)"><<</a>
+		</li>
 		<li ng-repeat="idx in pageIndex">
 			<a href="" ng-click="listMaker(idx)">
 				{{idx}}
 			</a>
+		</li>
+		<li>
+			<a href="" ng-click="NoticeList(lastPage)">>></a>
 		</li>
 	</ul>
 </div>

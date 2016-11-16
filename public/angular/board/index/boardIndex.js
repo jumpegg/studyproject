@@ -11,19 +11,20 @@ angular.module('board.index', ['ngRoute'])
 	guestService.getguest(function(data){
 		$scope.guestList = data;
 	});
-	freetalkService.getfreetalk(1, function(data){
+
+	freetalkService.getfreetalk(1, undefined, undefined, function(data){
 		$scope.freetalkList = data;
 	});
-	noticeService.getnotice(1,function(data){
+	noticeService.getnotice(1, undefined, undefined, function(data){
 		$scope.noticeList = data;
 	});
-	scheduleService.getschedule(1,function(data){
+	scheduleService.getschedule(1, undefined, undefined, function(data){
 		$scope.scheduleList = data;
 	});
-	accountService.getaccount(1,function(data){
+	accountService.getaccount(1, undefined, undefined, function(data){
 		$scope.accountList = data;
 	})
-	studydataService.getstudydata(1,function(data){
+	studydataService.getstudydata(1, undefined, undefined, function(data){
 		$scope.studydataList = data;
 	});
 });

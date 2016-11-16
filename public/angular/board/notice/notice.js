@@ -21,8 +21,8 @@ angular.module('board.notice', ['ngRoute'])
 	});
 }])
 .controller('noticeCtrl', function($scope, noticeService){
-	$scope.NoticeList = function(input){
-		noticeService.getnoticecnt(function(data){
+	$scope.NoticeList = function(input, type, search){
+		noticeService.getnoticecnt(type, search,function(data){
 			$scope.pageIndex=[];
 			$scope.lastPage = Math.ceil(data.cnt/10);
 			if(input <= 0){
@@ -30,17 +30,21 @@ angular.module('board.notice', ['ngRoute'])
 			}else if(input > $scope.lastPage){
 				input = $scope.lastPage;
 			}
-			var low = Math.floor(input/10) * 10 + 1;
-			var height = Math.ceil(input/10) * 10;
+			var low = input - 5;
+			var height = low + 9;
+			if(low < 1){
+				low = 1;
+				height = low + 9;
+			};
 			if(height > $scope.lastPage){
 				height = $scope.lastPage;
+				low = height - 9;
 			};
-			console.log(low+" - "+height); 
 			for(var i=low; i<=height; i++){
 				$scope.pageIndex.push(i);
 			};
 		});
-		noticeService.getnotice(input,function(data){
+		noticeService.getnotice(input, type, search, function(data){
 			$scope.noticeList = data;
 		});
 	};
@@ -48,8 +52,7 @@ angular.module('board.notice', ['ngRoute'])
 	$scope.NoticeList(1);
 	$scope.listMaker = function(input){
 		$scope.NoticeList(input);
-	}
-
+	};
 })
 .controller('newnoticeCtrl',function($scope, noticeService){
 	$scope.newnotice = function(input){

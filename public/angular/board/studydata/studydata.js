@@ -21,18 +21,33 @@ angular.module('board.studydata', ['ngRoute','file-model'])
 	})
 }])
 .controller('studydataCtrl', function($scope, studydataService){
-	$scope.StudydataList = function(input){
-		studydataService.getstudydata(input,function(data){
-			$scope.studydataList = data;
-		});
-		studydataService.getstudydatacnt(function(data){
+	$scope.StudydataList = function(input, type, search){
+		studydataService.getstudydatacnt(type, search,function(data){
 			$scope.pageIndex=[];
 			$scope.lastPage = Math.ceil(data.cnt/10);
-			for(var i=1; i<=$scope.lastPage; i++){
+			if(input <= 0){
+				input = 1;
+			}else if(input > $scope.lastPage){
+				input = $scope.lastPage;
+			}
+			var low = input - 5;
+			var height = low + 9;
+			if(low < 1){
+				low = 1;
+				height = (low + 9)>$scope.lastPage? $scope.lastPage : low+9;
+			};
+			if(height > $scope.lastPage){
+				height = $scope.lastPage;
+				low = (height-9)<1? 1 : height-9;
+			};
+			for(var i=low; i<=height; i++){
 				$scope.pageIndex.push(i);
 			};
 		});
-	}
+		studydataService.getstudydata(input, type, search, function(data){
+			$scope.studydataList = data;
+		});
+	};
 
 	$scope.StudydataList(1);
 	$scope.listMaker = function(input){

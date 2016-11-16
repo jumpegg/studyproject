@@ -100,16 +100,28 @@ angular.module('board',[
 })
 .factory('freetalkService', function($http, $location){
 	return{
-		getfreetalk: function(index, callback){
-			$http.get('/board/getfreetalk/list/'+index)
+		getfreetalk: function(index, type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getfreetalk/list/'+index+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
 				console.log(status);
 			});
 		},
-		getfreetalkcnt: function(callback){
-			$http.get('/board/getfreetalkcnt')
+		getfreetalkcnt: function(type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getfreetalkcnt?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -172,8 +184,14 @@ angular.module('board',[
 })
 .factory('noticeService', function($http, $location){
 	return{
-		getnotice: function(index, callback){
-			$http.get('/board/getnotice/list/'+index)
+		getnotice: function(index, type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getnotice/list/'+index+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -188,8 +206,14 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		getnoticecnt: function(callback){
-			$http.get('/board/getnoticecnt')
+		getnoticecnt: function(type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getnoticecnt'+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -252,10 +276,16 @@ angular.module('board',[
 })
 .factory('studydataService', function($http, $location){
 	return{
-		getstudydata: function(index, callback){
+		getstudydata: function(index, type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
 			$http({
 				method: 'get',
-				url:'/board/getstudydata/list/'+index
+				url:'/board/getstudydata/list/'+index+'?type='+type+'&search='+search
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
@@ -272,8 +302,14 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		getstudydatacnt: function(callback){
-			$http.get('/board/getstudydatacnt')
+		getstudydatacnt: function(type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getstudydatacnt'+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -344,8 +380,14 @@ angular.module('board',[
 })
 .factory('scheduleService', function($http, $location){
 	return{
-		getschedule: function(index, callback){
-			$http.get('/board/getschedule/list/'+index)
+		getschedule: function(index, type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getschedule/list/'+index+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -362,8 +404,14 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		getschedulecnt: function(callback){
-			$http.get('/board/getschedulecnt')
+		getschedulecnt: function(type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getschedulecnt'+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -458,8 +506,14 @@ angular.module('board',[
 })
 .factory('accountService', function($http, $location){
 	return{
-		getaccount: function(index, callback){
-			$http.get('/board/getaccount/list/'+index)
+		getaccount: function(index, type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getaccount/list/'+index+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -476,8 +530,14 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		getaccountcnt: function(callback){
-			$http.get('/board/getaccountcnt')
+		getaccountcnt: function(type, search, callback){
+			if(type==undefined){
+				type='';
+			};
+			if(search==undefined){
+				search='';
+			};
+			$http.get('/board/getaccountcnt'+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
