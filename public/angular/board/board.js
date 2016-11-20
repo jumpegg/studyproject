@@ -182,6 +182,9 @@ angular.module('board',[
 		},
 	}
 })
+.factory('boardCrudService', function($http){
+	
+})
 .factory('noticeService', function($http, $location){
 	return{
 		getnotice: function(index, type, search, callback){

@@ -235,3 +235,21 @@ select board.*, count(guest.id) AS guestcnt
 select board.id, board.admin_id, board.title, board.description, board.create_date, board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = 1 group by board.id;
 
 select board.*, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = 1 group by board.id;
+
+
+
+
+-- for get joiner boards
+select board.* 
+from guest inner join board
+on board.id = guest.board_id
+where guest.user_id = 2 and !(board.admin_id = 2);
+
+-- for get notice to userpage index
+select * from notice
+where board_id 
+in (select board.id from guest inner join board
+on board.id = guest.board_id
+where guest.user_id = 2)
+order by create_date desc
+limit 0,10;

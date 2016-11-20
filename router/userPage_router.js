@@ -44,14 +44,26 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 		});
 	});
 	app.get('/getjoinboards', function(req, res){
-		mysqlClient.query('select * from board where id = (select board_id from guest where user_id = ?)',[req.session.index],
+		mysqlClient.query('select board.* from guest inner join board on board.id = guest.board_id where user_id = ?',[req.session.index],
 			function(error, result){
+			console.log("session id is : "+req.session.index);
 				if(error){
 					console.log(error);
 				}else{
 					res.json(result);
 				}
 			});
+	});
+	app.get('/getallnotices', function(req,res){
+		mysqlClient.query('select * from notice where board_id in (select board.id from guest inner join board on board.id = guest.board_id where guest.user_id = ?) order by create_date desc limit 0,10',[req.session.index],
+		function(error, result){
+			console.log('called all notice!!');
+			if(error){
+				console.log(error);
+			}else{
+				res.json(result);
+			}
+		});
 	});
 	app.get('/getguest/:index', function(req,res){
 		mysqlClient.query('select count(id) from guest where board_id = ?', [req.params.index],
@@ -76,7 +88,14 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 					console.log(error);
 					res.json({result : 'false'});
 				}else{
-					res.json({result : 'success'});
+					mysqlClient.query('insert into guest(board_id, user_id, admin_auth, join_date) values((select id from board where admin_id = ? order by id desc limit 0,1),?,1,now())',
+					[req.session.index, req.session.index], function(error, result){
+						if(error){
+							console.log(error);
+						}else{
+							res.json({result : 'success'});
+						}
+					})
 				}
 			});
 	});

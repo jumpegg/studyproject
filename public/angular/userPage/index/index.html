@@ -35,7 +35,7 @@
 				</thead>
 				<tbody ng-repeat = 'joiner in joinboards'>
 					<tr>
-						<td>{{joiner.title}}</td>
+						<td><a href="/boardIndex/{{joiner.id}}">{{joiner.title}}</a></td>
 						<td>{{joiner.create_date}}</td>
 					</tr>
 				</tbody>
@@ -43,9 +43,25 @@
 		</div>
 
 	<div class="notification_wrapper">
-		<h1>
-			Notification section
-		</h1>
+		<div class="tabletitle">
+			<span>최근 올라온 공지</span>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>no</th>
+					<th>제목</th>
+					<th>공지일</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat = 'notice in allnotices'>
+				<tr>
+					<td>{{$index+1}}</td>
+					<td>{{notice.title}}</td>
+					<td>{{notice.create_date}}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	
 </div>

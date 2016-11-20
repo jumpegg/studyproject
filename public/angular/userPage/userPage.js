@@ -37,6 +37,9 @@ angular.module('userPage',[
 	user.getjoinboards(function(data){
 		$scope.joinboards = data;
 	});
+	user.getallnotices(function(data){
+		$scope.allnotices = data;
+	});
 })
 .factory('user',function($http){
 	return{
@@ -128,6 +131,16 @@ angular.module('userPage',[
 				callback(data);
 			}).error(function(data, status, headers, config){
 				console.log('error');
+			});
+		},
+		getallnotices: function(callback){
+			$http({
+				method: 'get',
+				url : '/getallnotices'
+			}).success(function(data,status,headers, config){
+				callback(data);
+			}).error(function(data,status,headers,config){
+				console.log(status);
 			});
 		},
 		setuserinfo: function(input){
