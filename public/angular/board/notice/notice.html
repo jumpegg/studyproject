@@ -27,23 +27,36 @@
 		</tbody>
 	</table>
 </div>
+
+<div class="listfooter">
+	<div class="footer_left">
+		<select class="form-control" name="type" ng-model="type">
+        <option value="title">제목</option>
+        <option value="content">내용</option>
+        <option value="nickname">작성자</option>
+      </select>
+		<input class="form-control" type="text" name="search" ng-model="search" placeholder="검색어를입력하세요">
+		<button class="btn btn-default" type="button" ng-click="ListSearch()">search</button>
+	</div>
+	<div class="footer_right">
+		<a href="{{boardinfo[0].id}}#!/newfreetalk" class="btn btn-default">새글 작성</a>
+	</div>
+</div>
 <div class="pager">
 	<ul class="idxWrapper">
 		<li>
-			<a href="" ng-click="NoticeList(1)"><<</a>
+			<a href="" ng-click="NoticeList(1,type,search)"><<</a>
 		</li>
 		<li ng-repeat="idx in pageIndex">
-			<a href="" ng-click="listMaker(idx)">
+			<a href="" ng-click="listMaker(idx,type,search)">
 				{{idx}}
 			</a>
 		</li>
 		<li>
-			<a href="" ng-click="NoticeList(lastPage)">>></a>
+			<a href="" ng-click="NoticeList(lastPage,type,search)">>></a>
 		</li>
 	</ul>
 </div>
-<div class="listfooter">
-	<a href="{{boardinfo[0].id}}#!/newnotice" class="btn btn-default">새글 작성</a>
-</div>
+
 	<link href="../css/board/customlist.less" rel="stylesheet/less" type="text/css" />
 	<script type="text/javascript" src="../js/less.min.js"></script>

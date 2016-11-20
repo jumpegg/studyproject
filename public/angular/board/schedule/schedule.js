@@ -21,6 +21,10 @@ angular.module('board.schedule', ['ngRoute'])
 	});
 }])
 .controller('scheduleCtrl', function($scope, scheduleService){
+	
+	$scope.type = undefined;
+	$scope.search = undefined;
+
 	$scope.ScheduleList = function(input, type, search){
 		scheduleService.getschedulecnt(type, search,function(data){
 			$scope.pageIndex=[];
@@ -35,11 +39,11 @@ angular.module('board.schedule', ['ngRoute'])
 			var height = low + 9;
 			if(low < 1){
 				low = 1;
-				height = low + 9;
+				height = (low + 9)>$scope.lastPage? $scope.lastPage : low+9;
 			};
 			if(height > $scope.lastPage){
 				height = $scope.lastPage;
-				low = height - 9;
+				low = (height-9)<1? 1 : height-9;
 			};
 			for(var i=low; i<=height; i++){
 				$scope.pageIndex.push(i);
@@ -52,7 +56,11 @@ angular.module('board.schedule', ['ngRoute'])
 
 	$scope.ScheduleList(1);
 	$scope.listMaker = function(input){
-		$scope.ScheduleList(input);
+		$scope.ScheduleList(input, $scope.type, $scope.search);
+	};
+
+	$scope.ListSearch = function(){
+		$scope.ScheduleList(1, $scope.type, $scope.search);
 	};
 
 })

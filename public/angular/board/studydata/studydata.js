@@ -23,6 +23,10 @@ angular.module('board.studydata', ['ngRoute','file-model'])
 .controller('studydataCtrl', function($scope, studydataService){
 	$scope.StudydataList = function(input, type, search){
 		studydataService.getstudydatacnt(type, search,function(data){
+
+			$scope.type = undefined;
+			$scope.search = undefined;
+
 			$scope.pageIndex=[];
 			$scope.lastPage = Math.ceil(data.cnt/10);
 			if(input <= 0){
@@ -51,7 +55,11 @@ angular.module('board.studydata', ['ngRoute','file-model'])
 
 	$scope.StudydataList(1);
 	$scope.listMaker = function(input){
-		$scope.StudydataList(input);
+		$scope.StudydataList(input, $scope.type, $scope.search);
+	};
+
+	$scope.ListSearch = function(){
+		$scope.StudydataList(1, $scope.type, $scope.search);
 	};
 })
 .controller('readstudydataCtrl', function($scope, studydataService, $routeParams, commentService){

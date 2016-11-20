@@ -40,6 +40,7 @@ table{
 	}
 }
 .pager{
+	margin: 0px;
 	.idxWrapper{
 		overflow: hidden;
 		li>a{
@@ -55,5 +56,25 @@ table{
 	width: 50px;
 }
 .listfooter{
-	text-align: right;
+	margin-top: 20px;
+	margin-bottom : 20px;
+	overflow: hidden;
+	.footer_left{
+		float: left;
+		width: 50%;
+		overflow: hidden;
+		select{
+			width: 80px;
+			float: left;
+		}
+		input{
+			width: 200px;
+			float: left;
+		}
+	}
+	.footer_right{
+		float: left;
+		width: 50%;
+		text-align: right;
+	}
 }

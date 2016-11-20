@@ -21,6 +21,10 @@ angular.module('board.account', ['ngRoute'])
 	});
 }])
 .controller('accountCtrl', function($scope, accountService){
+	
+	$scope.type = undefined;
+	$scope.search = undefined;
+
 	$scope.AccountList = function(input, type, search){
 		accountService.getaccountcnt(type, search, function(data){
 			$scope.pageIndex=[];
@@ -34,11 +38,11 @@ angular.module('board.account', ['ngRoute'])
 			var height = low + 9;
 			if(low < 1){
 				low = 1;
-				height = low + 9;
+				height = (low + 9)>$scope.lastPage? $scope.lastPage : low+9;
 			};
 			if(height > $scope.lastPage){
 				height = $scope.lastPage;
-				low = height - 9;
+				low = (height-9)<1? 1 : height-9;
 			};
 			for(var i=low; i<=height; i++){
 				$scope.pageIndex.push(i);
@@ -51,7 +55,11 @@ angular.module('board.account', ['ngRoute'])
 
 	$scope.AccountList(1);
 	$scope.listMaker = function(input){
-		$scope.AccountList(input);
+		$scope.AccountList(input, $scope.type, $scope.search);
+	};
+
+	$scope.ListSearch = function(){
+		$scope.AccountList(1, $scope.type, $scope.search);
 	};
 })
 .controller('newaccountCtrl', function($scope, accountService){
