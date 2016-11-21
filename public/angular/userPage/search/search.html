@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="searchboard_wrapper">
+    <div class="searchtable_title">
+      <span>스터디 목록</span>
+    </div>
+  </div>
+  <table class="searchtable">
+    <thead>
+      <tr>
+        <th>no</th>
+        <th>스터디명</th>
+        <th>시작일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "board in searchboard">
+        <th>{{$index+1}}</th>
+        <th>{{board.title}}</th>
+        <th>{{board.create_date}}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>

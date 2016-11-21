@@ -12,8 +12,8 @@
 						<th>생성일</th>
 					</tr>
 				</thead>
-				<tbody ng-repeat = 'board in testpaging'>
-					<tr>
+				<tbody>
+					<tr ng-repeat = 'board in testpaging'>
 						<td><a href="/boardIndex/{{board.id}}">{{board.title}}</a></td>
 						<td>{{board.create_date}}</td>
 					</tr>
@@ -33,8 +33,8 @@
 						<th>가입일</th>
 					</tr>
 				</thead>
-				<tbody ng-repeat = 'joiner in joinboards'>
-					<tr>
+				<tbody>
+					<tr ng-repeat = 'joiner in joinboards'>
 						<td><a href="/boardIndex/{{joiner.id}}">{{joiner.title}}</a></td>
 						<td>{{joiner.create_date}}</td>
 					</tr>
@@ -50,14 +50,16 @@
 			<thead>
 				<tr>
 					<th>no</th>
+					<th>스터디</th>
 					<th>제목</th>
 					<th>공지일</th>
 				</tr>
 			</thead>
-			<tbody ng-repeat = 'notice in allnotices'>
-				<tr>
+			<tbody>
+				<tr ng-repeat = 'notice in allnotices'>
 					<td>{{$index+1}}</td>
-					<td>{{notice.title}}</td>
+					<td>{{notice.board_name}}</td>
+					<td><a href="/boardIndex/{{notice.board_id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
 					<td>{{notice.create_date}}</td>
 				</tr>
 			</tbody>
@@ -65,7 +67,3 @@
 	</div>
 	
 </div>
-		<!-- <form action="/profilepicUpload", method="post", enctype="multipart/form-data">
-			<input type="file" name="uploadFile" />
-			<input type="submit" name="Upload" />
-		</form> -->

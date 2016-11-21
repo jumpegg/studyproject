@@ -5,13 +5,13 @@ angular.module('userPage',[
 	'userPage.index',
 	'userPage.owner',
 	'userPage.myprofile',
+	'userPage.search',
 	'ngAnimate'
 	])
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
   $routeProvider.otherwise({redirectTo: '/'});
-  
 }])
 .controller('userCtrl', function($scope, user, paging){
 	$scope.menuStatus = true;

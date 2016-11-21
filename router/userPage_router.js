@@ -1,7 +1,5 @@
 module.exports = function(app, mysqlClient, passport, session, fs, formidable, util)
 {
-
-
 	/////////////////////////
 	//board
 	//////////////////////////
@@ -15,7 +13,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 		});
 	});
 	app.get('/getboard', function(req, res){
-		mysqlClient.query('select * from board',function(error, result){
+		mysqlClient.query('select * from board order by create_date desc',function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -55,7 +53,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 			});
 	});
 	app.get('/getallnotices', function(req,res){
-		mysqlClient.query('select * from notice where board_id in (select board.id from guest inner join board on board.id = guest.board_id where guest.user_id = ?) order by create_date desc limit 0,10',[req.session.index],
+		mysqlClient.query('select board.title as board_name, notice.* from notice inner join board on notice.board_id = board.id where board_id in (select board.id from guest inner join board on board.id = guest.board_id where guest.user_id = ?) order by create_date desc limit 0,15',[req.session.index],
 		function(error, result){
 			console.log('called all notice!!');
 			if(error){
