@@ -8,6 +8,10 @@ angular.module('userPage.search', ['ngRoute'])
 	});
 }])
 .controller('searchCtrl', function($scope, searchboard){
+
+$scope.type = undefined;
+$scope.search = undefined;
+
   searchboard.getboard(function(data){
     $scope.searchboard = data;
   });

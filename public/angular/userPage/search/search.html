@@ -1,5 +1,19 @@
 <div class="container">
   <div class="searchboard_wrapper">
+    <!--<div class="listfooter">
+      <div class="footer_left">
+        <select class="form-control" name="type" ng-model="type">
+            <option value="title">스터디명</option>
+            <option value="nickname">스터디장</option>
+            <option value="description">설명</option>
+          </select>
+        <input class="form-control" type="text" name="search" ng-model="search" placeholder="검색어를입력하세요">
+        <button class="btn btn-default" type="button" ng-click="ListSearch()">search</button>
+      </div>
+      <div class="footer_right">
+        <a href="{{boardinfo[0].id}}#!/newnotice" class="btn btn-default">새글 작성</a>
+      </div>
+    </div>-->
     <div class="searchtable_title">
       <span>스터디 목록</span>
     </div>
@@ -8,6 +22,7 @@
     <thead>
       <tr>
         <th>no</th>
+        <th>스터디장</th>
         <th>스터디명</th>
         <th>시작일</th>
       </tr>
@@ -15,7 +30,8 @@
     <tbody>
       <tr ng-repeat = "board in searchboard">
         <th>{{$index+1}}</th>
-        <th>{{board.title}}</th>
+        <th>{{board.nickname}}</th>
+        <th><a href="boardIndex/{{board.id}}">{{board.title}}</a></th>
         <th>{{board.create_date}}</th>
       </tr>
     </tbody>

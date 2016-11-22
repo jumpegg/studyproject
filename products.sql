@@ -254,7 +254,7 @@ where guest.user_id = 2)
 order by create_date desc
 limit 0,15;
 
---for get notice and board infomation by board_id
+--for get notice and board information by board_id
 select board.title as board_name, notice.* 
 from notice inner join board
 on notice.board_id = board.id
@@ -264,3 +264,10 @@ on board.id = guest.board_id
 where guest.user_id = 2)
 order by create_date desc
 limit 0,15; 
+
+--for get boards and orner
+select board.*, guest.nickname
+from board inner join guest
+on board.admin_id = guest.user_id
+where board.id = guest.board_id
+order by create_date desc;

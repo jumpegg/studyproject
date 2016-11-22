@@ -27,6 +27,9 @@ angular.module('userPage',[
 		user.getboards(function(data){
 			$scope.adminBoards = data;
 		});
+		user.getjoinboards(function(data){
+			$scope.joinboards = data;
+		});
 	};
 	user.getuser(function(data){
 		$scope.loginUser = data[0];

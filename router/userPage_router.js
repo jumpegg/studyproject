@@ -13,7 +13,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 		});
 	});
 	app.get('/getboard', function(req, res){
-		mysqlClient.query('select * from board order by create_date desc',function(error, result){
+		mysqlClient.query('select board.*, guest.nickname from board inner join guest on board.admin_id = guest.user_id where board.id = guest.board_id order by create_date desc',function(error, result){
 			if(error){
 				console.log(error);
 			}else{
@@ -86,8 +86,8 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 					console.log(error);
 					res.json({result : 'false'});
 				}else{
-					mysqlClient.query('insert into guest(board_id, user_id, admin_auth, join_date) values((select id from board where admin_id = ? order by id desc limit 0,1),?,1,now())',
-					[req.session.index, req.session.index], function(error, result){
+					mysqlClient.query('insert into guest(board_id, user_id, admin_auth, nickname, join_date) values((select id from board where admin_id = ? order by id desc limit 0,1),?,1,?,now())',
+					[req.session.index, req.session.index, req.session.userID], function(error, result){
 						if(error){
 							console.log(error);
 						}else{
