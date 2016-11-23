@@ -3,7 +3,7 @@
 angular.module('board.freetalk', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider, $scope){
 	$routeProvider
-	.when('/freetalk/',{
+	.when('/freetalk',{
 		templateUrl: '../angular/board/freetalk/freetalk.html',
 		controller: 'freetalkCtrl'
 	})

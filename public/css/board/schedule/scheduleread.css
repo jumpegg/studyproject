@@ -1,0 +1,118 @@
+.boardinfo {
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.boardinfo .boardtitle {
+  width: 12%;
+  height: 20px;
+  font-weight: bold;
+  float: left;
+  border-bottom: 1px solid red;
+}
+.boardinfo .boardnav {
+  width: 88%;
+  height: 20px;
+  text-align: right;
+  float: left;
+  font-size: 8px;
+  color: #9f9f9f;
+  border-bottom: 1px solid black;
+}
+.readtitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.readinfo {
+  width: 100%;
+  padding: 3px 0px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
+  overflow: hidden;
+}
+.readinfo .readnickname {
+  padding-left: 10px;
+  width: 20%;
+  float: left;
+}
+.readinfo .readdate {
+  width: 80%;
+  float: left;
+  text-align: right;
+}
+.readcontent {
+  padding: 25px;
+  min-height: 300px;
+  margin-bottom: 10px;
+}
+.readcontent .infoLabel {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 10px 0px;
+}
+.readcontent .infodata {
+  padding-left: 20px;
+}
+.btnboxwrapper {
+  overflow: hidden;
+  border-bottom: 1px solid #cfcfcf;
+}
+.btnboxwrapper .btnbox {
+  width: 100%;
+  text-align: right;
+  float: left;
+  margin-bottom: 10px;
+}
+.commentwrapper {
+  width: 100%;
+}
+.commentwrapper .commentlabel {
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.commentwrapper .commentList {
+  margin-left: 40px;
+}
+.commentwrapper .commentOne_info {
+  margin-bottom: 20px;
+}
+.commentwrapper .commentOne_info .comment_name {
+  font-size: 25px;
+  font-weight: bold;
+}
+.commentwrapper .commentOne_info .comment_date {
+  color: #9f9f9f;
+  text-align: right;
+}
+.commentwrapper .commentOne_comment {
+  margin-bottom: 20px;
+}
+.commentwrapper .commentbox {
+  width: 100%;
+  height: 320px;
+  border: 1px solid #9f9f9f;
+  margin-bottom: 40px;
+  padding-top: 20px;
+}
+.commentwrapper .commentbox .comment {
+  width: 95%;
+  height: 230px;
+  margin: 12px auto;
+}
+.commentwrapper .commentbox .comment .comment_textarea {
+  width: 100%;
+  height: 230px;
+}
+.commentwrapper .commentbox .commentbtn {
+  width: 95%;
+  margin: 0px auto;
+  text-align: right;
+}
+.backbtnbox {
+  width: 20%;
+  float: left;
+}

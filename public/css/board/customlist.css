@@ -1,0 +1,75 @@
+.boardinfo {
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.boardinfo .boardtitle {
+  width: 12%;
+  height: 20px;
+  font-weight: bold;
+  float: left;
+  border-bottom: 1px solid red;
+}
+.boardinfo .boardnav {
+  width: 88%;
+  height: 20px;
+  text-align: right;
+  float: left;
+  font-size: 8px;
+  color: #9f9f9f;
+  border-bottom: 1px solid black;
+}
+table {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+table tr {
+  height: 25px;
+}
+table thead {
+  border-bottom: 1px solid black;
+}
+table thead th {
+  text-align: center;
+}
+table tbody td {
+  text-align: center;
+}
+.pager {
+  margin: 0px;
+}
+.pager .idxWrapper {
+  overflow: hidden;
+}
+.pager .idxWrapper li > a {
+  border-style: none;
+}
+.tblinfo {
+  width: 100px;
+}
+.tblno {
+  width: 50px;
+}
+.listfooter {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.listfooter .footer_left {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+}
+.listfooter .footer_left select {
+  width: 80px;
+  float: left;
+}
+.listfooter .footer_left input {
+  width: 200px;
+  float: left;
+}
+.listfooter .footer_right {
+  float: left;
+  width: 50%;
+  text-align: right;
+}

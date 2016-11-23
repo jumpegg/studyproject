@@ -1,0 +1,414 @@
+html,
+body {
+  height: 100%;
+}
+.side-bar {
+  height: 100%;
+  width: 15%;
+  background-color: black;
+  float: left;
+}
+.side-bar a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.side-bar .user-title {
+  padding-top: 30px;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.side-bar .list-wrapper {
+  padding: 20px;
+}
+.side-bar .list-wrapper .menu-list {
+  padding-left: 0px;
+}
+.side-bar .list-wrapper ul {
+  padding-left: 10px;
+  list-style-type: none;
+}
+.side-bar .list-wrapper ul li {
+  padding-left: 20px;
+  margin-top: 10px;
+  font-size: 15px;
+  width: 100%;
+  height: 30px;
+  color: #FFFFFF;
+  border-bottom: 1px solid #626262;
+}
+.side-bar .list-wrapper ul li a {
+  color: #FFFFFF;
+}
+.side-bar .list-wrapper ul li:hover {
+  border-left: 1px solid #B90000;
+}
+.main-panel {
+  width: 85%;
+  height: 100%;
+  float: left;
+}
+.top-font {
+  color: #fff;
+  font-size: 30px;
+  float: left;
+}
+.top-padding {
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.topMenu {
+  width: 100%;
+  height: 60px;
+  background-color: #5C5C5C;
+}
+.topMenu .username {
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #fff;
+  font-size: 30px;
+  float: left;
+}
+.topMenu .menuWrapper {
+  overflow: hidden;
+  float: left;
+  height: 100%;
+  margin-left: 50px;
+}
+.topMenu .menuWrapper .menu {
+  height: 100%;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #fff;
+  font-size: 30px;
+  float: left;
+}
+.topMenu .menuWrapper .menu:hover {
+  background-color: #A5A5A5;
+}
+.index_table {
+  width: 80%;
+  position: relative;
+  left: 50%;
+  margin-left: -40%;
+  font-size: 15px;
+  text-align: center;
+}
+.index_table th {
+  text-align: center;
+  border-top: 1px solid #515151;
+  border-bottom: 1px solid #D4D4D4;
+  background-color: #ECECEC;
+}
+.index_table td {
+  border-bottom: 1px solid #D4D4D4;
+}
+.admin_wrapper {
+  float: left;
+  width: 50%;
+  height: 400px;
+}
+.admin_wrapper .tabletitle {
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
+.admin_wrapper .tabletitle button {
+  border: none;
+  background: #FFF;
+  width: 60px;
+  height: 40px;
+  font-size: 20px;
+}
+.admin_wrapper .tabletitle button:hover {
+  background: #E3E3E3;
+}
+.admin_wrapper table {
+  width: 80%;
+  position: relative;
+  left: 50%;
+  margin-left: -40%;
+  font-size: 15px;
+  text-align: center;
+}
+.admin_wrapper table th {
+  text-align: center;
+  border-top: 1px solid #515151;
+  border-bottom: 1px solid #D4D4D4;
+  background-color: #ECECEC;
+}
+.admin_wrapper table td {
+  border-bottom: 1px solid #D4D4D4;
+}
+.guest_wrapper {
+  float: left;
+  width: 50%;
+  height: 400px;
+}
+.guest_wrapper .tabletitle {
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
+.guest_wrapper .tabletitle button {
+  border: none;
+  background: #FFF;
+  width: 60px;
+  height: 40px;
+  font-size: 20px;
+}
+.guest_wrapper .tabletitle button:hover {
+  background: #E3E3E3;
+}
+.guest_wrapper .tabletitle button:active {
+  border: none;
+}
+.guest_wrapper table {
+  width: 80%;
+  position: relative;
+  left: 50%;
+  margin-left: -40%;
+  font-size: 15px;
+  text-align: center;
+}
+.guest_wrapper table th {
+  text-align: center;
+  border-top: 1px solid #515151;
+  border-bottom: 1px solid #D4D4D4;
+  background-color: #ECECEC;
+}
+.guest_wrapper table td {
+  border-bottom: 1px solid #D4D4D4;
+}
+.notification_wrapper {
+  float: left;
+  width: 100%;
+}
+.notification_wrapper .tabletitle {
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
+.notification_wrapper .tabletitle button {
+  border: none;
+  background: #FFF;
+  width: 60px;
+  height: 40px;
+  font-size: 20px;
+}
+.notification_wrapper .tabletitle button:hover {
+  background: #E3E3E3;
+}
+.notification_wrapper .tabletitle button:active {
+  border: none;
+}
+.notification_wrapper table {
+  width: 90%;
+  position: relative;
+  left: 50%;
+  margin-left: -45%;
+  font-size: 15px;
+  text-align: center;
+}
+.notification_wrapper table th {
+  text-align: center;
+  border-top: 1px solid #515151;
+  border-bottom: 1px solid #D4D4D4;
+  background-color: #ECECEC;
+}
+.notification_wrapper table td {
+  border-bottom: 1px solid #D4D4D4;
+}
+.myprofile-full {
+  background-color: #E4E4E4;
+  height: 100%;
+  overflow: auto;
+}
+.myprofile-title {
+  font-size: 50px;
+  text-align: center;
+  color: #545454;
+  height: 200px;
+  padding-top: 40px;
+}
+.myprofile-infowrapper {
+  width: 90%;
+  position: relative;
+  left: 50%;
+  margin-left: -45%;
+  background-color: #ffffff;
+  padding: 40px;
+  overflow: hidden;
+}
+.myprofile-infowrapper .myprofile-simpleInfo {
+  width: 40%;
+  float: left;
+}
+.myprofile-infowrapper .myprofile-simpleInfo .myprofile-pic {
+  width: 100%;
+  height: 350px;
+  border: 1px solid black;
+}
+.myprofile-infowrapper .myprofile-simpleInfo .myprofile-pic img {
+  width: 100%;
+  height: 100%;
+}
+.myprofile-userinfo {
+  margin-top: 20px;
+  width: 100%;
+  clear: both;
+  padding: 10px;
+}
+.myprofile-userinfo .myprofile-name {
+  width: 20%;
+  float: left;
+  font-size: 20px;
+}
+.myprofile-userinfo .myprofile-content {
+  widht: 80%;
+  float: left;
+  font-size: 20px;
+}
+.myprofile-detailUserInfo {
+  margin-top: 20px;
+  width: 100%;
+  clear: both;
+  padding: 10px;
+}
+.myprofile-detailUserInfo .myprofile-detailname {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #858585;
+}
+.myprofile-detailUserInfo .myprofile-detailcontent {
+  font-size: 20px;
+}
+.myprofile-detailInfo {
+  width: 60%;
+  float: left;
+  padding: 40px;
+  padding-top: 0px;
+  padding-right: 0px;
+}
+.myprofile-detailInfo .myprofile-detailInfo-wrapper {
+  width: 100%;
+  border: 5px solid #DDDDDD;
+  padding: 20px;
+}
+.myprofile-footer {
+  width: 90%;
+  height: 100px;
+  position: relative;
+  left: 50%;
+  margin-left: -45%;
+  margin-top: 50px;
+}
+.myprofile-footer .myprofile-btnwrapper {
+  position: absolute;
+  right: 0px;
+}
+.owner-topmenu {
+  width: 80%;
+  height: 80px;
+  position: relative;
+  left: 50%;
+  margin-left: -40%;
+}
+.owner-topmenu button {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+}
+.owner-tablewrapper {
+  width: 80%;
+  position: relative;
+  left: 50%;
+  margin-left: -40%;
+  font-size: 15px;
+  text-align: center;
+  overflow: auto;
+}
+.owner-tablewrapper table {
+  width: 100%;
+}
+.owner-tablewrapper table th {
+  text-align: center;
+  border-top: 1px solid #515151;
+  border-bottom: 1px solid #D4D4D4;
+  border-right: 1px solid #D4D4D4;
+  background-color: #ECECEC;
+  height: 40px;
+}
+.owner-tablewrapper table td {
+  height: 40px;
+  border-bottom: 1px solid #D4D4D4;
+}
+.owner-tablewrapper .owner-tabledes td {
+  height: 120px;
+}
+.owner-tablewrapper .owner-tabledes .board-des {
+  text-align: left;
+  padding-left: 40px;
+  border-right: 1px solid #D4D4D4;
+}
+.owner-tablewrapper .owner-tabledes button {
+  width: 80%;
+}
+.owner-paging {
+  width: 80%;
+  position: relative;
+  left: 50%;
+  margin-left: -40%;
+  font-size: 15px;
+  text-align: center;
+}
+.modal-dialog {
+  width: 380px;
+}
+.modal-body {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+.modal-body input {
+  width: 300px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 3px;
+  padding-left: 10px;
+}
+.modal-footer {
+  text-align: center;
+}
+.dscArea {
+  width: 300px;
+  height: 200px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 3px;
+  padding-left: 10px;
+}
+.modal-footer button {
+  width: 150px;
+  height: 40px;
+}
+.searchtable_title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 40px 0px;
+}
+.searchtable {
+  width: 100%;
+}
+.searchtable th {
+  text-align: center;
+}

@@ -1,0 +1,62 @@
+.boardinfo {
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.boardinfo .boardtitle {
+  width: 12%;
+  height: 20px;
+  font-weight: bold;
+  float: left;
+  border-bottom: 1px solid red;
+}
+.boardinfo .boardnav {
+  width: 88%;
+  height: 20px;
+  text-align: right;
+  float: left;
+  font-size: 8px;
+  color: #9f9f9f;
+  border-bottom: 1px solid black;
+}
+.readtitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.readinfo {
+  width: 100%;
+  padding: 3px 0px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
+  overflow: hidden;
+}
+.readinfo .readnickname {
+  padding-left: 10px;
+  width: 20%;
+  float: left;
+}
+.readinfo .readdate {
+  width: 80%;
+  float: left;
+  text-align: right;
+}
+.readcontent {
+  padding: 25px;
+  min-height: 300px;
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 10px;
+}
+.btnboxwrapper {
+  overflow: hidden;
+}
+.btnboxwrapper .backbtnbox {
+  width: 20%;
+  float: left;
+}
+.btnboxwrapper .btnbox {
+  width: 80%;
+  text-align: right;
+  float: left;
+}
