@@ -9,6 +9,14 @@ angular.module('userPage.index', ['ngRoute'])
 }])
 .controller('indexCtrl', function($scope, user, paging){
 
+	$scope.Getboards = function(){
+		user.getboards(function(data){
+			$scope.adminBoards = data;
+		});
+	};
+	$scope.Getboards();
+
+	
 	$scope.setAdminPages = function(){
 		$scope.testpaging = paging.makePage($scope.adminBoards, $scope.adminCurrent, 10).list;
 	};
@@ -22,9 +30,6 @@ angular.module('userPage.index', ['ngRoute'])
 		$scope.setAdminPages();
 		$scope.adminCurrent = paging.makePage($scope.adminBoards, $scope.adminCurrent, 10).currentPage;
 	};
-	user.getboards(function(data){
-		$scope.adminBoards = data;
-	});
 	$scope.setAdminPages();
 
 });

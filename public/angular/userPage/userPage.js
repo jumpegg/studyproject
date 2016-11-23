@@ -65,7 +65,7 @@ angular.module('userPage',[
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
-				console.log("error");
+				console.log(status);
 			});
 		},
 		getboards: function(callback){
@@ -75,7 +75,7 @@ angular.module('userPage',[
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
-				console.log('error');
+				console.log(status);
 			});
 		},
 		getboard: function(input, callback){
@@ -145,7 +145,7 @@ angular.module('userPage',[
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
-				console.log('error');
+				console.log(status);
 			});
 		},
 		getallnotices: function(callback){

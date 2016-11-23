@@ -12,9 +12,12 @@ angular.module('userPage.myprofile', ['ngRoute','file-model'])
 	});
 }])
 .controller('myprofileCtrl', function($scope, user){
-	user.getuser(function(data){
-		$scope.loginUser = data[0];
-	});
+	$scope.Getuser = function(){
+		user.getuser(function(data){
+			$scope.loginUser = data[0];
+		});
+	};
+	$scope.Getuser();
 })
 .controller('myprofileCtrl2', function($scope, user, $location, $route, $window){
 	$scope.beforeUserUpdate = function(){

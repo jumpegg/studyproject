@@ -229,8 +229,9 @@ select board.id, board.admin_id, board.title, board.description, board.create_da
 select board.*, count(guest.id) AS guestcnt
 	from board left join guest
 	on board.id = guest.board_id
-	where board.admin_id = 1
-	group by board.id;
+	where board.admin_id = 2
+	group by board.id
+	limit 0,15;
 
 select board.id, board.admin_id, board.title, board.description, board.create_date, board.update_date, board.delete_date, board.available, count(guest.id) AS guestcnt from board left join guest on board.id = guest.board_id where board.admin_id = 1 group by board.id;
 
