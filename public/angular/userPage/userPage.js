@@ -31,18 +31,30 @@ angular.module('userPage',[
 			$scope.joinboards = data;
 		});
 	};
-	user.getuser(function(data){
-		$scope.loginUser = data[0];
-	});
-	user.getboards(function(data){
-		$scope.adminBoards = data;
-	});
-	user.getjoinboards(function(data){
-		$scope.joinboards = data;
-	});
-	user.getallnotices(function(data){
-		$scope.allnotices = data;
-	});
+	$scope.Getuser = function(){
+		user.getuser(function(data){
+			$scope.loginUser = data[0];
+		});
+	}
+	$scope.Getboards = function(){
+		user.getboards(function(data){
+			$scope.adminBoards = data;
+		});
+	}
+	$scope.Getjoinboards = function(){
+		user.getjoinboards(function(data){
+			$scope.joinboards = data;
+		});
+	}
+	$scope.Getallnotices = function(){
+		user.getallnotices(function(data){
+			$scope.allnotices = data;
+		});
+	}
+	$scope.Getuser();
+	$scope.Getboards();
+	$scope.Getjoinboards();
+	$scope.Getallnotices();
 })
 .factory('user',function($http){
 	return{
