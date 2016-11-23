@@ -17,12 +17,15 @@ angular.module('board',[
 
   $routeProvider.otherwise({redirectTo: '/'});
 }])
-.controller('boardCtrl', function($scope, boardService){
+.controller('boardCtrl', function($scope, boardService, authService){
 	boardService.getboard(function(data){
 		$scope.boardinfo = data[0];
 	});
 	boardService.getboardguest(function(data){
 		$scope.userinfo = data[0];
+	});
+	authService.isBoardAuth(function(data){
+		console.log(data);
 	});
 
 })
@@ -512,10 +515,10 @@ angular.module('board',[
 		getaccount: function(index, type, search, callback){
 			if(type==undefined){
 				type='';
-			};
+			}
 			if(search==undefined){
 				search='';
-			};
+			}
 			$http.get('/board/getaccount/list/'+index+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
@@ -536,10 +539,10 @@ angular.module('board',[
 		getaccountcnt: function(type, search, callback){
 			if(type==undefined){
 				type='';
-			};
-			if(search==undefined){
+			}
+			if(search===undefined){
 				search='';
-			};
+			}
 			$http.get('/board/getaccountcnt'+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
@@ -558,7 +561,7 @@ angular.module('board',[
 					$location.path("/account");
 				}else{
 					alert('서버에러');
-				};
+				}
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
@@ -574,7 +577,7 @@ angular.module('board',[
 					$location.path("/account");
 				}else{
 					alert('서버에러');
-				};
+				}
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
@@ -599,7 +602,7 @@ angular.module('board',[
 				console.log(status);
 			});
 		}
-	}
+	};
 })
 .factory('attendeeService', function($http, $location){
 	return{
@@ -622,7 +625,7 @@ angular.module('board',[
 					$location.path("/attendee");
 				}else{
 					alert('서버에러');
-				};
+				}
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
@@ -637,7 +640,7 @@ angular.module('board',[
 					$location.path("/attendee");
 				}else{
 					alert('서버에러');
-				};
+				}
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
@@ -652,7 +655,7 @@ angular.module('board',[
 					$location.path("/attendee");
 				}else{
 					alert('서버에러');
-				};
+				}
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
@@ -667,7 +670,7 @@ angular.module('board',[
 				console.log(status);
 			});
 		}
-	}
+	};
 })
 .factory('commentService', function($http, $location){
 	return{
@@ -713,7 +716,7 @@ angular.module('board',[
 					$location.path("/comment");
 				}else{
 					alert('서버에러');
-				};
+				}
 			}).error(function(data, status, headers, config){
 				alert(status);
 			});
@@ -728,5 +731,17 @@ angular.module('board',[
 				console.log(status);
 			});
 		}
-	}
+	};
+})
+.factory('authService', function($http, $location){
+	return{
+		isBoardAuth: function(callback){
+			$http.get('/isBoardAuth')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		}
+	};
 });

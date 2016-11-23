@@ -12,6 +12,16 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 
 	////////////////////////
+	//?authentification
+	////////////////////////
+
+	app.get('/isBoardAuth', function(req,res){
+		mysqlClient.query('select * from guest where board_id = ? and user_id = ?', [req.session.board_id, req.session.index], function(error, result){
+			(error) ? console.log(error) : res.json(result);
+		});
+	});
+
+	////////////////////////
 	//?guest
 	////////////////////////
 
