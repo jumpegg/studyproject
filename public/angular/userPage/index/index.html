@@ -1,9 +1,9 @@
 <div class="container">
 		<div class="admin_wrapper">
 			<div class="tabletitle">
-				<button ng-click="beforeAdminCurrent()"><</button>
+				<button type="button" ng-click="beforeAdminCurrent()"><</button>
 				<span>관리중인 페이지 목록</span>
-				<button ng-click="nextAdminCurrent()">></button>
+				<button type="button" ng-click="nextAdminCurrent()">></button>
 			</div>
 			<table>
 				<thead>
@@ -13,7 +13,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat = 'board in testpaging'>
+					<tr ng-repeat = 'board in adminpaging'>
 						<td><a href="/boardIndex/{{board.id}}">{{board.title}}</a></td>
 						<td>{{board.create_date}}</td>
 					</tr>
@@ -22,9 +22,9 @@
 		</div>	
 		<div class="guest_wrapper">
 			<div class="tabletitle">
-				<button><</button>
+				<button type="button" ng-click="beforeJoinCurrent()"><</button>
 				<span>가입한 페이지 목록</span>
-				<button>></button>
+				<button type="button" ng-click="nextJoinCurrent()">></button>
 			</div>
 			<table>
 				<thead>
@@ -34,7 +34,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat = 'joiner in joinboards'>
+					<tr ng-repeat = 'joiner in joinpaging'>
 						<td><a href="/boardIndex/{{joiner.id}}">{{joiner.title}}</a></td>
 						<td>{{joiner.create_date}}</td>
 					</tr>

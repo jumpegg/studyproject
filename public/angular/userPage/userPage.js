@@ -13,10 +13,9 @@ angular.module('userPage',[
 
   $routeProvider.otherwise({redirectTo: '/'});
 }])
-.controller('userCtrl', function($scope, user, paging){
+.controller('userCtrl', function($scope, user){
 	$scope.menuStatus = true;
-	$scope.adminCurrent = 1;
-	$scope.joinCurrent = 1;
+	
 
 	$scope.toggleMenu = function(){
 		$scope.menuStatus = $scope.menuStatus === false ? true: false;
@@ -35,22 +34,22 @@ angular.module('userPage',[
 		user.getuser(function(data){
 			$scope.loginUser = data[0];
 		});
-	}
+	};
 	$scope.Getboards = function(){
 		user.getboards(function(data){
 			$scope.adminBoards = data;
 		});
-	}
+	};
 	$scope.Getjoinboards = function(){
 		user.getjoinboards(function(data){
 			$scope.joinboards = data;
 		});
-	}
+	};
 	$scope.Getallnotices = function(){
 		user.getallnotices(function(data){
 			$scope.allnotices = data;
 		});
-	}
+	};
 	$scope.Getuser();
 	$scope.Getboards();
 	$scope.Getjoinboards();
@@ -214,7 +213,7 @@ angular.module('userPage',[
 			}else if(currentPage < 1){
 				currentPage = 1;
 			};
-			var pageComponent = {};
+			var pageComponent = [];
 			var filtered = [];
 			var begin = (currentPage-1) * itemsPerPage;
 			var end = begin + itemsPerPage;
