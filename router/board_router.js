@@ -34,7 +34,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			}
 		});
 	});
-	app.get('/board/getguests', function(req, res){
+	app.get('/board/getguest', function(req, res){
 		mysqlClient.query('select * from guest where board_id = ?',[req.session.board_id], function(error, result){
 			if(error){
 				console.log(error);

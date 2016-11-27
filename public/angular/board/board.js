@@ -29,8 +29,6 @@ angular.module('board',[
 		$rootScope.$on('$routeChangeStart', function(event){
 			if(!$rootScope.guest){
 				$location.path('/joinuser');
-			}else{
-				$location.path('/');
 			}
 		})
 	});
