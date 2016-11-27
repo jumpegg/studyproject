@@ -17,17 +17,54 @@ angular.module('board',[
 
   $routeProvider.otherwise({redirectTo: '/'});
 }])
-.controller('boardCtrl', function($scope, boardService, authService){
+.run(function($location, authService, $rootScope){
+	authService.isBoardAuth(function(data){
+		$rootScope.guest = data;
+		console.log("data test");
+		console.log($rootScope.guest);
+		console.log(!$rootScope.guest);
+		if(!$rootScope.guest){
+			$location.path('/joinuser');
+		}
+		$rootScope.$on('$routeChangeStart', function(event){
+			if(!$rootScope.guest){
+				$location.path('/joinuser');
+			}else{
+				$location.path('/');
+			}
+		})
+	});
+})
+.controller('boardCtrl', function($scope, boardService){
 	boardService.getboard(function(data){
 		$scope.boardinfo = data[0];
 	});
 	boardService.getboardguest(function(data){
 		$scope.userinfo = data[0];
 	});
-	authService.isBoardAuth(function(data){
-		console.log(data);
-	});
+})
+.factory('guestInterceptor', function($http){
+	return{
+		request: function(config){
+			console.log("req called");
+			return config;
+		},
 
+		requestError: function(config){
+			console.log("req error called");
+			return config;
+		},
+
+		response: function(res){
+			console.log("res called");
+			return res;
+		},
+
+		responseError: function(res){
+			console.log("res error called");
+			return res;
+		}
+	}
 })
 .factory('boardService', function($http){
 	return{
