@@ -37,10 +37,10 @@ angular.module('board',[
 })
 .controller('boardCtrl', function($scope, boardService){
 	boardService.getboard(function(data){
-		$scope.boardinfo = data[0];
+		$scope.boardinfo = data;
 	});
 	boardService.getboardguest(function(data){
-		$scope.userinfo = data[0];
+		$scope.userinfo = data;
 	});
 })
 .factory('guestInterceptor', function($http){

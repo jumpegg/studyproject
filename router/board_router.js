@@ -6,7 +6,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			if(error){
 				console.log(error);
 			}else{
-				res.json(result);
+				res.json(result[0]);
 			}
 		});
 	});
@@ -30,11 +30,11 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			if(error){
 				console.log(error);
 			}else{
-				res.json(result);
+				res.json(result[0]);
 			}
 		});
 	});
-	app.get('/board/getguest', function(req, res){
+	app.get('/board/getguests', function(req, res){
 		mysqlClient.query('select * from guest where board_id = ?',[req.session.board_id], function(error, result){
 			if(error){
 				console.log(error);
