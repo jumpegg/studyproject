@@ -17,6 +17,21 @@
 						<td><a href="/boardIndex/{{board.id}}">{{board.title}}</a></td>
 						<td>{{board.create_date}}</td>
 					</tr>
+					<tr ng-show="adminpaging.length == 0">
+						<td colspan="2">
+							<div>
+								<p>
+									관리중인 페이지가 없습니다.
+								</p>
+								<p>
+									좌측 study-Owner Page 에서
+								</p>
+								<p>
+									새로운 스터디를 만들어 보세요!
+								</p>
+							</div>
+						</td>
+					</tr>
 				</tbody>
 			</table>	
 		</div>	
@@ -37,6 +52,21 @@
 					<tr ng-repeat = 'joiner in joinpaging'>
 						<td><a href="/boardIndex/{{joiner.id}}">{{joiner.title}}</a></td>
 						<td>{{joiner.create_date}}</td>
+					</tr>
+					<tr ng-show="joinpaging.length == 0">
+						<td colspan="2">
+							<div>
+								<p>
+									가입된 페이지가 없습니다.
+								</p>
+								<p>
+									Search Study 에서
+								</p>
+								<p>
+									새로운 스터디를 찾아보세요!
+								</p>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>	
@@ -61,6 +91,13 @@
 					<td>{{notice.board_name}}</td>
 					<td><a href="/boardIndex/{{notice.board_id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
 					<td>{{notice.create_date}}</td>
+				</tr>
+				<tr ng-show="allnotices == 0">
+					<td colspan="4">
+						<div>
+							최근 30일간 새로 올라온 공지가 없습니다.
+						</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>

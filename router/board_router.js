@@ -80,7 +80,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 	app.get('/board/getfreetalk/list/:index', function(req, res){
 		var sql = "select * from freetalk where board_id = ? and available = true";
-		var limit = " order by id desc limit ?,?";
+		var limit = " order by create_date desc limit ?,?";
 		var sqlInput = "";
 		if(req.query.type.length == 0){
 			sqlInput = sql + limit;
@@ -162,7 +162,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 
 	app.get('/board/getnotice/list/:index', function(req, res){
 		var sql = "select * from notice where board_id = ? and available = true";
-		var limit = " order by id desc limit ?,?";
+		var limit = " order by create_date desc limit ?,?";
 		var sqlInput = "";
 		if(req.query.type.length == 0){
 			sqlInput = sql + limit;
@@ -251,7 +251,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 
 	app.get('/board/getschedule/list/:index', function(req, res){
 		var sql = "select * from schedule where board_id = ? and available = true";
-		var limit = " order by id desc limit ?,?";
+		var limit = " order by create_date desc limit ?,?";
 		var sqlInput = "";
 		if(req.query.type.length == 0){
 			sqlInput = sql + limit;
@@ -375,7 +375,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 
 	app.get('/board/getstudydata/list/:index', function(req, res){
 		var sql = "select * from studydata where board_id = ? and available = true";
-		var limit = " order by id desc limit ?,?";
+		var limit = " order by create_date desc limit ?,?";
 		var sqlInput = "";
 		if(req.query.type.length == 0){
 			sqlInput = sql + limit;
@@ -509,7 +509,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 
 	app.get('/board/getaccount/list/:index', function(req, res){
 		var sql = "select * from account where board_id = ? and available = true";
-		var limit = " order by id desc limit ?,?";
+		var limit = " order by create_date desc limit ?,?";
 		var sqlInput = "";
 		if(req.query.type.length == 0){
 			sqlInput = sql + limit;

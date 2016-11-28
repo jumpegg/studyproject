@@ -1,43 +1,46 @@
 <link href="css/login/login.css" rel="stylesheet" type="text/css" />
 
-<div class="container" ng-controller="indexCtrl">
-	<div class="row">
-		<div class="mainbanner">
-			<img ng-repeat="slide in slides" class="slide slide-animation" 
-			ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
-			<button class="arrow prev" ng-click="nextSlide()"></button>
-			<button class="arrow next" ng-click="prevSlide()"></button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                    <label>
+                        Enter the email you signed up with</label>
+                    <input type="email" placeholder="Email" />
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                    Sign In</p>
+                <form action="/login" method="post" class="login">
+                <input type="text" name="userID" placeholder="Username" />
+                <input type="password" name="password" placeholder="Password" />
+                <input type="submit" value="Sign In" class="btn btn-success" />
+                <input type="button" value="Sign Up" class="btn btn-primary" data-toggle="modal" data-target="#myModal" />
+                <!-- <div class="remember-forgot">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" />
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 forgot-pass-content">
+                            <a href="javascript:void(0)" class="forgot-pass">Forgot Password</a>
+                        </div>
+                    </div>
+                </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-			<nav class="nav">
-				<div class="wrapper">
-					<ul class="dots">
-						<li class="dot" ng-repeat="slide in slides">
-							<button ng-class="{'active':isCurrentSlideIndex($index)}" ng-click="setCurrentSlideIndex($index);">{{slide.description}}</button>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
 
-	<div class="row">
-		<div class="login">
-			<div class="login_wrapper">
-				<form action="/login" method="POST">
-					<div>
-						<input name="userID" type="text" placeholder="ID">
-					</div>
-					<div>
-						<input name="password" type="password" placeholder="PASSWORD">
-					</div>
-					<div class="button_wrapper">
-						<button class="login_btn" type="submit">Login</button>
-						<button class="login_btn" type="button" data-toggle="modal" data-target="#myModal">Sign-up</button>
-					</div>	
-				</form>
-			</div>
-		</div>	
-	</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -74,5 +77,4 @@
 
     </div>
   </div>
-</div>
 </div>

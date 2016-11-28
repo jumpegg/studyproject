@@ -20,9 +20,6 @@ angular.module('board',[
 .run(function($location, authService, $rootScope){
 	authService.isBoardAuth(function(data){
 		$rootScope.guest = data;
-		console.log("data test");
-		console.log($rootScope.guest);
-		console.log(!$rootScope.guest);
 		if(!$rootScope.guest){
 			$location.path('/joinuser');
 		}
@@ -36,9 +33,11 @@ angular.module('board',[
 .controller('boardCtrl', function($scope, boardService){
 	boardService.getboard(function(data){
 		$scope.boardinfo = data;
+		console.log($scope.boardinfo);
 	});
 	boardService.getboardguest(function(data){
 		$scope.userinfo = data;
+		console.log($scope.userinfo);
 	});
 })
 .factory('guestInterceptor', function($http){

@@ -42,7 +42,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 		});
 	});
 	app.get('/getjoinboards', function(req, res){
-		mysqlClient.query('select board.* from guest inner join board on board.id = guest.board_id where user_id = ?',[req.session.index],
+		mysqlClient.query('select board.* from guest inner join board on board.id = guest.board_id where user_id = ? and not admin_id = ?',[req.session.index, req.session.index],
 			function(error, result){
 			console.log("session id is : "+req.session.index);
 				if(error){

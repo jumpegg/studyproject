@@ -15,13 +15,14 @@ angular.module('userPage.index', ['ngRoute'])
 		user.getboards(function(data){
 			$scope.adminBoards = data;
 			$scope.adminpaging = paging.makePage($scope.adminBoards, $scope.adminCurrent, 10).list;
+
 		});
 	};
 	$scope.Getjoinboards = function(){
 		user.getjoinboards(function(data){
 			$scope.joinboards = data;
 			$scope.joinpaging = paging.makePage($scope.joinboards, $scope.joinCurrent, 10).list;
-			console.log('getjoinboards');
+
 		});
 	};
 	$scope.Getboards();
