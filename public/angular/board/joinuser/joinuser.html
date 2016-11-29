@@ -18,9 +18,18 @@
 		{{boardinfo.description}}
 	</div>
 </div>
+<div class="joinNicknameWrapper">
+	<div class="nicknameLabel">
+		사용희망 nickname
+	</div>
+	<div class="nicknameInput">
+		<input class="form-control" type="text" ng-model="nickname" value="{{userinfo.userID}}">
+		<input class="btn btn-default" type="button" ng-click="checknickname(nickname)">
+	</div>
+</div>
 <div class="applyWrapper">
 	<div class="applyBtn">
-		<button class="btn btn-primary" ng-click="submitJoin()">
+		<button class="btn btn-primary" ng-click="submitJoin(nickname)">
 			가입신청하기
 		</button>
 		<a href="/userPage" class="btn btn-default">

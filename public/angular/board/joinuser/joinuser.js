@@ -7,6 +7,8 @@ angular.module('board.joinuser', ['ngRoute'])
 		controller: 'joinuserCtrl'
 	});
 }])
-.controller('joinuserCtrl', function($scope){
-
+.controller('joinuserCtrl', function($scope, authService){
+	$scope.submitJoin = function(input){
+		authService.applyUser(input);
+	};
 });

@@ -7,6 +7,6 @@ angular.module('board.userauth', ['ngRoute'])
 		controller: 'userauthCtrl'
 	});
 }])
-.controller('userauthCtrl', function($scope){
-
+.controller('userauthCtrl', function($scope, authService){
+	
 });

@@ -25,6 +25,13 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			(error) ? console.log(error) : res.json({message : "success"});
 		});
 	});
+	app.get('/allowGuest/:index', function(req,res){
+		mysqlClient.query('select * from requestApply where id = ?',[req.params.index], function(error, result){
+			mysqlClient.query('insert into guest(board_id, user_id, admin_auth, nickname, join_date) values(?,?,0,?,now())',[result.board_id, result.user_id, result.nickname], function(err,result){
+				(error) ? console.log(error) : res.json({message:"success"});
+			});
+		});
+	});
 
 	////////////////////////
 	//?guest

@@ -776,6 +776,27 @@ angular.module('board',[
 			}).error(function(status){
 				console.log(status);
 			});
+		},
+		applyUser: function(input){
+			$http({
+				method: 'post',
+				url:'/applyUser',
+				data: input
+			}).success(function(data,status, headers, config){
+				if(data.message == 'success'){
+					alert('운영자에게 가입 신청되었습니다.');
+				}
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		allowUser: function(input, callback){
+			$http.get('/allowGuest/'+input)
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
 		}
 	};
 });
