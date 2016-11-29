@@ -1,80 +1,78 @@
 <link href="css/login/login.css" rel="stylesheet" type="text/css" />
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="pr-wrap">
-                <div class="pass-reset">
-                    <label>
-                        Enter the email you signed up with</label>
-                    <input type="email" placeholder="Email" />
-                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
-                </div>
-            </div>
-            <div class="wrap">
-                <p class="form-title">
-                    Sign In</p>
-                <form action="/login" method="post" class="login">
-                <input type="text" name="userID" placeholder="Username" />
-                <input type="password" name="password" placeholder="Password" />
-                <input type="submit" value="Sign In" class="btn btn-success" />
-                <input type="button" value="Sign Up" class="btn btn-primary" data-toggle="modal" data-target="#myModal" />
-                <!-- <div class="remember-forgot">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" />
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 forgot-pass-content">
-                            <a href="javascript:void(0)" class="forgot-pass">Forgot Password</a>
-                        </div>
-                    </div>
-                </div> -->
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="pr-wrap">
+				<div class="pass-reset">
+					<label>Enter the email you signed up with</label>
+					<input type="email" placeholder="Email" />
+					<input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+				</div>
+			</div>
+			<div class="wrap">
+				<p class="form-title">Sign In</p>
+				<form action="/login" method="post" class="login">
+					<input type="text" name="userID" placeholder="Username" />
+					<input type="password" name="password" placeholder="Password" />
+					<input type="submit" value="Sign In" class="btn btn-success" />
+					<input type="button" value="Sign Up" class="btn btn-primary" data-toggle="modal" data-target="#myModal" />
+								<!-- <div class="remember-forgot">
+										<div class="row">
+												<div class="col-md-6">
+														<div class="checkbox">
+																<label>
+																		<input type="checkbox" />
+																		Remember Me
+																</label>
+														</div>
+												</div>
+												<div class="col-md-6 forgot-pass-content">
+														<a href="javascript:void(0)" class="forgot-pass">Forgot Password</a>
+												</div>
+										</div>
+								</div> -->
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+	<div class="modal-dialog">
+		<div class="modal-content">
 
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">회원 가입</h4>
-      </div>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">회원 가입</h4>
+					</div>
 
 			<div class="signup">
-	      <div class="modal-body">
-	        	<div>
-	        		<h4>ID <button type="button" class="btn btn-default" ng-click="checkID(signupVO.userID)">중복확인</button>	</h4>
-	        		<input type="text" name="userID" placeholder="ID" ng-model="signupVO.userID">
-	        	</div>
-	        	
-	        	<div>
-	        		<h4>Password</h4>
-	        		<input type="text" name="password" placeholder="PASSWORD" ng-model="signupVO.password">
-	        	</div>
-	        	<div>
-	        		<h4>Email</h4>
-	        		<input type="text" name="email" placeholder="Email" ng-model="signupVO.email">
-	        	</div>
-	      </div>
+				<div class="modal-body">
+					<div>
+						<h4>ID <button type="button" class="btn btn-default" ng-click="checkID(signupVO.userID)">중복확인</button>	</h4>
+						<input type="text" name="userID" placeholder="ID" ng-model="signupVO.userID">
+					</div>
+								
+					<div>
+						<h4>Password</h4>
+						<input type="password" name="password" placeholder="PASSWORD" ng-model="signupVO.password">
+					</div>
+					<div>
+						<h4>Email</h4>
+						<input type="email" name="email" placeholder="Email" ng-model="signupVO.email">
+					</div>
+				</div>
 
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" ng-click="signUp(signupVO)">Sign-up</button>
-	      </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" ng-click="signUp(signupVO)" data-dismiss="modal">Sign-up</button>
+				</div>
 			</div>
 
-    </div>
-  </div>
+		</div>
+	</div>
 </div>

@@ -20,6 +20,11 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			(error) ? console.log(error) : res.json(result[0]);
 		});
 	});
+	app.post('/applyUser', function(req,res){
+		mysqlClient.query('insert into requestApply(board_id, user_id, nickname, apply_date) values(?,?,?,now())',[req.session.board_id, req.session.index, req.body.userID], function(error, result){
+			(error) ? console.log(error) : res.json({message : "success"});
+		});
+	});
 
 	////////////////////////
 	//?guest

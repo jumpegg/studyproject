@@ -48,7 +48,13 @@ create table guest(
 insert into guest(board_id, user_id, admin_auth, nickname, join_date) values(1, 1, true, 'wonnynickname', now());
 insert into guest(board_id, user_id, admin_auth, nickname, join_date) values(2, 2, true, 'wonnynickname', now());
 
-
+create table requestApply(
+	id int not null auto_increment primary key,
+	board_id int not null,
+	user_id int not null,
+	nickname varchar(200) not null,
+	apply_date DATE
+);
 
 create table freetalk(
 	id int not null auto_increment primary key,
@@ -130,6 +136,7 @@ create table account(
 	delete_date DATE,
 	available boolean not null
 );
+
 insert into freetalk(board_id, user_id, nickname, title, content, create_date, available, cnt) select board_id, user_id, nickname, title, content, create_date, available, cnt from freetalk;
 
 insert into notice(board_id, user_id, nickname, title, content, create_date, available, cnt) select board_id, user_id, nickname, title, content, create_date, available, cnt from notice;
