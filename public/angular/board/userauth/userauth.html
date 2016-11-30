@@ -1,1 +1,23 @@
-<h1>userauth</h1>
+<link rel="stylesheet" type="text/css" href="../css/board/userauth/userauth.css">
+	<div class="applyLabel">
+		<div class="usernickname">
+			신청자
+		</div>
+		<div class="applydate">
+			신청일
+		</div>
+		<div class="allowbtn">
+			가입승인
+		</div>
+	</div>
+	<div class="applyWrapper" ng-repeat="user in userList">
+		<div class="usernickname">
+			{{user.nickname}}
+		</div>
+		<div class="applydate">
+			{{user.apply_date|date:"MM.dd"}}
+		</div>
+		<div class="allowbtn">
+			<input type="button" class="btn btn-default">
+		</div>
+	</div>

@@ -23,13 +23,13 @@
 		사용희망 nickname
 	</div>
 	<div class="nicknameInput">
-		<input class="form-control" type="text" ng-model="nickname" value="{{userinfo.userID}}">
-		<input class="btn btn-default" type="button" ng-click="checknickname(nickname)">
+		<input class="form-control" type="text" ng-model="apply.nickname">
+		<input class="btn btn-default" type="button" ng-click="checknickname(apply)" value="중복 확인">
 	</div>
 </div>
 <div class="applyWrapper">
 	<div class="applyBtn">
-		<button class="btn btn-primary" ng-click="submitJoin(nickname)">
+		<button class="btn btn-primary" ng-click="submitJoin(apply)">
 			가입신청하기
 		</button>
 		<a href="/userPage" class="btn btn-default">

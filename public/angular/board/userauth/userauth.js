@@ -8,5 +8,10 @@ angular.module('board.userauth', ['ngRoute'])
 	});
 }])
 .controller('userauthCtrl', function($scope, authService){
-	
+	$scope.applicantList = function(){
+		authService.applicantList(function(data){
+			$scope.userList = data;
+		});
+	};
+	$scope.applicantList();
 });

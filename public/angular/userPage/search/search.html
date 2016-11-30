@@ -32,7 +32,7 @@
         <th>{{$index+1}}</th>
         <th>{{board.nickname}}</th>
         <th><a href="boardIndex/{{board.id}}">{{board.title}}</a></th>
-        <th>{{board.create_date}}</th>
+        <th>{{board.create_date|date:"MM.dd"}}</th>
       </tr>
     </tbody>
   </table>

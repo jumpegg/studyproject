@@ -21,8 +21,16 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 		});
 	});
 	app.post('/applyUser', function(req,res){
-		mysqlClient.query('insert into requestApply(board_id, user_id, nickname, apply_date) values(?,?,?,now())',[req.session.board_id, req.session.index, req.body.userID], function(error, result){
-			(error) ? console.log(error) : res.json({message : "success"});
+		mysqlClient.query('select * from requestApply where user_id = ?',[req.session.index], function(error, result){
+			if(error){
+				console.log(error);
+			}else if(result.length != 0){
+				res.json({message : "exist"});
+			}else{
+				mysqlClient.query('insert into requestApply(board_id, user_id, nickname, apply_date) values(?,?,?,now())',[req.session.board_id, req.session.index, req.body.nickname], function(error, result){
+					(error) ? console.log(error) : res.json({message : "success"});
+				});
+			}
 		});
 	});
 	app.get('/allowGuest/:index', function(req,res){
@@ -32,13 +40,19 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			});
 		});
 	});
+	app.get('/applicantList', function(req,res){
+		mysqlClient.query('select * from requestApply where board_id = ?', [req.session.board_id], function(error, result){
+			(error) ? console.log(error) : res.json(result);
+		});
+	});
+
 
 	////////////////////////
 	//?guest
 	////////////////////////
 
-	app.get('/board/getboardguest', function(req, res){
-		mysqlClient.query('select * from guest where board_id = ? and user_id = ?', [req.session.board_id, req.session.index], function(error, result){
+	app.get('/board/getCurrentUser', function(req, res){
+		mysqlClient.query('select * from user where id = ?', [req.session.index], function(error, result){
 			if(error){
 				console.log(error);
 			}else{

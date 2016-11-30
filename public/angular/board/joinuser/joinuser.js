@@ -8,7 +8,10 @@ angular.module('board.joinuser', ['ngRoute'])
 	});
 }])
 .controller('joinuserCtrl', function($scope, authService){
+	$scope.apply={};
+	$scope.apply.nickname = $scope.userinfo.userID;
 	$scope.submitJoin = function(input){
+		console.log(input);
 		authService.applyUser(input);
 	};
 });

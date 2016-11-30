@@ -15,7 +15,7 @@
 				<tbody>
 					<tr ng-repeat = 'board in adminpaging'>
 						<td><a href="/boardIndex/{{board.id}}">{{board.title}}</a></td>
-						<td>{{board.create_date}}</td>
+						<td>{{board.create_date|date:"MM.dd"}}</td>
 					</tr>
 					<tr ng-show="adminpaging.length == 0">
 						<td colspan="2">
@@ -51,7 +51,7 @@
 				<tbody>
 					<tr ng-repeat = 'joiner in joinpaging'>
 						<td><a href="/boardIndex/{{joiner.id}}">{{joiner.title}}</a></td>
-						<td>{{joiner.create_date}}</td>
+						<td>{{joiner.create_date|date:"MM.dd"}}</td>
 					</tr>
 					<tr ng-show="joinpaging.length == 0">
 						<td colspan="2">
@@ -90,7 +90,7 @@
 					<td>{{$index+1}}</td>
 					<td>{{notice.board_name}}</td>
 					<td><a href="/boardIndex/{{notice.board_id}}#!/notice/{{notice.id}}">{{notice.title}}</a></td>
-					<td>{{notice.create_date}}</td>
+					<td>{{notice.create_date|date:"MM.dd"}}</td>
 				</tr>
 				<tr ng-show="allnotices == 0">
 					<td colspan="4">

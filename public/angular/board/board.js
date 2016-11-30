@@ -30,38 +30,20 @@ angular.module('board',[
 		})
 	});
 })
-.controller('boardCtrl', function($scope, boardService){
+.controller('boardCtrl', function($scope, boardService, authService){
 	boardService.getboard(function(data){
 		$scope.boardinfo = data;
 		console.log($scope.boardinfo);
 	});
-	boardService.getboardguest(function(data){
+	boardService.getcurrentuser(function(data){
 		$scope.userinfo = data;
 		console.log($scope.userinfo);
 	});
-})
-.factory('guestInterceptor', function($http){
-	return{
-		request: function(config){
-			console.log("req called");
-			return config;
-		},
+	authService.isBoardAuth(function(data){
+		$scope.adminCheck = data.admin_auth;
+		console.log($scope.adminCheck);
+	});
 
-		requestError: function(config){
-			console.log("req error called");
-			return config;
-		},
-
-		response: function(res){
-			console.log("res called");
-			return res;
-		},
-
-		responseError: function(res){
-			console.log("res error called");
-			return res;
-		}
-	}
 })
 .factory('boardService', function($http){
 	return{
@@ -73,8 +55,8 @@ angular.module('board',[
 				console.log(status);
 			});
 		},
-		getboardguest: function(callback){
-			$http.get('/board/getboardguest')
+		getcurrentuser: function(callback){
+			$http.get('/board/getCurrentUser')
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
@@ -779,14 +761,25 @@ angular.module('board',[
 		},
 		applyUser: function(input){
 			$http({
-				method: 'post',
+				method:'post',
 				url:'/applyUser',
 				data: input
 			}).success(function(data,status, headers, config){
 				if(data.message == 'success'){
 					alert('운영자에게 가입 신청되었습니다.');
 				}
+				if(data.message == 'exist'){
+					alert('이미 가입 신청이 되어있습니다.');
+				}
 			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		applicantList: function(callback){
+			$http.get('/applicantList')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
 				console.log(status);
 			});
 		},
