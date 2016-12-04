@@ -11,6 +11,7 @@ angular.module('board.index', ['ngRoute'])
 	guestService.getguest(function(data){
 		$scope.guestList = data;
 	});
+	
 	freetalkService.getfreetalk(1, undefined, undefined, function(data){
 		$scope.freetalkList = data;
 	});

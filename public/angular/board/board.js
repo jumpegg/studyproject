@@ -33,15 +33,12 @@ angular.module('board',[
 .controller('boardCtrl', function($scope, boardService, authService){
 	boardService.getboard(function(data){
 		$scope.boardinfo = data;
-		console.log($scope.boardinfo);
 	});
 	boardService.getcurrentuser(function(data){
 		$scope.userinfo = data;
-		console.log($scope.userinfo);
 	});
 	authService.isBoardAuth(function(data){
 		$scope.adminCheck = data.admin_auth;
-		console.log($scope.adminCheck);
 	});
 
 })
@@ -64,6 +61,58 @@ angular.module('board',[
 			});
 		}
 	}
+})
+.factory('authService', function($http, $location){
+	return{
+		isBoardAuth: function(callback){
+			$http.get('/isBoardAuth')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		applyUser: function(input){
+			$http({
+				method:'post',
+				url:'/applyUser',
+				data: input
+			}).success(function(data,status, headers, config){
+				if(data.message == 'success'){
+					alert('운영자에게 가입 신청되었습니다.');
+				}
+				if(data.message == 'exist'){
+					alert('이미 가입 신청이 되어있습니다.');
+				}
+			}).error(function(data, status, headers, config){
+				console.log(status);
+			});
+		},
+		applicantList: function(callback){
+			$http.get('/applicantList')
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		allowUser: function(input, callback){
+			$http.get('/allowGuest/'+input)
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		},
+		rejectUser: function(input, callback){
+			$http.get('/rejectGuest/'+input)
+			.success(function(data){
+				callback(data);
+			}).error(function(status){
+				console.log(status);
+			});
+		}
+	};
 })
 .factory('guestService', function($http, $location){
 	return{
@@ -117,268 +166,186 @@ angular.module('board',[
 		}
 	}
 })
-.factory('freetalkService', function($http, $location){
+.factory('boardCrudService', function($http, $location){
 	return{
-		getfreetalk: function(index, type, search, callback){
+		getlist : function(url, index, type, search, callback){
 			if(type==undefined){
 				type='';
 			};
 			if(search==undefined){
 				search='';
 			};
-			$http.get('/board/getfreetalk/list/'+index+'?type='+type+'&search='+search)
+			$http.get(url+index+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
 				console.log(status);
 			});
 		},
-		getfreetalkcnt: function(type, search, callback){
+		getcnt : function(url, type, search, callback){
 			if(type==undefined){
 				type='';
 			};
 			if(search==undefined){
 				search='';
 			};
-			$http.get('/board/getfreetalkcnt?type='+type+'&search='+search)
+			$http.get(url+'?type='+type+'&search='+search)
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
 				console.log(status);
-			});
+			})
 		},
-		getfreetalkone: function(index, callback){
+		getone : function(url, index, callback){
 			$http({
 				method: 'get',
-				url:'/board/getfreetalk/'+index
+				url: url+index
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
 		},
-		setfreetalk: function(input){
+		new : function(url, backurl, input){
 			$http({
-				method: 'post',
-				url:'/board/newfreetalk',
-				data: input
+				method : 'post',
+				url : url,
+				data : input
 			}).success(function(data, status, headers, config){
 				if(data.message == "success"){
 					alert('등록되었습니다.');
-					$location.path("/freetalk");
+					$location.path(backurl);
 				}else{
 					alert('서버에러');
 				}
 			}).error(function(data, status, headers, config){
-				alert(status);
+				console.log(status);
 			});
 		},
-		upfreetalk: function(input){
+		update : function(url, backurl, input){
 			$http({
 				method: 'post',
-				url:'/board/upfreetalk',
-				data: input
+				url : url,
+				data : input
 			}).success(function(data, status, headers, config){
 				if(data.message == 'success'){
 					alert('등록되었습니다.');
-					$location.path("/freetalk");
+					$location.path(backurl);
 				}else{
 					alert('서버에러');
 				};
-			}).error(function(data, status, headers, config){
+			}).error(function(data,status, headers, config){
 				alert(status);
 			});
 		},
-		hidefreetalk: function(index){
-			$http({
-				method: 'get',
-				url: '/board/hidefreetalk/'+index
-			}).success(function(data, status, headers, config){
-				$location.path("/freetalk");
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
-		},
-	}
-})
-.factory('boardCrudService', function($http){
-	
-})
-.factory('noticeService', function($http, $location){
-	return{
-		getnotice: function(index, type, search, callback){
-			if(type==undefined){
-				type='';
-			};
-			if(search==undefined){
-				search='';
-			};
-			$http.get('/board/getnotice/list/'+index+'?type='+type+'&search='+search)
+		hide : function(url, backurl, index){
+			$http.get(url+index)
 			.success(function(data){
-				callback(data);
+				$location.path(backurl);
 			}).error(function(status){
 				console.log(status);
 			});
 		},
-		getnoticeone: function(index, callback){
-			$http.get('/board/getnotice/'+index)
-			.success(function(data){
-				callback(data);
-			}).error(function(status){
-				console.log(status);
-			});
-		},
-		getnoticecnt: function(type, search, callback){
-			if(type==undefined){
-				type='';
-			};
-			if(search==undefined){
-				search='';
-			};
-			$http.get('/board/getnoticecnt'+'?type='+type+'&search='+search)
-			.success(function(data){
-				callback(data);
-			}).error(function(status){
-				console.log(status);
-			});
-		},
-		setnotice: function(input){
-			$http({
-				method: 'post',
-				url:'/board/newnotice',
-				data: input
-			}).success(function(data, status, headers, config){
-				if(data.message == 'success'){
-					alert('등록되었습니다.');
-					$location.path("/notice");
-				}else{
-					alert('서버에러');
-				}
-			}).error(function(data, status, headers, config){
-				alert(status);
-			});
-		},
-		upnotice: function(input){
-			$http({
-				method: 'post',
-				url:'/board/upnotice',
-				data: input
-			}).success(function(data, status, headers, config){
-				if(data.message == 'success'){
-					alert('등록되었습니다.');
-					$location.path("/notice");
-				}else{
-					alert('서버에러');
-				};
-			}).error(function(data, status, headers, config){
-				alert(status);
-			});
-		},
-		hidenotice: function(index){
+		del : function(url, backurl, index){
 			$http({
 				method: 'get',
-				url:'/board/hidenotice/'+index
+				url: url+index
 			}).success(function(data, status, headers, config){
-				$location.path("/notice");
+				$location.path(backurl);
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
-		},
-		delnotice: function(callback){
-			$http({
-				method: 'get',
-				url:'/board/delnotice/:index'
-			}).success(function(data, status, headers, config){
-				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+
 		}
 	}
 })
-.factory('studydataService', function($http, $location){
+.factory('freetalkService', function($http, $location, boardCrudService){
 	return{
-		getstudydata: function(index, type, search, callback){
-			if(type==undefined){
-				type='';
-			};
-			if(search==undefined){
-				search='';
-			};
-			$http({
-				method: 'get',
-				url:'/board/getstudydata/list/'+index+'?type='+type+'&search='+search
-			}).success(function(data, status, headers, config){
+		getfreetalk: function(index, type, search, callback){
+			boardCrudService.getlist('/board/getfreetalk/list/',index, type, search, function(data){
 				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
 			});
 		},
-		getstudydataone: function(index, callback){
-			$http({
-				method: 'get',
-				url:'/board/getstudydata/'+index
-			}).success(function(data, status, headers, config){
+		getfreetalkcnt: function(type, search, callback){
+			boardCrudService.getcnt('/board/getfreetalkcnt', type, search, function(data){
 				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
+			});
+		},
+		getfreetalkone: function(index, callback){
+			boardCrudService.getone('/board/getfreetalk/', index, function(data){
+				callback(data);
+			});
+		},
+		setfreetalk: function(input){
+			boardCrudService.new('/board/newfreetalk', '/freetalk', input);
+		},
+		upfreetalk: function(input){
+			boardCrudService.update('/board/upfreetalk', '/freetalk', input);
+		},
+		hidefreetalk: function(index){
+			boardCrudService.hide('/board/hidefreetalk/', '/freetalk', index);
+		}
+	}
+})
+.factory('noticeService', function($http, $location, boardCrudService){
+	return{
+		getnotice: function(index, type, search, callback){
+			boardCrudService.getlist('/board/getnotice/list/', index, type, search, function(data){
+				callback(data);
+			});
+		},
+		getnoticecnt: function(type, search, callback){
+			boardCrudService.getcnt('/board/getnoticecnt', type, search, function(data){
+				callback(data);
+			});
+		},
+		getnoticeone: function(index, callback){
+			boardCrudService.getone('/board/getnotice/', index, function(data){
+				callback(data);
+			});
+		},
+		setnotice: function(input){
+			boardCrudService.new('/board/newnotice', '/notice', input);
+		},
+		upnotice: function(input){
+			boardCrudService.update('/board/upnotice', '/notice', input);
+		},
+		hidenotice: function(index){
+			boardCrudService.hide('/board/hidenotice/', '/notice', index);
+		},
+		delnotice: function(index){
+			boardCrudService.del('/board/delnotice/', '/notice', index);
+		}
+	}
+})
+.factory('studydataService', function($http, $location, boardCrudService){
+	return{
+		getstudydata: function(index, type, search, callback){
+			boardCrudService.getlist('/board/getstudydata/list/', index, type, search, function(data){
+				callback(data);
 			});
 		},
 		getstudydatacnt: function(type, search, callback){
-			if(type==undefined){
-				type='';
-			};
-			if(search==undefined){
-				search='';
-			};
-			$http.get('/board/getstudydatacnt'+'?type='+type+'&search='+search)
-			.success(function(data){
+			boardCrudService.getcnt('/board/getstudydatacnt', type, search, function(data){
 				callback(data);
-			}).error(function(status){
-				console.log(status);
+			});
+		},
+		getstudydataone: function(index, callback){
+			boardCrudService.getone('/board/getstudydata/', index, function(data){
+				callback(data);
 			});
 		},
 		setstudydata: function(input){
-			$http({
-				method: 'post',
-				url:'/board/newstudydata',
-				data: input
-			}).success(function(data, status, headers, config){
-				$location.path("/studydata");
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+			boardCrudService.new('/board/newstudydata', '/studydata', input);
 		},
 		upstudydata: function(input){
-			$http({
-				method: 'post',
-				url:'/board/upstudydata',
-				data: input
-			}).success(function(data, status, headers, config){
-				$location.path("/studydata");
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+			boardCrudService.update('/board/upstudydata', '/studydata', input);
 		},
 		hidestudydata: function(index){
-			$http({
-				method: 'get',
-				url:'/board/hidestudydata/'+index
-			}).success(function(data, status, headers, config){
-				$location.path("/studydata");
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+			boardCrudService.hide('/board/hidestudydata/', '/studydata', index);
 		},
 		delstudydata: function(index){
-			$http({
-				method: 'get',
-				url:'/board/delstudydata/'+index
-			}).success(function(data, status, headers, config){
-				$location.path("/studydata");
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+			boardCrudService.del('/board/delstudydata/', '/studydata', index);
 		},
 		setstudydatafile: function(file){
 			var fd = new FormData();
@@ -400,223 +367,62 @@ angular.module('board',[
 		}
 	}
 })
-.factory('scheduleService', function($http, $location){
+.factory('scheduleService', function($http, $location, boardCrudService){
 	return{
 		getschedule: function(index, type, search, callback){
-			if(type==undefined){
-				type='';
-			};
-			if(search==undefined){
-				search='';
-			};
-			$http.get('/board/getschedule/list/'+index+'?type='+type+'&search='+search)
-			.success(function(data){
+			boardCrudService.getlist('/board/getschedule/list/', index, type, search, function(data){
 				callback(data);
-			}).error(function(status){
-				console.log(status);
-			});
-		},
-		getscheduleone: function(index, callback){
-			$http({
-				method: 'get',
-				url:'/board/getschedule/'+index
-			}).success(function(data, status, headers, config){
-				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
 			});
 		},
 		getschedulecnt: function(type, search, callback){
-			if(type==undefined){
-				type='';
-			};
-			if(search==undefined){
-				search='';
-			};
-			$http.get('/board/getschedulecnt'+'?type='+type+'&search='+search)
-			.success(function(data){
+			boardCrudService.getcnt('/board/getschedulecnt', type, search, function(data){
 				callback(data);
-			}).error(function(status){
-				console.log(status);
+			});
+		},
+		getscheduleone: function(index, callback){
+			boardCrudService.getone('/board/getschedule/', index, function(data){
+				callback(data);
 			});
 		},
 		setschedule: function(input){
-			$http({
-				method: 'post',
-				url:'/board/newschedule',
-				data: input
-			}).success(function(data, status, headers, config){
-				if(data.message == 'success'){
-					alert('등록되었습니다.');
-					$location.path("/schedule");
-				}else{
-					alert('서버에러');
-				};
-			}).error(function(data, status, headers, config){
-				alert(status);
-			});
+			boardCrudService.new('/board/newschedule', '/schedule', input);
 		},
 		upschedule: function(input){
-			$http({
-				method: 'post',
-				url:'/board/upschedule',
-				data: input
-			}).success(function(data, status, headers, config){
-				if(data.message == 'success'){
-					alert('등록되었습니다.');
-					$location.path("/schedule");
-				}else{
-					alert('서버에러');
-				};
-			}).error(function(data, status, headers, config){
-				alert(status);
-			});
+			boardCrudService.update('/board/upschedule', '/schedule', input);
 		},
-		delschedule: function(input){
-			$http({
-				method: 'get',
-				url:'/board/delschedule/'+input
-			}).success(function(data, status, headers, config){
-				$location.path("/schedule");
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+		delschedule: function(index){
+			boardCrudService.del('/board/delschedule/', '/schedule', index);
 		}
 	}
 })
-.factory('attendUserService', function($http, $location){
-	return{
-		getattendUser: function(callback){
-			$http.get('/board/getattendUser')
-			.success(function(data){
-				callback(data);
-			}).error(function(status){
-				console.log(status);
-			});
-		},
-		setattendUser: function(callback){
-			$http({
-				method: 'get',
-				url:'/board/newattendUser/:s_id/:u_id'
-			}).success(function(data, status, headers, config){
-				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log('error')
-			});
-		},
-		hideschedule: function(callback){
-			$http({
-				method: 'get',
-				url:'/board/hideschedule/:index'
-			}).success(function(data, status, headers, config){
-				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
-		},
-		delattendUser: function(callback){
-			$http({
-				method: 'get',
-				url:'/board/delattendUser/:index'
-			}).success(function(data, status, headers, config){
-				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
-		}
-	}
-})
-.factory('accountService', function($http, $location){
+.factory('accountService', function($http, $location, boardCrudService){
 	return{
 		getaccount: function(index, type, search, callback){
-			if(type==undefined){
-				type='';
-			}
-			if(search==undefined){
-				search='';
-			}
-			$http.get('/board/getaccount/list/'+index+'?type='+type+'&search='+search)
-			.success(function(data){
+			boardCrudService.getlist('/board/getaccount/list/', index, type, search, function(data){
 				callback(data);
-			}).error(function(status){
-				console.log(status);
-			});
-		},
-		getaccountone: function(index, callback){
-			$http({
-				method: 'get',
-				url:'/board/getaccount/'+index
-			}).success(function(data, status, headers, config){
-				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
 			});
 		},
 		getaccountcnt: function(type, search, callback){
-			if(type==undefined){
-				type='';
-			}
-			if(search===undefined){
-				search='';
-			}
-			$http.get('/board/getaccountcnt'+'?type='+type+'&search='+search)
-			.success(function(data){
+			boardCrudService.getcnt('/board/getaccountcnt', type, search, function(data){
 				callback(data);
-			}).error(function(status){
-				console.log(status);
+			});
+		},
+		getaccountone: function(index, callback){
+			boardCrudService.getone('/board/getaccount/', index, function(data){
+				callback(data);
 			});
 		},
 		setaccount: function(input){
-			$http({
-				method: 'post',
-				url:'/board/newaccount',
-				data: input
-			}).success(function(data, status, headers, config){
-				if(data.message == 'success'){
-					alert('등록되었습니다.');
-					$location.path("/account");
-				}else{
-					alert('서버에러');
-				}
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+			boardCrudService.new('/board/newaccount', '/account', input);
 		},
 		upaccount: function(input){
-			$http({
-				method: 'post',
-				url:'/board/upaccount',
-				data: input
-			}).success(function(data, status, headers, config){
-				if(data.message == 'success'){
-					alert('등록되었습니다.');
-					$location.path("/account");
-				}else{
-					alert('서버에러');
-				}
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+			boardCrudService.update('/board/upaccount', '/account', input);
 		},
-		hideaccount: function(callback){
-			$http({
-				method: 'get',
-				url:'/board/hideaccount/:index'
-			}).success(function(data, status, headers, config){
-				callback(data);
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+		hideaccount: function(index){
+			boardCrudService.hide('/board/hideaccount/', '/account', index);
 		},
 		delaccount: function(input){
-			$http({
-				method: 'get',
-				url:'/board/delaccount/'+input
-			}).success(function(data, status, headers, config){
-				$location.path("/account");
-			}).error(function(data, status, headers, config){
-				console.log(status);
-			});
+			boardCrudService.del('/board/delaccount/', '/account', index);
 		}
 	};
 })
@@ -749,47 +555,45 @@ angular.module('board',[
 		}
 	};
 })
-.factory('authService', function($http, $location){
+.factory('attendUserService', function($http, $location){
 	return{
-		isBoardAuth: function(callback){
-			$http.get('/isBoardAuth')
+		getattendUser: function(callback){
+			$http.get('/board/getattendUser')
 			.success(function(data){
 				callback(data);
 			}).error(function(status){
 				console.log(status);
 			});
 		},
-		applyUser: function(input){
+		setattendUser: function(callback){
 			$http({
-				method:'post',
-				url:'/applyUser',
-				data: input
-			}).success(function(data,status, headers, config){
-				if(data.message == 'success'){
-					alert('운영자에게 가입 신청되었습니다.');
-				}
-				if(data.message == 'exist'){
-					alert('이미 가입 신청이 되어있습니다.');
-				}
+				method: 'get',
+				url:'/board/newattendUser/:s_id/:u_id'
+			}).success(function(data, status, headers, config){
+				callback(data);
+			}).error(function(data, status, headers, config){
+				console.log('error')
+			});
+		},
+		hideschedule: function(callback){
+			$http({
+				method: 'get',
+				url:'/board/hideschedule/:index'
+			}).success(function(data, status, headers, config){
+				callback(data);
 			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
 		},
-		applicantList: function(callback){
-			$http.get('/applicantList')
-			.success(function(data){
+		delattendUser: function(callback){
+			$http({
+				method: 'get',
+				url:'/board/delattendUser/:index'
+			}).success(function(data, status, headers, config){
 				callback(data);
-			}).error(function(status){
-				console.log(status);
-			});
-		},
-		allowUser: function(input, callback){
-			$http.get('/allowGuest/'+input)
-			.success(function(data){
-				callback(data);
-			}).error(function(status){
+			}).error(function(data, status, headers, config){
 				console.log(status);
 			});
 		}
-	};
+	}
 });

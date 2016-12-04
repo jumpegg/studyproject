@@ -22,13 +22,13 @@ angular.module('userPage',[
 	};
 	$scope.CreateStudy = function(input){
 		user.setboard(input);
-		
-		user.getboards(function(data){
-			$scope.adminBoards = data;
-		});
-		user.getjoinboards(function(data){
-			$scope.joinboards = data;
-		});
+
+		$scope.Getboards();
+		$scope.Getjoinboards();
+		if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+    	$scope.$apply();
+		};
+
 	};
 	$scope.Getuser = function(){
 		user.getuser(function(data){

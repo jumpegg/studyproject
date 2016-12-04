@@ -1,23 +1,29 @@
 <link rel="stylesheet" type="text/css" href="../css/board/userauth/userauth.css">
-	<div class="applyLabel">
-		<div class="usernickname">
-			신청자
-		</div>
-		<div class="applydate">
-			신청일
-		</div>
-		<div class="allowbtn">
-			가입승인
-		</div>
+	<div class="applytitle">
+		<p>
+			가입 신청 리스트
+		</p>
 	</div>
-	<div class="applyWrapper" ng-repeat="user in userList">
-		<div class="usernickname">
-			{{user.nickname}}
-		</div>
-		<div class="applydate">
-			{{user.apply_date|date:"MM.dd"}}
-		</div>
-		<div class="allowbtn">
-			<input type="button" class="btn btn-default">
-		</div>
-	</div>
+	<table>
+		<thead>
+			<tr>
+				<td class="authid">UserID</td>
+				<td>Email</td>
+				<td>희망ID</td>
+				<td>신청일</td>
+				<td class="authbtn">확인</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in userList">
+				<td>{{user.username}}</td>
+				<td>{{user.useremail}}</td>
+				<td>{{user.nickname}}</td>
+				<td>{{user.apply_date|date:"MM.dd"}}</td>
+				<td>
+					<input type="button" class="btn btn-default" ng-click="allowGuest(user.id)" value="허가">
+					<input type="button" class="btn btn-default" ng-click="rejectGuest(user.id)" value="거절">
+				</td>
+			</tr>
+		</tbody>
+	</table>

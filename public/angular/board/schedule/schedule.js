@@ -73,7 +73,7 @@ angular.module('board.schedule', ['ngRoute'])
 	scheduleService.getscheduleone($routeParams.index, function(data){
 		$scope.scheduleVO = data[0];
 	});
-	$scope.Delschedule = function(input){
+	$scope.DelSchedule = function(input){
 		scheduleService.delschedule(input);
 	};
 	commentService.getcomment('schedule', $routeParams.index, function(data){

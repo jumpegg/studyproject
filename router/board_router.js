@@ -27,7 +27,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			}else if(result.length != 0){
 				res.json({message : "exist"});
 			}else{
-				mysqlClient.query('insert into requestApply(board_id, user_id, nickname, apply_date) values(?,?,?,now())',[req.session.board_id, req.session.index, req.body.nickname], function(error, result){
+				mysqlClient.query('insert into requestApply(board_id, user_id, nickname, username, useremail, apply_date) values(?,?,?,?,?,now())',[req.session.board_id, req.session.index, req.body.nickname, req.session.userID, req.session.email], function(error, result){
 					(error) ? console.log(error) : res.json({message : "success"});
 				});
 			}
@@ -35,9 +35,26 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 	});
 	app.get('/allowGuest/:index', function(req,res){
 		mysqlClient.query('select * from requestApply where id = ?',[req.params.index], function(error, result){
-			mysqlClient.query('insert into guest(board_id, user_id, admin_auth, nickname, join_date) values(?,?,0,?,now())',[result.board_id, result.user_id, result.nickname], function(err,result){
-				(error) ? console.log(error) : res.json({message:"success"});
+			console.log(result);
+			mysqlClient.query('insert into guest(board_id, user_id, admin_auth, nickname, join_date) values(?,?,0,?,now())',[result[0].board_id, result[0].user_id, result[0].nickname], function(err,result){
+					if(err){
+						console.log(err);
+					}else{
+						console.log('guest insert success');
+						mysqlClient.query('delete from requestApply where id = ?', [req.params.index], function(err2, result){
+							if(err2){
+								console.log(err2);
+							}else{
+								res.json({message: "success"});
+							}
+						})
+					}
 			});
+		});
+	});
+	app.get('/rejectGuest/:index', function(req,res){
+		mysqlClient.query('delete from requestApply where id = ?', [req.params.index], function(error, result){
+			(error) ? console.log(error) : res.json({message : "success"});
 		});
 	});
 	app.get('/applicantList', function(req,res){
@@ -45,7 +62,6 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable)
 			(error) ? console.log(error) : res.json(result);
 		});
 	});
-
 
 	////////////////////////
 	//?guest
