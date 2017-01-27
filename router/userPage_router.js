@@ -12,7 +12,7 @@ module.exports = function(app, mysqlClient, passport, session, fs, formidable, u
 			}
 		});
 	});
-	app.get('/getboard', function(req, res){
+	app.get('/getboardsearch', function(req, res){
 		mysqlClient.query('select board.*, guest.nickname from board inner join guest on board.admin_id = guest.user_id where board.id = guest.board_id order by create_date desc',function(error, result){
 			if(error){
 				console.log(error);

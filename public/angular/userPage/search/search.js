@@ -21,7 +21,7 @@ $scope.search = undefined;
   	getboard: function(callback){
 			$http({
 				method: 'get',
-				url:'/getboard'
+				url:'/getboardsearch'
 			}).success(function(data, status, headers, config){
 				callback(data);
 			}).error(function(data, status, headers, config){

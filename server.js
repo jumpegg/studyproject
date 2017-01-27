@@ -12,8 +12,10 @@ var util = require('util');
 var mysql = require('mysql');
 // mysql config
 var mysqlClient = mysql.createConnection({
-	user:'wonny',
-	password: 'wonny',
+	host: 'myproject.cpylkksl9brd.ap-northeast-2.rds.amazonaws.com',
+	port: 3306,
+	user:'jumpegg',
+	password: 'fly19354',
 	database : 'nodetest'
 });
 var passport = require('passport');
@@ -23,7 +25,7 @@ var async = require('async');
 var fs = require('fs');
 //formidable : 파일 업로드
 var formidable = require('formidable');
-// encrypt 
+// encrypt
 var bcrypt = require('bcrypt-nodejs');
 var salt = bcrypt.genSaltSync(33);
 
@@ -56,13 +58,13 @@ passport.use('local',
 		passReqToCallback : true
 	},
 	function(req, userID, password, done){
-		mysqlClient.query('select * from user where userID = ?', [userID], 
+		mysqlClient.query('select * from user where userID = ?', [userID],
 			function(error, result){
 				console.log(result.length);
 				var checkpass = '';
 
 				checkpass = result.length == 0 ? bcrypt.hashSync(0, salt) : result[0].password;
-				
+
 				var comp = bcrypt.compareSync(password, checkpass);
 
 				if(error){
